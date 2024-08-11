@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Pangram World" />
+    <meta property="og:description"
+        content="For all your Physics needs with some extra social media helpers to really get your game on!" />
+    <meta property="og:image" content="https://www.pangram-world.com/static/images/pangram-world-title-trsp.png" />
+    <meta property="og:url" content="https://www.pangram-world.com" />
+    <title>Pangram World</title>
+    <!-- ... Bootstrap CSS ... -->
+    <link rel="stylesheet" href="../styles/bootstrap.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/calculators.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- ... other head elements ... -->
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="shortcut icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="shortcut icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="shortcut icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <!-- ... Head Scripts ... -->
+    <script src="../node_modules/handlebars/dist/handlebars.min.js"></script> <!--Must Come First-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="../scripts/bootstrap.bundle.js"></script>
+    <script src="../scripts/main.js" defer></script>
+    <script src="../scripts/utils/sig_fig_util.js" defer></script>
+</head>
+<!-- ... Body ... -->
+<body>
+    <!-- ... Header Content ... -->
+    <div id="header-container"></div>
+    <main>
+        <!-- Container for the Significant Figures Calculator -->
+        <div class="container my-4">
+            <div class="row d-flex">
+                <!-- Left Column for the Calculator -->
+                <div class="col-lg-6 d-flex">
+                    <div class="form-font-style bg-white p-4 shadow-sm flex-fill">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h2 class="mb-0">Significant Figures Calculator</h2>
+                            <button type="button" class="btn btn-help" data-bs-toggle="popover"
+                                data-bs-title="Significant Figures Calculator Help" data-bs-content="<p>Enter a number, and the calculator will instantly tell you the number of significant figures.</p>
+                                    <ul>
+                                        <li>All non-zero digits are significant.</li>
+                                        <li>Zeros between non-zero digits are significant.</li>
+                                        <li>Leading and trailing zeros are not significant unless the zeros are after the decimal place.</li>
+                                        <li>Trailing zeros in a decimal number are significant.</li>
+                                    </ul>">
+                                <span class="material-symbols-outlined help">
+                                    help_outline
+                                </span>
+                            </button>
+                        </div>
+                        <div class="input-group mb-3 bg-light p-2 rounded">
+                            <label for="inputNumber" class="input-group-text label-col">Enter Number:</label>
+                            <input type="text" class="form-control" id="inputNumber" placeholder="Enter a number...">
+                        </div>
+                        <div class="output-area">
+                            <h4>Significant Figures</h4>
+                            <p id="sigFigOutput">Significant Figures: 0</p>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <button type="button" class="btn copy-button" id="clearButton">Clear</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right Column for the Significant Figures Test -->
+                <div class="col-lg-6 d-flex">
+                    <div class="form-font-style bg-white p-4 shadow-sm flex-fill">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h2 class="mb-0">Significant Figures Test</h2>
+                            <button type="button" class="btn btn-help" data-bs-toggle="popover"
+                                data-bs-title="Significant Figures Test Help"
+                                data-bs-content="<p>Click the 'Generated Number' box to start. Enter the number of significant figures for the generated number and check your answer.</p>">
+                                <span class="material-symbols-outlined help">
+                                    help_outline
+                                </span>
+                            </button>
+                        </div>
+                        <div class="input-group mb-3 bg-light p-2 rounded clickable-input" id="generateNumberContainer" data-bs-toggle="tooltip"
+                            data-bs-placement="auto" title="Click me to generate a number and test your skills">
+                            <label for="generateNumber" class="input-group-text gen label-col">Generate Number:</label>
+                            <input type="text" class="form-control clickable-input" id="generateNumber" placeholder="Click to generate number..." disabled>
+                        </div>
+                        <div class="input-group mb-3 bg-light p-2 rounded">
+                            <label for="inputSigFigs" class="input-group-text label-col">Enter Sig Figs:</label>
+                            <input type="text" class="form-control" id="inputSigFigs" placeholder="Enter sig figs...">
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <button type="button" class="btn btn-reveal" id="revealResultBtn">Reveal Result</button>
+                            </div>
+                        </div>
+                        <div class="output-area">
+                            <h4>Test Result</h4>
+                            <p id="testResultOutput">Result will appear here...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Additional Content Section -->
+            <div class="col-12 mt-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Understanding Significant Figures</h5>
+                        <p class="card-text">Significant figures are critical in scientific measurements, ensuring that your
+                            calculations reflect the precision of your instruments. Understanding how to count and use
+                            significant figures is a fundamental skill in science, especially in fields like physics and
+                            chemistry.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ... Scroll Button ... -->
+        <button onclick="scrollToTop()" id="scrollToTopButton" class="scroll-button"><span
+                class="material-symbols-outlined">
+                arrow_upward
+            </span></button>
+    </main>
+
+    <!-- ... Footer Content ... -->
+    <div id="footer-container"></div>
+
+    <!-- ... Other Required Scripts-->
+    <script src="../scripts/calculators/x_0/x0_sig_fig.js" defer></script>
+    <script src="../scripts/calculators/x_0/x0_sig_fig_test.js" defer></script>
+</body>
+</html>

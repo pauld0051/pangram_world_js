@@ -1,0 +1,299 @@
+/* Flexbox alignment for the row containing calculator and equations */
+.row.d-flex {
+    display: flex;
+    align-items: stretch; /* Stretch the children to fill the height */
+    margin-left: -15px; /* Adjust these values as per your layout */
+    margin-right: -15px; /* Adjust these values as per your layout */
+}
+
+/* Color styling for labels */
+.input-group-text.label-col {
+    background-color: #f8d7da; /* Soft pink, for example */
+    color: #721c24; /* Dark red text color for contrast */
+    border-color: #f5c6cb; /* Soft pink border */
+}
+
+.gen.label-col {
+    background-color: #555555; /* Dark grey for contrast */
+    color: #ffffff; /* White text for readability */
+    border-color: #f5c6cb; /* Pink border */
+}
+
+/* Define CSS variables for easy adjustment of sizes */
+:root {
+    --input-label-width: 33%;
+    --input-field-width: 45%;
+    --select-width: 22%;
+}
+
+/* Ensuring consistent sizing for input groups with CSS variables */
+.input-group .input-group-text {
+    width: var(--input-label-width); /* 33% width for label */
+    flex: none; /* Do not grow or shrink */
+}
+
+.input-group .form-control {
+    width: var(--input-field-width); /* 45% width for input field */
+    flex: none; /* Do not grow or shrink */
+}
+
+.input-group .form-select {
+    width: var(--select-width); /* 22% width for select */
+    flex: none; /* Do not grow or shrink */
+}
+
+.custom-generate-btn {
+    background-color: #FFAA33; /* Adjust this color to match your theme */
+    color: #FFFFFF; /* White text for better readability */
+    border: none;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 5px; /* Slightly rounded corners */
+    transition: background-color 0.3s ease;
+}
+
+.custom-generate-btn:hover {
+    background-color: #FF8800; /* Darken on hover */
+    cursor: pointer;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+    /* On smaller screens, you may want to adjust the sizes or allow them to auto-adjust. 
+       For now, I'll leave them to take full width on smaller screens for better visibility. */
+    .input-group .input-group-text,
+    .input-group .input-group-text-gen,
+    .input-group .form-control,
+    .input-group .form-select {
+        width: 100%; /* Each element takes full width of its container */
+    }
+}
+
+/* Remove the fixed height on select elements, it's not necessary */
+.input-group-sm .form-select {
+    height: auto;
+    line-height: inherit;
+}
+
+/* The .form-label class is not used with Bootstrap's input-group
+   but if you're using it elsewhere, keep it. Otherwise, it can be removed. */
+.form-label {
+    margin-bottom: 0.5rem; /* Keep if used outside input-groups */
+}
+
+/* General styles for both containers */
+.bg-white.p-4.shadow-sm {
+    display: flex; /* Enables flexbox layout */
+    flex-direction: column; /* Stacks children vertically */
+    justify-content: flex-start; /* Aligns children to the start of the main axis */
+    align-items: center; /* Centers children along the cross axis */
+    padding: 1.5rem; /* Consistent padding */
+    background-color: #fff; /* White background */
+    border-radius: 0.5rem; /* Rounded corners */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* Subtle shadow */
+    margin-bottom: 2rem; /* Space below the container */
+}
+
+/* Styles specific to the equations container */
+.equations-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content to the top */
+    min-height: 100%; /* Use min-height to allow container to grow */
+    padding-bottom: 1rem; /* Adjust the padding to ensure the container can grow */
+}
+
+.equation {
+    margin-bottom: 1rem; /* Space between each equation */
+    text-align: center; /* Center-align the equations */
+}
+
+.form-font-style.flex-fill,
+.equations-container.flex-fill {
+    flex: 1; /* Flex-grow to fill the space */
+}
+
+/* Styles for equation images to ensure they do not exceed their container's width */
+.equations-container img {
+    max-width: 100%; /* Ensures images are responsive and do not overflow */
+    margin-bottom: 1rem; /* Evenly spaces images vertically */
+}
+
+.row.d-flex.align-items-stretch {
+    align-items: stretch; /* This ensures that both children (calculator and equation columns) fill the parent height */
+}
+
+.bg-white.p-4.shadow-sm {
+    margin-bottom: 0; /* Remove fixed margin to control the spacing between components */
+}
+
+/* Height adjustments to match both sides */
+.bg-white.p-4.shadow-sm.flex-fill {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distributes space between items */
+    height: 100%; /* Takes full height of the parent */
+}
+
+/* Ensuring equations are spaced evenly and aligned */
+.equations-container.flex-fill {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; /* Evenly distributes space around items, can be 'space-between' if no space is wanted at the start/end */
+}
+
+.clickable-input {
+    cursor: pointer;
+    color: #FFFFFF; /* White text for readability */
+    background-color: #555555; /* Dark grey for clickable input */
+    border: 2px solid #FF8800; /* Orange border */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.clickable-input:disabled {
+    background-color: #e9ecef; /* Bootstrap default light grey */
+    color: #495057; /* Dark grey text */
+    opacity: 1; /* Ensure full opacity */
+}
+
+/* Reveal Button */
+.btn-reveal {
+    background-color: #007bff; /* Bootstrap's primary blue */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-reveal:hover {
+    background-color: #0056b3; /* Slightly darker shade of blue on hover */
+}
+
+.btn-reveal:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Subtle blue shadow for focus */
+}
+
+@media (max-width: 991px) {
+    .row.d-flex {
+        flex-direction: column; /* Stack children on smaller screens */
+    }
+    .equations-container.flex-fill {
+        min-height: 0; /* Reset min-height for mobile to accommodate varying content heights */
+    }
+}
+
+/* Ensuring that the equations are not too close to the edges on smaller screens */
+@media (max-width: 575px) {
+    .equations-container .equation {
+        padding: 0 1rem; /* Add padding on the sides */
+    }
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 991px) {
+    .bg-white.p-4.shadow-sm {
+        margin-bottom: 1rem; /* Reduces space below the container on smaller screens */
+    }
+}
+
+/* Additional responsive adjustments for very small screens */
+@media (max-width: 575px) {
+    .bg-white.p-4.shadow-sm {
+        padding: 1rem; /* Reduces padding for more space */
+    }
+}
+
+/* Make sure the .row.flex-fill containers have the same height */
+.row.d-flex {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping on larger screens */
+}
+
+/* Ensure both the calculator and the equations containers fill the height and are aligned */
+.col-lg-6.d-flex {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-font-style.flex-fill,
+.equations-container.flex-fill {
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* Flex-grow to fill the space */
+    justify-content: flex-start; /* Align content to the top */
+}
+
+/* Remove the fixed margin-bottom from .bg-white.p-4.shadow-sm */
+.bg-white.p-4.shadow-sm {
+    margin-bottom: 0; /* Or adjust as necessary to control the spacing between components */
+}
+
+.locked-input {
+    background-color: #e9acef;
+    border: 1px solid #ced4da;
+    cursor: not-allowed; /* Shows a 'not-allowed' cursor on hover */
+}
+
+/* Locked Input Message */
+.hidden {
+  display: none;
+}
+
+.locked-message {
+  color: #dc3545; /* Bootstrap's $danger color, for example */
+  background-color: #f8d7da; /* Bootstrap's $danger-100 color */
+  border-color: #f5c6cb; /* Bootstrap's $danger-300 color */
+  position: absolute;
+  z-index: 1;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Hide long names in select boxes */
+    .sel:focus .l{
+        display: inline;
+        visibility: visible;
+    }
+    .sel:focus .s{
+        display: none;
+        visibility: hidden;
+    }
+
+    /* Speed of light tooltip */
+    #velocityTooltip, 
+    #gravityTooltip, 
+    #massTooltip,
+    #timeToolTip {
+    position: absolute;
+    background-color: #fff;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: smaller;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5); /* Fluorescent green glow */
+    z-index: 1000;
+    pointer-events: none; /* Prevents the tooltip from blocking clicks */
+}
+
+    /* Triangle pointer */
+    #velocityTooltip::after, 
+    #gravityTooltip::after, 
+    #massTooltip::after,
+    #timeTooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%; /* Position the pointer just below the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #f5c6cb transparent transparent transparent;
+}
