@@ -1,8 +1,8 @@
 function calculateSigFigs(number) {
-    if (!number) return 0;
+    if (number == null) return 0;
 
-    // Remove leading and trailing spaces
-    number = number.trim();
+    // Convert number to string to ensure it can be trimmed
+    number = number.toString().trim();
 
     // Handle scientific notation separately
     if (/e/i.test(number)) {
@@ -43,4 +43,20 @@ function calculateSigFigs(number) {
     }
 
     return sigFigs;
+}
+
+
+function findLeastSigFigs(inputs) {
+    let leastSigFigs = Infinity;
+
+    inputs.forEach(input => {
+        if (input) {
+            const sigFigs = calculateSigFigs(input);
+            if (sigFigs < leastSigFigs) {
+                leastSigFigs = sigFigs;
+            }
+        }
+    });
+
+    return leastSigFigs === Infinity ? 0 : leastSigFigs;
 }
