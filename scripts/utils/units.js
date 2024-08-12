@@ -1,3 +1,30 @@
+/* Force Unit Conversion */
+const forceConversionRates = {
+    'N': 1,               // base unit, 1 N = 1 N
+    'kN': 1e-3,           // 1 kN = 1000 N
+    'mN': 1e3,            // 1 mN = 0.001 N
+    'μN': 1e6,            // 1 μN = 0.000001 N
+    'MN': 1e-6,           // 1 MN = 1,000,000 N
+    'GN': 1e-9,           // 1 GN = 1,000,000,000 N
+    'dyn': 1e5,           // 1 dyn = 0.00001 N
+    'lbf': 4.44822,       // 1 lbf = 4.44822 N
+    'kgf': 9.80665,       // 1 kgf = 9.80665 N
+    'gf': 9.80665e-3,     // 1 gf = 0.00980665 N
+    'tf': 9.80665e3,      // 1 tf = 9,806.65 N (metric ton-force)
+    'kip': 4.44822e3,     // 1 kip = 4448.22 N
+    'ozf': 0.278014,      // 1 ozf = 0.278014 N
+};
+
+export function getForceConversionRate(unit) {
+    return forceConversionRates[unit];
+}
+
+export function convertForce(value, fromUnit, toUnit) {
+    const fromRate = getForceConversionRate(fromUnit);
+    const toRate = getForceConversionRate(toUnit);
+    return (value / fromRate) * toRate; // Convert from the initial unit to Newtons, then to the target unit
+}
+
 /* Gravitational Constants */ 
 const gravityValues = {
     'e': 9.807,
@@ -27,6 +54,15 @@ const otherGravityConversions = {
     'mih2': value => value * 8053.71, // 1 m/s² = 8053.71 mi/h²
 };
 
+export function getGravityConstant(key) {
+    return gravityValues[key];
+}
+
+export function convertGravity(value, unit) {
+    const conversion = otherGravityConversions[unit];
+    return conversion ? conversion(value) : value; // If no conversion found, return the original value
+}
+
 /* Mass Unit Conversion */
 const massConversionRates = {
     'kg': 1,                // base unit, 1 kg = 1 kg
@@ -46,15 +82,6 @@ const massConversionRates = {
     'amu': 6.02214e26,      // 1 kg = 6.02214 x 10^26 amu (atomic mass units)
     'slug': 0.0685218,      // 1 kg = 0.0685218 slug (slugs)
 };
-
-export function getGravityConstant(key) {
-    return gravityValues[key];
-}
-
-export function convertGravity(value, unit) {
-    const conversion = otherGravityConversions[unit];
-    return conversion ? conversion(value) : value; // If no conversion found, return the original value
-}
 
 export function getMassConversionRate(unit) {
     return massConversionRates[unit];

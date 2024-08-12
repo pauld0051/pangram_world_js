@@ -1,11 +1,12 @@
-import { getGravityConstant, convertGravity, convertMass } from '/scripts/utils/units.js';
+import { getGravityConstant, convertForce, convertGravity, convertMass } from '/scripts/utils/units.js';
 
 document.addEventListener('DOMContentLoaded', function () {
     const forceInput = document.getElementById('inputF');
-    const massInput = document.getElementById('inputM');
     const gravityInput = document.getElementById('inputG');
-    const unitMassSelect = document.getElementById('unitMass');
+    const massInput = document.getElementById('inputM');
+    const unitForceSelect = document.getElementById('unitForce');
     const unitGravitySelect = document.getElementById('unitGravity');
+    const unitMassSelect = document.getElementById('unitMass');
     const clearButton = document.getElementById('clearButton');
     const sigFigCheckbox = document.getElementById('sigFigCheckbox');
     let calculatedField = null;
@@ -47,18 +48,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Handle changes in the unit selection for mass
-    unitMassSelect.addEventListener('change', function () {
-        if (calculatedField === 'Mass') {
-            let mass = parseFloat(massInput.value);
-            const currentUnit = unitMassSelect.value;
-            mass = convertMass(mass, 'kg', currentUnit); // Convert the displayed mass to the new selected unit
-            massInput.value = formatResult(mass, [mass]);
-        } else {
-            calculate(); // Recalculate and convert the displayed mass if the unit changes and mass isn't the calculated field
-        }
-    });
-
     function calculate() {
         let force = parseFloat(forceInput.value);
         let mass = parseFloat(massInput.value);
@@ -66,6 +55,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const massUnit = unitMassSelect.value;
         mass = convertMass(mass, massUnit, 'kg'); // Convert mass to kg for calculation
+
+        const forceUnit = unitForceSelect.value;
+        force = convertForce(force, forceUnit, 'N'); // Convert force to N for calculation
 
         const inputsFilled = [!isNaN(force), !isNaN(mass), !isNaN(gravity)];
         const filledCount = inputsFilled.filter(Boolean).length;
@@ -86,7 +78,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 massInput.value = formatResult(calculatedM, [force, gravity]);
                 lockInput(massInput, 'Mass');
             } else if (!isNaN(mass) && !isNaN(gravity)) {
-                const calculatedF = mass * gravity;
+                let calculatedF = mass * gravity;
+                calculatedF = convertForce(calculatedF, 'N', forceUnit); // Convert the calculated force back to the selected unit
                 forceInput.value = formatResult(calculatedF, [mass, gravity]);
                 lockInput(forceInput, 'Force');
             }
@@ -99,22 +92,33 @@ document.addEventListener('DOMContentLoaded', function () {
                 calculatedM = convertMass(calculatedM, 'kg', massUnit); // Convert mass back to the selected unit
                 massInput.value = formatResult(calculatedM, [force, gravity]);
             } else if (calculatedField === 'Force' && !isNaN(mass) && !isNaN(gravity)) {
-                const calculatedF = mass * gravity;
+                let calculatedF = mass * gravity;
+                calculatedF = convertForce(calculatedF, 'N', forceUnit); // Convert force back to the selected unit
                 forceInput.value = formatResult(calculatedF, [mass, gravity]);
             }
         }
     }
 
+    // Add this event listener for the checkbox
+    sigFigCheckbox.addEventListener('change', function () {
+        calculate(); // Recalculate when the significant figures checkbox is toggled
+    });
+
     function formatResult(value, inputs) {
         if (sigFigCheckbox.checked) {
-            const minSigFigs = Math.min(...inputs.map(countSigFigs));
-            return Number(value.toPrecision(minSigFigs));
+            const leastSigFigs = findLeastSigFigs(inputs);
+
+            // Use toPrecision directly to handle small sig figs and scientific notation
+            return Number(value.toPrecision(leastSigFigs)).toString();
         }
         return value.toFixed(10);
     }
 
+
     function countSigFigs(number) {
-        return calculateSigFigs(number.toString());
+        const sigFigs = calculateSigFigs(number.toString());
+        console.log(sigFigs); // Log the number of significant figures to the console
+        return sigFigs; // Return the number of significant figures
     }
 
     // Event Listeners for inputs
@@ -131,6 +135,18 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // Handle changes in the unit selection for force
+    unitForceSelect.addEventListener('change', function () {
+        if (calculatedField === 'Force') {
+            let force = parseFloat(forceInput.value);
+            const currentUnit = unitForceSelect.value;
+            force = convertForce(force, 'N', currentUnit); // Convert the displayed force to the new selected unit
+            forceInput.value = formatResult(force, [force]);
+        } else {
+            calculate(); // Recalculate and convert the displayed force if the unit changes and force isn't the calculated field
+        }
+    });
+
     // Event Listener for Gravity Unit Select
     unitGravitySelect.addEventListener('change', function () {
         const selectedValue = unitGravitySelect.value;
@@ -142,6 +158,18 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             gravityInput.disabled = false;
             gravityInput.value = ''; // Clear the gravity input if a custom unit is selected
+        }
+    });
+
+    // Handle changes in the unit selection for mass
+    unitMassSelect.addEventListener('change', function () {
+        if (calculatedField === 'Mass') {
+            let mass = parseFloat(massInput.value);
+            const currentUnit = unitMassSelect.value;
+            mass = convertMass(mass, 'kg', currentUnit); // Convert the displayed mass to the new selected unit
+            massInput.value = formatResult(mass, [mass]);
+        } else {
+            calculate(); // Recalculate and convert the displayed mass if the unit changes and mass isn't the calculated field
         }
     });
 
