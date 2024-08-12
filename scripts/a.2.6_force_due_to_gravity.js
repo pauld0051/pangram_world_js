@@ -1,4 +1,4 @@
-import { getGravityConstant, convertGravity, convertMass } from '/scripts/utils/units.js';
+import { getGravityConstant, convertGravity, convertMass } from './scripts/utils/units.js';
 
 document.addEventListener('DOMContentLoaded', function () {
     const forceInput = document.getElementById('inputF');
