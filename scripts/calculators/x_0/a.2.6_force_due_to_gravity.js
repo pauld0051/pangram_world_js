@@ -49,6 +49,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function calculate() {
+        if (checkForInvalidValues()) {
+            return; // Stop calculation if there are invalid values
+        }
+
         let force = parseFloat(forceInput.value);
         let mass = parseFloat(massInput.value);
         let gravity = parseFloat(gravityInput.value);
@@ -98,6 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
+
 
     // Add this event listener for the checkbox
     sigFigCheckbox.addEventListener('change', function () {
@@ -172,6 +177,40 @@ document.addEventListener('DOMContentLoaded', function () {
             calculate(); // Recalculate and convert the displayed mass if the unit changes and mass isn't the calculated field
         }
     });
+
+    function showTooltipModal(message) {
+        const tooltipModal = new bootstrap.Modal(document.getElementById('errorTooltipModal'));
+        document.getElementById('errorTooltipText').innerText = message; // Set the error message dynamically
+        tooltipModal.show();
+
+        // Auto-hide the modal after a few seconds
+        setTimeout(() => {
+            tooltipModal.hide();
+        }, 5000); // Adjust timing as necessary
+    }
+
+    function showPositionedModal(modalId, targetElement) {
+        var modal = document.getElementById(modalId);
+        var targetRect = targetElement.getBoundingClientRect();
+
+        // Positioning the modal
+        var modalDialog = modal.querySelector('.modal-dialog');
+        modalDialog.style.position = 'absolute';
+        modalDialog.style.top = targetRect.bottom + window.scrollY + 'px'; // Adjust the position
+        modalDialog.style.left = targetRect.left + window.scrollX + 'px';  // Adjust the position
+
+        // Show the modal
+        var bsModal = new bootstrap.Modal(modal);
+        bsModal.show();
+    }
+
+    function checkForInvalidValues() {
+        if (parseFloat(massInput.value) < 0) {
+            showPositionedModal('massWarningModal', massInput);
+            return true; // Return true if a negative mass is found
+        }
+        return false; // Return false if no invalid values
+    }
 
     // Clear button resets the form
     clearButton.addEventListener('click', clearAll);

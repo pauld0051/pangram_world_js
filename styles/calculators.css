@@ -297,3 +297,54 @@
     border-style: solid;
     border-color: #f5c6cb transparent transparent transparent;
 }
+
+/* Make the modal small and centered like a tooltip */
+.modal-dialog.modal-sm {
+    max-width: 300px;
+}
+
+.modal-content {
+    background-color: #ffcccb; /* Light red background to indicate an error */
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-body {
+    padding: 10px 20px;
+}
+
+.modal-body p {
+    font-size: 0.9rem;
+    color: #333; /* Dark text color */
+}
+
+/* Optional: Position the modal like a tooltip */
+.modal-dialog {
+    margin: 0; /* Remove default centering */
+    transform: none; /* Ensure it doesn't apply centering transform */
+    max-width: none; /* Allow it to grow to the full size if needed */
+}
+
+.speech-bubble {
+    background-color: #ffc0cb; /* Soft pink background */
+    border-radius: 8px;
+    border: none;
+    padding: 10px;
+    position: relative;
+    display: inline-block;
+    max-width: 300px; /* Adjust as needed */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -10px; /* Adjust according to position */
+    left: 20px; /* Adjust to align with the target element */
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-top-color: #ffc0cb; /* Match background color */
+}
+
+/* END MODAL STUFF */
