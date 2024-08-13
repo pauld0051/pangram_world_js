@@ -285,3 +285,14 @@ document.addEventListener('DOMContentLoaded', function () {
     clearButton.addEventListener('click', clearAll);
 });
 
+// KaTeX Rendering
+// Render equations with custom options
+    const options = {
+        displayMode: true,
+        throwOnError: false,
+        colorIsTextColor: true
+    };
+
+    katex.render("\\Large \\color{#333}{F_g = m \\cdot g}", document.getElementById('equation1'), options);
+    katex.render("\\Large \\color{#333}{m = \\frac{F_g}{g}}", document.getElementById('equation2'), options);
+    katex.render("\\Large \\color{#333}{g = \\frac{F_g}{m}}", document.getElementById('equation3'), options);
