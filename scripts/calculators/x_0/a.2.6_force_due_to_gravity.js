@@ -25,12 +25,13 @@ document.addEventListener('DOMContentLoaded', function () {
     function clearAll() {
         forceInput.value = '';
         massInput.value = '';
+        gravityInput.value = '';
 
-        // Reset gravity only if it's not predefined
-        if (getGravityConstant(unitGravitySelect.value) === undefined) {
-            gravityInput.value = '';
-            gravityInput.readOnly = false;
-        }
+        // Reset the gravity unit to the default "g (ms⁻²)"
+        unitGravitySelect.value = 'g';
+        
+        // Make the gravity input editable again
+        gravityInput.readOnly = false;
 
         disablePredefinedOptions(false); // Enable all options in the dropdown
         calculatedField = null;
@@ -186,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function () {
             disablePredefinedOptions(true); // Disable predefined options if gravity is being calculated
         } else {
             // Non-predefined gravity unit selected
-            gravityInput.readOnly = true; // Ensure the input is still readonly
+            gravityInput.readOnly = false; // Ensure the input is editable
             let currentGravityValue = parseFloat(gravityInput.value);
             if (!isNaN(currentGravityValue)) {
                 gravity = convertGravity(currentGravityValue, selectedValue); // Convert the gravity value to the selected unit
@@ -197,7 +198,6 @@ document.addEventListener('DOMContentLoaded', function () {
             disablePredefinedOptions(false); // Allow switching to non-predefined units
         }
 
-        // Recalculate based on the new gravity value or unit if necessary
         if (calculatedField === 'Gravity') {
             calculate(); // Recalculate if gravity is the calculated field
         }
