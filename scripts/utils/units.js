@@ -93,3 +93,49 @@ export function convertMass(value, fromUnit, toUnit) {
     return (value / fromRate) * toRate; // Convert from the initial unit to kilograms, then to the target unit
 }
 
+/* Momentum Unit Conversion */
+const momentumConversionRates = {
+    'kg_m_s': 1,                // base unit, 1 kg·m/s = 1 kg·m/s
+    'g_cm_s': 1e3,              // 1 kg·m/s = 1000 g·cm/s
+    'mg_mm_s': 1e6,             // 1 kg·m/s = 1,000,000 mg·mm/s
+    'N_s': 1,                   // 1 kg·m/s = 1 N·s (since 1 N·s = 1 kg·m/s)
+    'slug_ft_s': 1.35582,       // 1 kg·m/s = 1.35582 slug·ft/s
+    'lb_ft_s': 0.138255,        // 1 kg·m/s = 0.138255 lb·ft/s
+    'oz_in_s': 0.0086396,       // 1 kg·m/s = 0.0086396 oz·in/s
+    'dyne_s': 1e5,              // 1 kg·m/s = 100,000 dyne·s
+    'gf_cm_s': 98.0665,         // 1 kg·m/s = 98.0665 gf·cm/s
+};
+
+export function getMomentumConversionRate(unit) {
+    return momentumConversionRates[unit];
+}
+
+export function convertMomentum(value, fromUnit, toUnit) {
+    const fromRate = getMomentumConversionRate(fromUnit);
+    const toRate = getMomentumConversionRate(toUnit);
+    return (value / fromRate) * toRate; // Convert from the initial unit to kg·m/s, then to the target unit
+}
+
+/* Time Unit Conversion */
+const timeConversionRates = {
+    's': 1,                      // base unit, 1 s = 1 s
+    'min': 1/60,                 // 1 min = 60 s
+    'hr': 1/3600,                // 1 hr = 3600 s
+    'day': 1/86400,              // 1 day = 86400 s
+    'yr': 1/31536000,            // 1 yr = 31536000 s
+    'ms': 1e3,                   // 1 s = 1000 ms
+    'micros': 1e6,               // 1 s = 1,000,000 µs
+    'ns': 1e9,                   // 1 s = 1,000,000,000 ns
+};
+
+export function getTimeConversionRate(unit) {
+    return timeConversionRates[unit];
+}
+
+export function convertTime(value, fromUnit, toUnit) {
+    const fromRate = getTimeConversionRate(fromUnit);
+    const toRate = getTimeConversionRate(toUnit);
+    return (value / fromRate) * toRate; // Convert from the initial unit to seconds, then to the target unit
+}
+
+

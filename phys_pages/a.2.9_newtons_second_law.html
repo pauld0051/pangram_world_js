@@ -8,7 +8,7 @@
         content="For all your Physics needs with some extra social media helpers to really get your game on!" />
     <meta property="og:image" content="https://www.pangram-world.com/static/images/pangram-world-title-trsp.png" />
     <meta property="og:url" content="https://www.pangram-world.com" />
-    <title>Pangram World - Force Due To Gravity</title>
+    <title>Pangram World - Newton's Second Law</title>
     <!-- ... Bootstrap CSS ... -->
     <link rel="stylesheet" href="../styles/bootstrap.css">
     <link rel="stylesheet" href="../styles/katex.css">
@@ -26,7 +26,7 @@
     <link rel="shortcut icon" type="image/png" sizes="512x512" href="../android-chrome-512x512.png">
     <!-- ... Head Scripts ... -->
     <script src="../scripts/handlebars/dist/handlebars.min.js"></script> <!--Must Come First-->
-    
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>
@@ -36,7 +36,7 @@
     <script src="../scripts/main.js" defer></script>
     <script src="../scripts/utils/sig_fig_util.js" defer></script>
     <script type="module" src="../scripts/utils/units.js"></script>
-    <script type="module" src="../scripts/calculators/a_0/a.2.6_force_due_to_gravity.js"></script>
+    <script type="module" src="../scripts/calculators/a_0/a.2.9_newtons_second_law.js"></script>
 </head>
 <!-- ... Body ... -->
 <body>
@@ -70,13 +70,14 @@
                             <label class="form-check-label" for="sigFigCheckbox">
                                 Use significant figures
                             </label>
-        
+
                             <!-- Force (F) Input -->
                             <div class="input-group mb-3 bg-light p-2 rounded">
                                 <label for="inputF" class="input-group-text label-col">Force&nbsp;<span
                                         class="d-none d-md-inline">(F<sub>g</sub>)</span>:</label>
                                 <input type="number" class="form-control" id="inputF" name="force">
-                                <select class="form-select" id="unitForce" name="unit_force" aria-label="Select unit of force">
+                                <select class="form-select" id="unitForce" name="unit_force"
+                                    aria-label="Select unit of force">
                                     <option value="N" selected>N (Newtons)</option>
                                     <option value="kN">kN (Kilonewtons)</option>
                                     <option value="mN">mN (Millinewtons)</option>
@@ -92,13 +93,14 @@
                                     <option value="ozf">ozf (Ounce-force)</option>
                                 </select>
                             </div>
-        
+
                             <!-- Mass (m) Input -->
                             <div class="input-group mb-3 bg-light p-2 rounded">
                                 <label for="inputM" class="input-group-text label-col">Mass&nbsp;<span
                                         class="d-none d-md-inline">(m)</span>:</label>
                                 <input type="number" class="form-control" id="inputM" name="mass">
-                                <select class="form-select" id="unitMass" name="unit_mass" aria-label="Select unit of mass">
+                                <select class="form-select" id="unitMass" name="unit_mass"
+                                    aria-label="Select unit of mass">
                                     <option value="kg">kg (kilograms)</option>
                                     <option value="g">g (Grams)</option>
                                     <option value="mg">mg (Milligrams)</option>
@@ -117,13 +119,14 @@
                                     <option value="slug">slug (Slugs)</option>
                                 </select>
                             </div>
-        
-                            <!-- Gravity (g) Input -->
+
+                            <!-- Acceleration (a) Input -->
                             <div class="input-group mb-3 bg-light p-2 rounded">
-                                <label for="inputG" class="input-group-text label-col">Gravity&nbsp;<span
-                                        class="d-none d-md-inline">(g)</span>:</label>
+                                <label for="inputG" class="input-group-text label-col">Acceleration&nbsp;<span
+                                        class="d-none d-md-inline">(a)</span>:</label>
                                 <input type="number" class="form-control" id="inputG" name="gravity">
-                                <select class="form-select" id="unitGravity" name="unit_gravity" aria-label="Select gravity">
+                                <select class="form-select" id="unitGravity" name="unit_gravity"
+                                    aria-label="Select gravity">
                                     <option value="g" selected>g (ms⁻²)</option>
                                     <option value="e">Earth (9.807 ms⁻²)</option>
                                     <option value="me">Mercury (3.70 ms⁻²)</option>
@@ -148,6 +151,43 @@
                                     <option value="mih2">mih⁻² (miles per hour squared)</option>
                                 </select>
                             </div>
+
+                            <!-- Change in Momentum (Δp) Input -->
+                            <div class="input-group mb-3 bg-light p-2 rounded">
+                                <label for="inputDeltaP" class="input-group-text label-col">Δ Momentum&nbsp;<span
+                                        class="d-none d-md-inline">(Δp)</span>:</label>
+                                <input type="number" class="form-control" id="inputDeltaP" name="momentum">
+                                <select class="form-select" id="unitMomentum" name="unit_momentum" aria-label="Select unit of momentum">
+                                    <!-- Metric Units -->
+                                    <option value="kg_m_s">kg·m·s⁻¹ (Kilogram metre per second)</option>
+                                    <option value="g_cm_s">g·cm·s⁻¹ (Gram centimetre per second)</option>
+                                    <option value="mg_mm_s">mg·mm·s⁻¹ (Milligram millimetre per second)</option>
+                                    <option value="N_s">N·s (Newton second)</option>
+                                    <!-- Imperial Units -->
+                                    <option value="slug_ft_s">slug·ft·s⁻¹ (Slug foot per second)</option>
+                                    <option value="lb_ft_s">lb·ft·s⁻¹ (Pound foot per second)</option>
+                                    <option value="oz_in_s">oz·in·s⁻¹ (Ounce inch per second)</option>
+                                    <!-- Other Units -->
+                                    <option value="dyne_s">dyne·s (Dyne second)</option>
+                                    <option value="gf_cm_s">gf·cm·s⁻¹ (Gram-force centimetre per second)</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group mb-3 bg-light p-2 rounded">
+                                <label for="inputT" class="input-group-text label-col">Δ Time&nbsp;<span class="d-none d-md-inline">(t)</span>:</label>
+                                <input type="number" class="form-control" id="inputT" name="time">
+                                <select class="form-select" id="unitTime" name="unit_time" aria-label="Select unit of time">
+                                    <option value="s">s (seconds)</option>
+                                    <option value="min">min (minutes)</option>
+                                    <option value="hr">hr (hours)</option>
+                                    <option value="day">days</option>
+                                    <option value="yr">years</option>
+                                    <option value="ms">ms (milliseconds)</option>
+                                    <option value="micros">µs (microseconds)</option>
+                                    <option value="ns">ns (nanoseconds)</option>
+                                </select>
+                            </div>
+
                             <div class="row">
                                 <!-- Clear Button -->
                                 <div class="col text-center">
@@ -157,7 +197,7 @@
                         </form>
                     </div>
                 </div>
-        
+
                 <!-- Right Column for Equations -->
                 <div class="col-lg-6 d-flex">
                     <div class="equations-container bg-white p-4 shadow-sm flex-fill">
@@ -166,6 +206,8 @@
                         <div id="equation1" class="equation mb-3"></div>
                         <div id="equation2" class="equation mb-3"></div>
                         <div id="equation3" class="equation mb-3"></div>
+                        <div id="equation4" class="equation mb-3"></div>
+                        <div id="equation5" class="equation mb-3"></div>
                     </div>
                 </div>
             </div>
@@ -175,17 +217,19 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Understanding Gravity</h5>
-                        <p class="card-text">Explore the force of gravity acting on an object with our interactive calculator.
-                            Understand how mass and the gravitational field strength influence the gravitational force an object
-                            experiences. Whether you're studying the force on different planets or curious about gravitational
-                            differences, this tool provides clear insights into the fundamental forces at play.</p>
+                        <p class="card-text">
+                            Dive into the dynamics of force, mass, and acceleration with our comprehensive tool. This calculator illustrates the
+                            intricate relationship between an object's mass, the acceleration it undergoes, and the change in momentum over
+                            time. Whether you're exploring the impact of varying forces or analyzing momentum shifts, this tool sheds light on
+                            the fundamental principles that govern motion and interaction in our physical world.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Modal -->
-        <div class="modal fade" id="massWarningModal" tabindex="-1" role="dialog" aria-labelledby="massWarningModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="massWarningModal" tabindex="-1" role="dialog"
+            aria-labelledby="massWarningModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content speech-bubble">
                     <div class="modal-body">
@@ -195,7 +239,8 @@
             </div>
         </div>
         <!-- ... Scroll Button ... -->
-        <button onclick="scrollToTop()" id="scrollToTopButton" class="scroll-button"><span class="material-symbols-outlined">
+        <button onclick="scrollToTop()" id="scrollToTopButton" class="scroll-button"><span
+                class="material-symbols-outlined">
                 arrow_upward
             </span></button>
     </main>
