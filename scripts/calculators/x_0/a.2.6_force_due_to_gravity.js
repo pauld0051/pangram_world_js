@@ -99,35 +99,36 @@ document.addEventListener('DOMContentLoaded', function () {
                 calculatedG = convertGravity(calculatedG, gravityUnit); // Convert gravity to the selected unit
                 gravityInput.value = formatResult(calculatedG, [force, mass]);
                 lockInput(gravityInput, 'Gravity'); // Lock gravity input if it's being calculated
+                disablePredefinedOptions(true); // Ensure predefined options remain disabled
             } else if (!isNaN(force) && !isNaN(gravity)) {
                 let calculatedM = force / gravity;
                 calculatedM = convertMass(calculatedM, 'kg', massUnit); // Convert the calculated mass back to the selected unit
                 massInput.value = formatResult(calculatedM, [force, gravity]);
                 lockInput(massInput, 'Mass');
-                disablePredefinedOptions(false); // Allow changing planets
+                disablePredefinedOptions(true); // Ensure predefined options remain disabled
             } else if (!isNaN(mass) && !isNaN(gravity)) {
                 let calculatedF = mass * gravity;
                 calculatedF = convertForce(calculatedF, 'N', forceUnit); // Convert the calculated force back to the selected unit
                 forceInput.value = formatResult(calculatedF, [mass, gravity]);
                 lockInput(forceInput, 'Force');
-                disablePredefinedOptions(false); // Allow changing planets
+                disablePredefinedOptions(true); // Ensure predefined options remain disabled
             }
         } else if (calculatedField) {
             if (calculatedField === 'Gravity' && !isNaN(force) && !isNaN(mass)) {
                 let calculatedG = force / mass;
                 calculatedG = convertGravity(calculatedG, gravityUnit); // Convert gravity to the selected unit
                 gravityInput.value = formatResult(calculatedG, [force, mass]);
-                disablePredefinedOptions(true); // Disable predefined options when calculating gravity
+                disablePredefinedOptions(true); // Ensure predefined options remain disabled
             } else if (calculatedField === 'Mass' && !isNaN(force) && !isNaN(gravity)) {
                 let calculatedM = force / gravity;
                 calculatedM = convertMass(calculatedM, 'kg', massUnit); // Convert mass back to the selected unit
                 massInput.value = formatResult(calculatedM, [force, gravity]);
-                disablePredefinedOptions(false); // Allow changing planets
+                disablePredefinedOptions(true); // Ensure predefined options remain disabled
             } else if (calculatedField === 'Force' && !isNaN(mass) && !isNaN(gravity)) {
                 let calculatedF = mass * gravity;
                 calculatedF = convertForce(calculatedF, 'N', forceUnit); // Convert force back to the selected unit
                 forceInput.value = formatResult(calculatedF, [mass, gravity]);
-                disablePredefinedOptions(false); // Allow changing planets
+                disablePredefinedOptions(true); // Ensure predefined options remain disabled
             }
         }
     }
@@ -162,6 +163,10 @@ document.addEventListener('DOMContentLoaded', function () {
     function handleInputChange(input) {
         if (input.value.trim() === '') {
             clearLockedInput();
+        } else {
+            if (calculatedField === 'Gravity') {
+                disablePredefinedOptions(true); // Keep predefined options disabled if Gravity was calculated
+            }
         }
     }
 
