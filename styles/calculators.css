@@ -348,3 +348,29 @@
 }
 
 /* END MODAL STUFF */
+
+.copy-tooltip {
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    opacity: 0.9;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+/* Style for readonly inputs to look locked */
+input[readonly] {
+    background-color: #f2dede; /* Light pinky-grey */
+    color: #555; /* Text color to make it readable */
+    border-color: #e6bcbc; /* Border color to match the background */
+    cursor: not-allowed; /* Cursor indicates non-editable state */
+}
+
+/* Optional: Add some padding for a more polished look */
+input[readonly] {
+    padding: 8px;
+    border-radius: 4px; /* Slightly rounded corners */
+}
