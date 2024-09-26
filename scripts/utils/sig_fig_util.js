@@ -1,4 +1,6 @@
-function calculateSigFigs(number) {
+// sig_fig_util.js
+
+export function calculateSigFigs(number) {
     if (number == null) return 0;
 
     // Convert number to string to ensure it can be trimmed
@@ -45,8 +47,7 @@ function calculateSigFigs(number) {
     return sigFigs;
 }
 
-
-function findLeastSigFigs(inputs) {
+export function findLeastSigFigs(inputs) {
     let leastSigFigs = Infinity;
 
     inputs.forEach(input => {
@@ -60,3 +61,9 @@ function findLeastSigFigs(inputs) {
 
     return leastSigFigs === Infinity ? 0 : leastSigFigs;
 }
+
+// Use CommonJS export syntax
+//module.exports = {
+//    calculateSigFigs,
+//    findLeastSigFigs
+//};
