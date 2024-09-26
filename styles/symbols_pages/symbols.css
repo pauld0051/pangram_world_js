@@ -1,0 +1,106 @@
+.alphabet-card {
+            margin-bottom: 30px;
+        }
+
+        .alphabet-key {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+            font-size: 24px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .alphabet-key:hover {
+            background-color: #e2e6ea;
+        }
+
+        /* Styles for the Main Heading Card */
+.card.bg-primary {
+    background-color: #e0e0e0 !important; /* Use a neutral color with !important */
+    border: none !important; /* Ensure border is removed */
+    color: #333 !important; /* Set text color */
+}
+
+.card.bg-primary .card-body {
+    padding: 20px !important; /* Adjust padding for the heading card */
+}
+
+.card.bg-primary h1 {
+    font-size: 2rem !important; /* Adjust font size */
+    margin-bottom: 0 !important; /* Remove bottom margin */
+}
+
+/* CSS for Greek alphabet keys */
+.alphabet-key {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    margin: 5px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    font-size: 24px;
+    width: 80px; /* Adjust width to fit both letter and name */
+    height: 80px; /* Adjust height to fit both letter and name */
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.alphabet-key:hover {
+    background-color: #e2e6ea;
+}
+
+.alphabet-key .letter {
+    font-size: 30px; /* Size of the Greek letter */
+    font-weight: bold;
+    margin-bottom: 5px; /* Space between letter and name */
+}
+
+.alphabet-key .name {
+    font-size: 14px; /* Size of the name text */
+    color: #666; /* Slightly lighter color for the name */
+}
+
+/* Main Heading Section */
+.main-heading {
+    background: linear-gradient(45deg, #5a5a5a, #777);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.main-heading h1 {
+    font-size: 2.5rem; /* Adjust font size */
+    margin-bottom: 0;
+    color: #fff; /* White color for heading */
+}
+
+.main-heading p {
+    font-size: 1.2rem; /* Adjust font size for subtitle */
+    color: #f1f1f1; /* Light gray for subtitle */
+    margin-top: 5px;
+}
+
+/* Instruction Card */
+.instruction-card {
+    background-color: #f8f9fa; /* Light background for instruction card */
+    border: 1px solid #e2e6ea;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.instruction-card h5 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.instruction-card p {
+    font-size: 1rem;
+    color: #555;
+}
