@@ -1,3 +1,52 @@
+/* Acceleration Unit Conversion */
+const accelerationConversionRates = {
+    'ms2': 1,                  // base unit, 1 m/s² = 1 m/s²
+    'g': 9.80665,              // 1 g = 9.80665 m/s²
+    'gal': 0.01,               // 1 Gal = 0.01 m/s²
+    'fts2': 0.3048,            // 1 ft/s² = 0.3048 m/s²
+    'kmh2': 7.71604938e-7,     // 1 km/h² = 7.71604938e-7 m/s²
+    'mih2': 1.25160106e-6,     // 1 mi/h² = 1.25160106e-6 m/s²
+};
+
+export function getAccelerationConversionRate(unit) {
+    return accelerationConversionRates[unit];
+}
+
+export function convertAcceleration(value, fromUnit, toUnit, skipGConversion = false) {
+    if (skipGConversion && fromUnit === 'g' && toUnit === 'ms2') {
+        return value; // Skip conversion, treat g as a base unit
+    }
+
+    const fromRate = getAccelerationConversionRate(fromUnit);
+    const toRate = getAccelerationConversionRate(toUnit);
+
+    if (fromRate === undefined || toRate === undefined) {
+        console.error(`Invalid acceleration unit provided: fromUnit=${fromUnit}, toUnit=${toUnit}`);
+        return NaN;
+    }
+
+    return (value * fromRate) / toRate;
+}
+
+/* Displacement Unit Conversion */
+const displacementConversionRates = {
+    'm': 1,               // base unit, 1 m = 1 m
+    'km': 1e-3,           // 1 km = 1000 m
+    'cm': 1e2,            // 1 cm = 0.01 m
+    'mm': 1e3,            // 1 mm = 0.001 m
+    'in': 39.3701,        // 1 in = 0.0254 m
+    'ft': 3.28084,        // 1 ft = 0.3048 m
+    'yd': 1.09361,        // 1 yd = 0.9144 m
+    'mi': 0.000621371,    // 1 mi = 1609.34 m
+    'nmi': 0.000539957    // 1 nmi = 1852 m
+};
+
+export function convertDisplacement(value, fromUnit, toUnit) {
+    const fromRate = displacementConversionRates[fromUnit];
+    const toRate = displacementConversionRates[toUnit];
+    return (value / fromRate) * toRate;
+}
+
 /* Force Unit Conversion */
 const forceConversionRates = {
     'N': 1,               // base unit, 1 N = 1 N
@@ -137,5 +186,35 @@ export function convertTime(value, fromUnit, toUnit) {
     const toRate = getTimeConversionRate(toUnit);
     return (value / fromRate) * toRate; // Convert from the initial unit to seconds, then to the target unit
 }
+
+// Velocity Unit Conversion
+const velocityConversionRates = {
+    'ms': 1,          // base unit, 1 m/s = 1 m/s
+    'kms': 1e-3,      // 1 km/s = 1000 m/s
+    'kmph': 1 / 3.6,  // 1 km/h = 0.27778 m/s
+    'mph': 0.44704,   // 1 mph = 0.44704 m/s
+    'fts': 0.3048,    // 1 ft/s = 0.3048 m/s
+    'ftm': 0.00508,   // 1 ft/min = 0.00508 m/s
+    'mpm': 1 / 60,    // 1 m/min = 0.01667 m/s
+    'mps': 1609.34,   // 1 mile/s = 1609.34 m/s
+    'kn': 0.514444,   // 1 knot = 0.514444 m/s
+};
+
+export function getVelocityConversionRate(unit) {
+    return velocityConversionRates[unit];
+}
+
+export function convertVelocity(value, fromUnit, toUnit) {  // Make sure this is exported
+
+    // Get the conversion rates
+    const fromRate = getVelocityConversionRate(fromUnit);
+    const toRate = getVelocityConversionRate(toUnit);
+
+    // Perform the conversion
+    const result = (value * fromRate) / toRate;
+    
+    return result;
+}
+
 
 

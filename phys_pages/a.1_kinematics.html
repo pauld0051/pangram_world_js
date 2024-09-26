@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Pangram World" />
+    <meta property="og:description"
+        content="For all your Physics needs with some extra social media helpers to really get your game on!" />
+    <meta property="og:image" content="https://www.pangram-world.com/static/images/pangram-world-title-trsp.png" />
+    <meta property="og:url" content="https://www.pangram-world.com" />
+    <title>Pangram World - Kinematics</title>
+    <!-- ... Bootstrap CSS ... -->
+    <link rel="stylesheet" href="../styles/bootstrap.css">
+    <link rel="stylesheet" href="../styles/katex.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/calculators.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- ... other head elements ... -->
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="shortcut icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="shortcut icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="shortcut icon" type="image/png" sizes="192x192" href="../android-chrome-192x192.png">
+    <link rel="shortcut icon" type="image/png" sizes="512x512" href="../android-chrome-512x512.png">
+    <!-- ... Head Scripts ... -->
+    <script src="../scripts/handlebars/dist/handlebars.min.js"></script> <!--Must Come First-->
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="../scripts/bootstrap.bundle.js"></script>
+    <script defer src="../scripts/katex.js"></script>
+    <script defer src="../scripts/auto-render.js" onload="renderMathInElement(document.body);"></script>
+    <script src="../scripts/main.js" defer></script>
+    <script src="../scripts/utils/sig_fig_util.js" defer></script>
+    <script type="module" src="../scripts/utils/units.js"></script>
+    <script type="module" src="../scripts/calculators/a_0/a.1_kinematics.js"></script>
+</head>
+<!-- ... Body ... -->
+<body>
+    <!-- ... Header Content ... -->
+    <div id="header-container"></div>
+    <main>
+        <!-- Container for the Kinematics Calculator -->
+        <div class="container my-4">
+            <div class="row d-flex">
+                <!-- Left Column for the Calculator -->
+                <div class="col-lg-6 d-flex">
+                    <div class="form-font-style bg-white p-4 shadow-sm">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h2 class="mb-0">A.1 Kinematics Calculator</h2>
+                            <button type="button" class="btn btn-help" data-bs-toggle="popover"
+                                data-bs-title="A.1 Kinematics Calculator" data-bs-content="<p>Welcome to the Kinematics Calculator. This tool calculates missing kinematic variables: displacement (s), initial velocity (u), final velocity (v), acceleration (a), and time (t) based on the inputs you provide:</p>
+<ul>
+    <li><strong>Displacement (s):</strong> Enter the distance in meters, or leave blank to calculate based on other values.</li>
+    <li><strong>Initial Velocity (u):</strong> Enter the initial speed in meters per second, or leave blank if unknown.</li>
+    <li><strong>Final Velocity (v):</strong> Enter the final speed in meters per second, or leave blank if unknown.</li>
+    <li><strong>Acceleration (a):</strong> Enter the acceleration in meters per second squared, or leave blank if unknown.</li>
+    <li><strong>Time (t):</strong> Enter the time in seconds, or leave blank if unknown.</li>
+</ul>
+<p>Select the appropriate units from the dropdown menus for each variable. The calculator automatically calculates and fills in the missing values.</p>
+<p>Enable '<em>Use significant figures</em>' to round the results according to the significant figures of the input values for more precise calculations.</p>
+<p><strong>Note:</strong> Ensure the inputs make physical sense; for example, negative time is not valid, and the square root of a negative number will be treated as zero in velocity calculations.</p>
+<p>Click 'Clear' to reset all inputs and calculations. Changing units after input will auto-convert the values and recalculate.</p>">
+                                <span class="material-symbols-outlined help">
+                                    help_outline
+                                </span>
+                            </button>
+                        </div>
+                        <form id="gravityForm">
+                            <input class="form-check-input" type="checkbox" id="sigFigCheckbox">
+                            <label class="form-check-label" for="sigFigCheckbox">
+                                Use significant figures
+                            </label>
+
+                            <!-- Displacement (s) -->
+                            <div class="input-group mb-3 bg-light p-2 rounded">
+                                <label for="inputS" class="input-group-text label-col">Displacement <span
+                                        class="d-none d-md-inline">(s)</span>:</label>
+                                <input type="number" class="form-control" id="inputS" name="displacement">
+                                <select class="form-select" id="unitDisplacement" name="unit_displacement" aria-label="Select unit of displacement">
+                                    <option value="mm">mm (millimeters)</option>
+                                    <option value="cm">cm (centimeters)</option>
+                                    <option value="m" selected>m (meters)</option>
+                                    <option value="km">km (kilometers)</option>
+                                    <option value="in">in (inches)</option>
+                                    <option value="ft">ft (feet)</option>
+                                    <option value="yd">yd (yards)</option>
+                                    <option value="mi">mi (miles)</option>
+                                    <option value="nmi">nmi (nautical miles)</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Initial Velocity (u) -->
+                            <div class="input-group mb-3 bg-light p-2 rounded">
+                                <label for="inputU" class="input-group-text label-col">Initial Velocity <span
+                                        class="d-none d-md-inline">(u)</span>:</label>
+                                <input type="number" class="form-control" id="inputU" name="initial_velocity">
+                                <select class="form-select" id="unitInitialVelocity" name="unit_initial_velocity"
+                                    aria-label="Select unit of initial velocity">
+                                    <option value="ms">ms⁻¹ (meters per second)</option>
+                                    <option value="kms">kms⁻¹ (kilometers per second)</option>
+                                    <option value="kmph">km/h (kilometers per hour)</option>
+                                    <option value="mph">mph (miles per hour)</option>
+                                    <option value="fts">ft/s (feet per second)</option>
+                                    <option value="ftm">ft/min (feet per minute)</option>
+                                    <option value="mpm">m/min (meters per minute)</option>
+                                    <option value="mps">mps (miles per second)</option>
+                                    <option value="kn">knots</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Final Velocity (v) -->
+                            <div class="input-group mb-3 bg-light p-2 rounded">
+                                <label for="inputV" class="input-group-text label-col">Final Velocity <span
+                                        class="d-none d-md-inline">(v)</span>:</label>
+                                <input type="number" class="form-control" id="inputV" name="final_velocity">
+                                <select class="form-select" id="unitFinalVelocity" name="unit_final_velocity"
+                                    aria-label="Select unit of final velocity">
+                                    <option value="ms">ms⁻¹ (meters per second)</option>
+                                    <option value="kms">kms⁻¹ (kilometers per second)</option>
+                                    <option value="kmph">km/h (kilometers per hour)</option>
+                                    <option value="mph">mph (miles per hour)</option>
+                                    <option value="fts">ft/s (feet per second)</option>
+                                    <option value="ftm">ft/min (feet per minute)</option>
+                                    <option value="mpm">m/min (meters per minute)</option>
+                                    <option value="mps">mps (miles per second)</option>
+                                    <option value="kn">knots</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Acceleration (a) -->
+                            <div class="input-group mb-3 bg-light p-2 rounded">
+                                <label for="inputA" class="input-group-text label-col">Acceleration <span
+                                        class="d-none d-md-inline">(a)</span>:</label>
+                                <input type="number" class="form-control" id="inputA" name="acceleration">
+                                <select class="form-select" id="unitAcceleration" name="unit_acceleration" aria-label="Select unit of acceleration">
+                                    <option value="ms2" selected>ms⁻² (meters per second squared)</option>
+                                    <option value="g">g in ms⁻² (accel. due to g)</option>
+                                    <option value="gal">Gal (Galileos)</option>
+                                    <option value="fts2">fts⁻² (feet per second squared)</option>
+                                    <option value="kmh2">kmh⁻² (kilometers per hour squared)</option>
+                                    <option value="mih2">mih⁻² (miles per hour squared)</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Time (t) -->
+                            <div class="input-group mb-3 bg-light p-2 rounded">
+                                <label for="inputT" class="input-group-text label-col">Time <span class="d-none d-md-inline">(t)</span>:</label>
+                                <input type="number" class="form-control" id="inputT" name="time">
+                                <select class="form-select" id="unitTime" name="unit_time" aria-label="Select unit of time">
+                                    <option value="s">s (seconds)</option>
+                                    <option value="min">min (minutes)</option>
+                                    <option value="hr">hr (hours)</option>
+                                    <option value="day">days</option>
+                                    <option value="yr">years</option>
+                                    <option value="ms">ms (milliseconds)</option>
+                                    <option value="micros">µs (microseconds)</option>
+                                    <option value="ns">ns (nanoseconds)</option>
+                                </select>
+                            </div>
+
+                            <div class="row">
+                                <!-- Clear Button -->
+                                <div class="col text-center">
+                                    <button type="button" class="btn copy-button" id="clearButton">Clear</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Right Column for Equations -->
+                <div class="col-lg-6 d-flex">
+                    <div class="equations-container bg-white p-4 shadow-sm flex-fill">
+                        <h3 class="text-center mb-3">Equations Used</h3>
+                        <!-- Equation Containers -->
+                        <div id="equation1" class="equation mb-3"></div>
+                        <div id="equation2" class="equation mb-3"></div>
+                        <div id="equation3" class="equation mb-3"></div>
+                        <div id="equation4" class="equation mb-3"></div>
+                        <div id="equation5" class="equation mb-3"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Content Section -->
+            <div class="col-12 mt-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Kinematics Calculator: Unlocking the secrets of uniform acceleration.</h5>
+                        <p class="card-text">
+                            Our Kinematics Calculator is a dynamic tool designed to simplify the process of understanding and solving problems
+                            related to motion in physics. Whether you’re a student, educator, or professional, this calculator provides a
+                            practical application of theoretical concepts.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="timeWarningModal" tabindex="-1" role="dialog"
+            aria-labelledby="timeWarningModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content speech-bubble">
+                    <div class="modal-body">
+                        Negative time is not physically possible. Please enter a positive value for time.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ... Scroll Button ... -->
+        <button onclick="scrollToTop()" id="scrollToTopButton" class="scroll-button"><span
+                class="material-symbols-outlined">
+                arrow_upward
+            </span></button>
+    </main>
+    <!-- ... Footer Content ... -->
+    <div id="footer-container"></div>
+    <!-- ... Other Required Scripts-->
+</body>
+</html>
