@@ -44,6 +44,10 @@ document.addEventListener('DOMContentLoaded', function () {
         unlockAllInputs();
 
         // Reset locked fields
+        resetLockedFields();
+    }
+
+    function resetLockedFields() {
         lockedFields = {
             displacement: false,
             initialVelocity: false,
@@ -67,21 +71,17 @@ document.addEventListener('DOMContentLoaded', function () {
         timeInput.readOnly = false;
 
         // Reset locked fields
-        lockedFields = {
-            displacement: false,
-            initialVelocity: false,
-            finalVelocity: false,
-            acceleration: false,
-            time: false
-        };
+        resetLockedFields();
     }
 
     function clearLockedInput() {
         Object.keys(lockedFields).forEach(key => {
             const inputElement = document.getElementById(`input${key.charAt(0).toUpperCase()}`);
-            if (!lockedFields[key] && inputElement) {
-                inputElement.value = ''; // Clear only unlocked fields
-                inputElement.readOnly = false; // Allow edits to unlocked fields
+            if (lockedFields[key] && inputElement) {
+                // Clear and unlock locked fields only
+                inputElement.value = '';
+                inputElement.readOnly = false;
+                lockedFields[key] = false;
             }
         });
     }
@@ -139,6 +139,19 @@ document.addEventListener('DOMContentLoaded', function () {
         let a = accelerationInput.value ? parseFloat(accelerationInput.value) : NaN;
         let s = displacementInput.value ? parseFloat(displacementInput.value) : NaN;
 
+        // Don't lock fields or do calculations unless exactly 3 known variables are present
+        let knownCount = 0;
+        let variables = { u, v, t, a, s };
+        for (let key in variables) {
+            if (!isNaN(variables[key])) knownCount++;
+        }
+
+        if (knownCount < 3) {
+            clearLockedInput(); // Ensure fields are cleared if not enough inputs
+            console.log("Not enough known values to perform a calculation.");
+            return;
+        }
+
         // Handle locked fields to avoid calculation issues
         if (lockedFields.initialVelocity) u = NaN;
         if (lockedFields.finalVelocity) v = NaN;
@@ -174,22 +187,11 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(`u: ${u}, v: ${v}, t: ${t}, a: ${a}, s: ${s}`);
 
         // Identify which calculation to perform based on inputs
-        let knownCount = 0; // Counter for known variables
-        let variables = { u, v, t, a, s }; // Create an object to hold all variables
-        let unknowns = []; // Array to track unknown variables
+        let unknowns = Object.keys(variables).filter(key => isNaN(variables[key]));
 
-        // Count known variables and track unknowns
-        for (let key in variables) {
-            if (!isNaN(variables[key])) {
-                knownCount++;
-            } else {
-                unknowns.push(key); // Add unknown variable key to the array
-            }
-        }
-
-        // Only calculate when there are exactly three known values
-        if (knownCount !== 3) {
-            console.log("Not enough known values to perform a calculation.");
+        // Only calculate when exactly two unknowns are present
+        if (unknowns.length !== 2) {
+            console.log("Calculation skipped. Not exactly two unknowns present.");
             return;
         }
 
@@ -252,7 +254,7 @@ document.addEventListener('DOMContentLoaded', function () {
     [displacementInput, initialVelocityInput, finalVelocityInput, accelerationInput, timeInput].forEach(input => {
         input.addEventListener('input', () => {
             if (!input.readOnly) {
-                clearLockedInput(); // Clear fields that are not locked
+                clearLockedInput(); // Clear locked fields
                 calculate(); // Recalculate based on new input
             }
         });
