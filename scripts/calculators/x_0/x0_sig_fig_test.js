@@ -1,3 +1,6 @@
+// Import the calculateSigFigs function from the module
+import { calculateSigFigs } from '../../utils/sig_fig_util.js';
+
 document.addEventListener('DOMContentLoaded', function () {
     const generateNumberContainer = document.getElementById('generateNumberContainer');
     const generateNumberInput = document.getElementById('generateNumber');

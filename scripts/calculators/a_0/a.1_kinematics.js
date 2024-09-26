@@ -2,7 +2,6 @@
 import { convertVelocity, convertDisplacement, convertAcceleration, convertTime } from '../../utils/units.js';
 import { calculateSigFigs, findLeastSigFigs } from '../../utils/sig_fig_util.js';
 
-
 document.addEventListener('DOMContentLoaded', function () {
     // Input elements
     const displacementInput = document.getElementById('inputS');
@@ -273,12 +272,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let calculatedValues = calculateUnknowns(values, unknowns);
 
+    let minSigFigs = findLeastSigFigs([u, v, a, s, t]);
+
     if (calculatedValues) {
         unknowns.forEach(key => {
             const input = document.getElementById(`input${key.toUpperCase()}`);
             if (!isNaN(calculatedValues[key])) {
                 const valueToDisplay = sigFigCheckbox.checked
-                    ? calculatedValues[key].toPrecision(findLeastSigFigs([u, v, a, s, t]))  // Check for NaN
+                    ? calculatedValues[key].toPrecision(minSigFigs)
                     : calculatedValues[key].toFixed(10);
 
                 // Check if valueToDisplay is NaN before assigning
@@ -364,7 +365,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-        [unitDisplacementSelect, unitInitialVelocitySelect, unitFinalVelocitySelect, unitAccelerationSelect, unitTimeSelect].forEach(select => {
+    [unitDisplacementSelect, unitInitialVelocitySelect, unitFinalVelocitySelect, unitAccelerationSelect, unitTimeSelect].forEach(select => {
         select.addEventListener('change', () => {
             // Convert and update inputs based on new units selected
             convertAndUpdateInputs(select, displacementInput, convertDisplacement, originalValues.displacement);
@@ -380,6 +381,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Ensure the correct significant figures are used on change
     sigFigCheckbox.addEventListener('change', () => {
+        // Recalculate with significant figures applied, ensure to fetch and update inputs
         calculate(); // Recalculate to apply significant figures
     });
 
