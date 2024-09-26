@@ -95,6 +95,22 @@ const medievalRunes = [
     { letter: 'ᛥ', unicode: '\u16E5', name: 'Gar' }
 ];
 
+// Tolkienian Extensions (3 Characters)
+const tolkienianExtensions = [
+    { letter: 'ᛱ', unicode: '\u16F1', name: 'K' },
+    { letter: 'ᛲ', unicode: '\u16F2', name: 'Sh' },
+    { letter: 'ᛳ', unicode: '\u16F3', name: 'Oo' }
+];
+
+// Cryptogrammic Letters (8 Characters)
+const cryptogrammicLetters = [
+    { letter: 'ᛴ', unicode: '\u16F4', name: 'Os' },
+    { letter: 'ᛵ', unicode: '\u16F5', name: 'Is' },
+    { letter: 'ᛶ', unicode: '\u16F6', name: 'Eh' },
+    { letter: 'ᛷ', unicode: '\u16F7', name: 'Ac' },
+    { letter: 'ᛸ', unicode: '\u16F8', name: 'Aesc' },
+];
+
 
 // Function to create keys for each group
 function createKeys(containerId, alphabet) {
@@ -191,4 +207,7 @@ createKeys('elder-futhark-container', elderFuthark);
 createKeys('younger-futhark-container', youngerFuthark);
 createKeys('anglo-saxon-container', angloSaxon);
 createKeys('medieval-runes-container', medievalRunes);
+createKeys('tolkienian-extensions-container', tolkienianExtensions);
+createKeys('cryptogrammic-letters-container', cryptogrammicLetters);
+
 
