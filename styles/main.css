@@ -1,18 +1,23 @@
 /* Apply background image to the entire body */
 body {
     background-image: url('../images/texture_2.png');
-    background-size: cover; /* This will scale the image to cover the entire background */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-size: cover;
+    /* This will scale the image to cover the entire background */
+    background-repeat: no-repeat;
+    /* Prevents the image from repeating */
     background-attachment: fixed;
     font-family: 'Roboto', sans-serif;
     display: flex;
     flex-direction: column;
-    margin: 0; /* Remove any default margin around the body */
-    padding: 0; /* Remove any default padding */
+    margin: 0;
+    /* Remove any default margin around the body */
+    padding: 0;
+    /* Remove any default padding */
 }
 
 /* Apply styles to body and HTML */
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
 }
@@ -44,42 +49,50 @@ footer {
     bottom: 0;
     left: 0;
     width: 100%;
-    z-index: 8; /* Ensure it's above other elements */
+    z-index: 8;
+    /* Ensure it's above other elements */
     margin-top: 30px;
 }
 
 /* Material Symbols colours */
 /* Icon Colours */
 .material-symbols-outlined {
-  font-family: 'Material Symbols Outlined';
-  font-feature-settings: 'liga';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px; /* Preferred icon size */
-  display: inline-flex;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
-  vertical-align: middle;
+    font-family: 'Material Symbols Outlined';
+    font-feature-settings: 'liga';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    /* Preferred icon size */
+    display: inline-flex;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    vertical-align: middle;
 }
 
 /* Popovers */
 .popover-header {
-    background-color: #D9B99B; /* Example color: golden */
-    color: #FFFFFF; /* White text */
-    font-family: 'Roboto', sans-serif; /* Your website's font */
-    border-bottom: 2px solid #FFA500; /* Example color: orange border */
+    background-color: #D9B99B;
+    /* Example color: golden */
+    color: #FFFFFF;
+    /* White text */
+    font-family: 'Roboto', sans-serif;
+    /* Your website's font */
+    border-bottom: 2px solid #FFA500;
+    /* Example color: orange border */
 }
 
 .popover-body {
-    font-family: 'Roboto', sans-serif; /* Consistent font */
+    font-family: 'Roboto', sans-serif;
+    /* Consistent font */
 }
 
 /* Help Button */
 .btn-help {
-    background-color: #ffdd57; /* Your theme color */
+    background-color: #ffdd57;
+    /* Your theme color */
     color: #fff;
     border-radius: 50%;
     padding: 0.5em;
@@ -88,31 +101,46 @@ footer {
 
 /* Search Button Styles */
 .btn-search {
-    background-color: #ffdd57; /* Custom theme color */
-    color: #333; /* Text color */
-    border: none; /* Remove default border */
-    padding: 6px 12px; /* Adjust padding as needed */
-    border-radius: 4px; /* Rounded corners */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Subtle shadow for depth */
-    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    background-color: #ffdd57;
+    /* Custom theme color */
+    color: #333;
+    /* Text color */
+    border: none;
+    /* Remove default border */
+    padding: 6px 12px;
+    /* Adjust padding as needed */
+    border-radius: 4px;
+    /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    /* Subtle shadow for depth */
+    transition: all 0.3s ease;
+    /* Smooth transition for hover effects */
 }
 
-.btn-search:hover, .btn-search:focus {
-    background-color: #ffcc44; /* Slightly darker shade for hover/focus */
-    color: #222; /* Darker text color for contrast */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.25); /* Enhanced shadow for hover */
-    outline: none; /* Remove outline on focus */
+.btn-search:hover,
+.btn-search:focus {
+    background-color: #ffcc44;
+    /* Slightly darker shade for hover/focus */
+    color: #222;
+    /* Darker text color for contrast */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    /* Enhanced shadow for hover */
+    outline: none;
+    /* Remove outline on focus */
 }
 
 .btn-search .material-symbols-outlined {
-    vertical-align: middle; /* Align icon with text */
-    font-size: 20px; /* Adjust icon size */
+    vertical-align: middle;
+    /* Align icon with text */
+    font-size: 20px;
+    /* Adjust icon size */
 }
 
 /* Google Sign-in Customization */
 .gsi-material-button {
     /* Your custom styles for the button */
-    background-color: #4285F4; /* Google blue */
+    background-color: #4285F4;
+    /* Google blue */
     color: #ffffff;
     border-radius: 5px;
     padding: 0.5em 1em;
@@ -120,8 +148,10 @@ footer {
 
 /* Ensuring Button does not overflow */
 .btn {
-    white-space: nowrap; /* Ensures text stays in one line */
-    overflow: hidden; /* Keeps the content within the button */
+    white-space: nowrap;
+    /* Ensures text stays in one line */
+    overflow: hidden;
+    /* Keeps the content within the button */
 }
 
 /* Responsive Image */
@@ -132,58 +162,67 @@ footer {
 
 /* Custom help icon */
 .help {
-    background-color: #f8f9fa; /* Light background for contrast */
-    color: #5c636a; /* Darker text for visibility */
-    font-size: 1.5em; /* Larger size for visibility */
-    border-radius: 50%; /* Circular shape */
+    background-color: #f8f9fa;
+    /* Light background for contrast */
+    color: #5c636a;
+    /* Darker text for visibility */
+    font-size: 1.5em;
+    /* Larger size for visibility */
+    border-radius: 50%;
+    /* Circular shape */
     padding: 0.25em;
 }
 
 /* Tooltip styling */
 .btn-favourite[aria-label]:hover::after {
-  content: attr(aria-label);
-  position: absolute;
-  background-color: #555;
-  color: white;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  white-space: nowrap;
+    content: attr(aria-label);
+    position: absolute;
+    background-color: #555;
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
 }
 
 .container-style {
     margin-top: 2rem;
     padding: 2rem;
-    border: 1px solid #dee2e6; /* Bootstrap's border color */
+    border: 1px solid #dee2e6;
+    /* Bootstrap's border color */
     border-radius: 0.5rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     background: #fff;
 }
 
 .standard-button {
-    background-color: #ffdd57; /* Your theme color for buttons */
+    background-color: #ffdd57;
+    /* Your theme color for buttons */
     color: #333;
     border-color: #ffdd57;
     margin-top: 0.5rem;
 }
 
 .standard-button:hover {
-    background-color: #fcca46; /* Slightly darker on hover */
+    background-color: #fcca46;
+    /* Slightly darker on hover */
     border-color: #fcca46;
 }
 
 .standard-cancel-button {
-    background-color: #332C11; /* Your theme color for buttons */
+    background-color: #332C11;
+    /* Your theme color for buttons */
     color: #fff;
     border-color: #332C11;
     margin-top: 0.5rem;
 }
 
 .standard-cancel-button:hover {
-    background-color: #191608; /* Slightly darker on hover */
+    background-color: #191608;
+    /* Slightly darker on hover */
     border-color: #191608;
     color: #fff;
 }
@@ -198,9 +237,9 @@ footer {
 }
 
 .scroll-button {
-    display: none; 
-    position: fixed; 
-    bottom: 20px; 
+    display: none;
+    position: fixed;
+    bottom: 20px;
     right: 20px;
     z-index: 12;
 }
@@ -216,11 +255,13 @@ footer {
 }
 
 .placeholder-style {
-    color: #C0C0C0; /* Placeholder text color */
+    color: #C0C0C0;
+    /* Placeholder text color */
 }
 
 .color-select option {
-    padding-left: 20px; /* Adjust as needed */
+    padding-left: 20px;
+    /* Adjust as needed */
 }
 
 .pink {
@@ -259,43 +300,53 @@ footer {
     display: block;
 }
 
-.dropdown-submenu:hover > .dropdown-toggle:after {
+.dropdown-submenu:hover>.dropdown-toggle:after {
     transform: rotate(-90deg);
 }
 
 .form-font-style {
     margin-top: 2rem;
     padding: 2rem;
-    border: 1px solid #dee2e6; /* Bootstrap's border color */
+    border: 1px solid #dee2e6;
+    /* Bootstrap's border color */
     border-radius: 0.5rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     background: #fff;
 }
 
 .output-area {
-    background: #f8f9fa; /* Light grey background */
+    background: #f8f9fa;
+    /* Light grey background */
     border: 1px solid #dee2e6;
     border-radius: 0.25rem;
     padding: 1rem;
     margin-top: 1rem;
-    min-height: 60px; /* Gives a minimum height for better visual */
+    min-height: 60px;
+    /* Gives a minimum height for better visual */
 }
 
 .copy-button {
-    background-color: #ffdd57; /* Your theme color for buttons */
+    background-color: #ffdd57;
+    /* Your theme color for buttons */
     color: #333;
     border-color: #ffdd57;
     margin-top: 0.5rem;
 }
 
 .copy-button:hover {
-    background-color: #fcca46; /* Slightly darker on hover */
+    background-color: #fcca46;
+    /* Slightly darker on hover */
     border-color: #fcca46;
 }
 
 /* Global style to keep the text color in disabled inputs consistent */
-input[disabled], textarea[disabled], select[disabled] {
-    color: #333; /* Change this color code to whatever you want for disabled text */
-    background-color: #f5f5f5; /* Optional: adjust the background color of disabled inputs */
-    opacity: 1; /* Ensure opacity doesn't dim the text */
+input[disabled],
+textarea[disabled],
+select[disabled] {
+    color: #333;
+    /* Change this color code to whatever you want for disabled text */
+    background-color: #f5f5f5;
+    /* Optional: adjust the background color of disabled inputs */
+    opacity: 1;
+    /* Ensure opacity doesn't dim the text */
 }

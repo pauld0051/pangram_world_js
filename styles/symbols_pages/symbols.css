@@ -3,23 +3,29 @@
 }
 
 .alphabet-card {
-            margin-bottom: 30px;
-        }
+    margin-bottom: 30px;
+}
 
-        /* Styles for the Main Heading Card */
+/* Styles for the Main Heading Card */
 .card.bg-primary {
-    background-color: #e0e0e0 !important; /* Use a neutral color with !important */
-    border: none !important; /* Ensure border is removed */
-    color: #333 !important; /* Set text color */
+    background-color: #e0e0e0 !important;
+    /* Use a neutral color with !important */
+    border: none !important;
+    /* Ensure border is removed */
+    color: #333 !important;
+    /* Set text color */
 }
 
 .card.bg-primary .card-body {
-    padding: 20px !important; /* Adjust padding for the heading card */
+    padding: 20px !important;
+    /* Adjust padding for the heading card */
 }
 
 .card.bg-primary h1 {
-    font-size: 2rem !important; /* Adjust font size */
-    margin-bottom: 0 !important; /* Remove bottom margin */
+    font-size: 2rem !important;
+    /* Adjust font size */
+    margin-bottom: 0 !important;
+    /* Remove bottom margin */
 }
 
 /* CSS for Greek alphabet keys */
@@ -34,8 +40,10 @@
     border-radius: 8px;
     background-color: #f8f9fa;
     font-size: 24px;
-    width: 80px; /* Adjust width to fit both letter and name */
-    height: 80px; /* Adjust height to fit both letter and name */
+    width: 80px;
+    /* Adjust width to fit both letter and name */
+    height: 80px;
+    /* Adjust height to fit both letter and name */
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
@@ -45,14 +53,18 @@
 }
 
 .alphabet-key .letter {
-    font-size: 30px; /* Size of the Greek letter */
+    font-size: 30px;
+    /* Size of the Greek letter */
     font-weight: bold;
-    margin-bottom: 5px; /* Space between letter and name */
+    margin-bottom: 5px;
+    /* Space between letter and name */
 }
 
 .alphabet-key .name {
-    font-size: 14px; /* Size of the name text */
-    color: #666; /* Slightly lighter color for the name */
+    font-size: 14px;
+    /* Size of the name text */
+    color: #666;
+    /* Slightly lighter color for the name */
 }
 
 /* Main Heading Section */
@@ -63,20 +75,25 @@
 }
 
 .main-heading h1 {
-    font-size: 2.5rem; /* Adjust font size */
+    font-size: 2.5rem;
+    /* Adjust font size */
     margin-bottom: 0;
-    color: #fff; /* White color for heading */
+    color: #fff;
+    /* White color for heading */
 }
 
 .main-heading p {
-    font-size: 1.2rem; /* Adjust font size for subtitle */
-    color: #f1f1f1; /* Light gray for subtitle */
+    font-size: 1.2rem;
+    /* Adjust font size for subtitle */
+    color: #f1f1f1;
+    /* Light gray for subtitle */
     margin-top: 5px;
 }
 
 /* Instruction Card */
 .instruction-card {
-    background-color: #f8f9fa; /* Light background for instruction card */
+    background-color: #f8f9fa;
+    /* Light background for instruction card */
     border: 1px solid #e2e6ea;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
@@ -95,10 +112,12 @@
 
 /* Adjust the width of the cards */
 .card.alphabet-card {
-    width: calc(100% - 30px); /* Adjust width based on parent and margin */
+    width: calc(100% - 30px);
+    /* Adjust width based on parent and margin */
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 15px; /* Margin below each card */
+    margin-bottom: 15px;
+    /* Margin below each card */
 }
 
 /* Adjust the main container spacing */
@@ -110,17 +129,25 @@
 /* Adjust the layout for different screen sizes */
 @media (max-width: 768px) {
     .card.alphabet-card {
-        width: 100%; /* Full width on small screens */
+        width: 100%;
+        /* Full width on small screens */
     }
 }
 
 /* Outer container styling */
 .outer-container {
-    background-color: rgba(231, 218, 218, 0.99); /* Light newspaper-like color */
-    border: 1px solid rgba(200, 200, 200, 0.5); /* Light gray border for definition */
-    border-radius: 8px; /* Rounded corners for a soft look */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    padding: 20px; /* Inner padding */
-    max-width: 80%; /* Max width of 80% of the viewport */
-    margin: 0 auto; /* Center the container horizontally */
+    background-color: rgba(231, 218, 218, 0.99);
+    /* Light newspaper-like color */
+    border: 1px solid rgba(200, 200, 200, 0.5);
+    /* Light gray border for definition */
+    border-radius: 8px;
+    /* Rounded corners for a soft look */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
+    padding: 20px;
+    /* Inner padding */
+    max-width: 80%;
+    /* Max width of 80% of the viewport */
+    margin: 0 auto;
+    /* Center the container horizontally */
 }

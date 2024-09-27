@@ -26,7 +26,7 @@
     <link rel="shortcut icon" type="image/png" sizes="512x512" href="../android-chrome-512x512.png">
     <!-- ... Head Scripts ... -->
     <script src="../scripts/handlebars/dist/handlebars.min.js"></script> <!--Must Come First-->
-    
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>
@@ -45,15 +45,15 @@
     <main>
         <!-- Container for the Gravity Calculator -->
         <div class="outer-container mx-auto my-5">
-        <div class="container my-4">
-            <div class="row d-flex">
-                <!-- Left Column for the Calculator -->
-                <div class="col-lg-6 d-flex">
-                    <div class="form-font-style bg-white p-4 shadow-sm">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h2 class="mb-0">A.2.6 Force Due To Gravity</h2>
-                            <button type="button" class="btn btn-help" data-bs-toggle="popover"
-                                data-bs-title="A.2.6 Force Due To Gravity Calculator" data-bs-content="<p>Welcome to the Force Due To Gravity Calculator. This tool allows you to compute the gravitational force, mass, or gravitational field strength (gravity) based on two inputs:</p>
+            <div class="container my-4">
+                <div class="row d-flex">
+                    <!-- Left Column for the Calculator -->
+                    <div class="col-lg-6 d-flex">
+                        <div class="form-font-style bg-white p-4 shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h2 class="mb-0">A.2.6 Force Due To Gravity</h2>
+                                <button type="button" class="btn btn-help" data-bs-toggle="popover"
+                                    data-bs-title="A.2.6 Force Due To Gravity Calculator" data-bs-content="<p>Welcome to the Force Due To Gravity Calculator. This tool allows you to compute the gravitational force, mass, or gravitational field strength (gravity) based on two inputs:</p>
         <ul>
             <li><strong>Force (F):</strong> The gravitational force in Newtons (N). Leave blank if you have mass and gravity.</li>
             <li><strong>Mass (m):</strong> The mass of the object in kilograms (kg). Leave blank if you have force and gravity.</li>
@@ -61,145 +61,152 @@
         </ul>
         <p>Select the appropriate units from the dropdown menus. The calculator automatically computes the missing value. Enable '<em>Use significant figures</em>' for more precise answers.</p>
         <p>Use the 'Clear' button to reset all fields and start a new calculation.</p>">
-                                <span class="material-symbols-outlined help">
-                                    help_outline
-                                </span>
-                            </button>
-                        </div>
-                        <form id="gravityForm">
-                            <input class="form-check-input" type="checkbox" id="sigFigCheckbox">
-                            <label class="form-check-label" for="sigFigCheckbox">
-                                Use significant figures
-                            </label>
-        
-                            <!-- Force (F) Input -->
-                            <div class="input-group mb-3 bg-light p-2 rounded">
-                                <label for="inputF" class="input-group-text label-col">Force&nbsp;<span
-                                        class="d-none d-md-inline">(F<sub>g</sub>)</span>:</label>
-                                <input type="number" class="form-control" id="inputF" name="force">
-                                <select class="form-select" id="unitForce" name="unit_force" aria-label="Select unit of force">
-                                    <option value="N" selected>N (Newtons)</option>
-                                    <option value="kN">kN (Kilonewtons)</option>
-                                    <option value="mN">mN (Millinewtons)</option>
-                                    <option value="μN">μN (Micronewtons)</option>
-                                    <option value="MN">MN (Meganewtons)</option>
-                                    <option value="GN">GN (Giganewtons)</option>
-                                    <option value="dyn">dyn (Dynes)</option>
-                                    <option value="lbf">lbf (Pound-force)</option>
-                                    <option value="kgf">kgf (Kilogram-force)</option>
-                                    <option value="gf">gf (Gram-force)</option>
-                                    <option value="tf">tf (Ton-force, metric)</option>
-                                    <option value="kip">kip (Kip force)</option>
-                                    <option value="ozf">ozf (Ounce-force)</option>
-                                </select>
+                                    <span class="material-symbols-outlined help">
+                                        help_outline
+                                    </span>
+                                </button>
                             </div>
-        
-                            <!-- Mass (m) Input -->
-                            <div class="input-group mb-3 bg-light p-2 rounded">
-                                <label for="inputM" class="input-group-text label-col">Mass&nbsp;<span
-                                        class="d-none d-md-inline">(m)</span>:</label>
-                                <input type="number" class="form-control" id="inputM" name="mass">
-                                <select class="form-select" id="unitMass" name="unit_mass" aria-label="Select unit of mass">
-                                    <option value="kg">kg (kilograms)</option>
-                                    <option value="g">g (Grams)</option>
-                                    <option value="mg">mg (Milligrams)</option>
-                                    <option value="μg">μg (Micrograms)</option>
-                                    <option value="lb">lb (Pounds)</option>
-                                    <option value="oz">oz (Ounces)</option>
-                                    <option value="t">t (Metric tons)</option>
-                                    <option value="st">st (Stones)</option>
-                                    <option value="cwt">cwt (Hundredweights)</option>
-                                    <option value="ton">ton (US tons / Short tons)</option>
-                                    <option value="long_ton">long_ton (Long tons)</option>
-                                    <option value="gr">gr (Grains)</option>
-                                    <option value="dwt">dwt (Pennyweights)</option>
-                                    <option value="carat">carat (Carats)</option>
-                                    <option value="amu">amu (Atomic mass units)</option>
-                                    <option value="slug">slug (Slugs)</option>
-                                </select>
-                            </div>
-        
-                            <!-- Gravity (g) Input -->
-                            <div class="input-group mb-3 bg-light p-2 rounded">
-                                <label for="inputG" class="input-group-text label-col">Gravity&nbsp;<span
-                                        class="d-none d-md-inline">(g)</span>:</label>
-                                <input type="number" class="form-control" id="inputG" name="gravity">
-                                <select class="form-select" id="unitGravity" name="unit_gravity" aria-label="Select gravity">
-                                    <option value="g" selected>g (ms⁻²)</option>
-                                    <option value="e">Earth (9.807 ms⁻²)</option>
-                                    <option value="me">Mercury (3.70 ms⁻²)</option>
-                                    <option value="ve">Venus (8.87 ms⁻²)</option>
-                                    <option value="ma">Mars (3.71 ms⁻²)</option>
-                                    <option value="ju">Jupiter (24.79 ms⁻²)</option>
-                                    <option value="sa">Saturn (10.44 ms⁻²)</option>
-                                    <option value="ur">Uranus (8.69 ms⁻²)</option>
-                                    <option value="ne">Neptune (11.15 ms⁻²)</option>
-                                    <option value="pl">Pluto (0.620 ms⁻²)</option>
-                                    <option value="mo">Moon (1.625 ms⁻²)</option>
-                                    <option value="su">Sun (274 ms⁻²)</option>
-                                    <option value="io">Io (Jupiter's moon) (1.796 ms⁻²)</option>
-                                    <option value="eu">Europa (Jupiter's moon) (1.314 ms⁻²)</option>
-                                    <option value="ga">Ganymede (Jupiter's moon) (1.428 ms⁻²)</option>
-                                    <option value="ca">Callisto (Jupiter's moon) (1.235 ms⁻²)</option>
-                                    <option value="ti">Titan (Saturn's moon) (1.352 ms⁻²)</option>
-                                    <option value="tr">Triton (Neptune's moon) (0.779 ms⁻²)</option>
-                                    <option value="gal">Gal (Galileos)</option>
-                                    <option value="fts2">fts⁻² (feet per second squared)</option>
-                                    <option value="kmh2">kmh⁻² (kilometers per hour squared)</option>
-                                    <option value="mih2">mih⁻² (miles per hour squared)</option>
-                                </select>
-                            </div>
-                            <div class="row">
-                                <!-- Clear Button -->
-                                <div class="col text-center">
-                                    <button type="button" class="btn copy-button" id="clearButton">Clear</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-        
-                <!-- Right Column for Equations -->
-                <div class="col-lg-6 d-flex">
-                    <div class="equations-container bg-white p-4 shadow-sm flex-fill">
-                        <h3 class="text-center mb-3">Equations Used</h3>
-                        <!-- Equation Containers -->
-                        <div id="equation1" class="equation mb-3"></div>
-                        <div id="equation2" class="equation mb-3"></div>
-                        <div id="equation3" class="equation mb-3"></div>
-                    </div>
-                </div>
-            </div>
+                            <form id="gravityForm">
+                                <input class="form-check-input" type="checkbox" id="sigFigCheckbox">
+                                <label class="form-check-label" for="sigFigCheckbox">
+                                    Use significant figures
+                                </label>
 
-            <!-- Additional Content Section -->
-            <div class="col-12 mt-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Understanding Gravity</h5>
-                        <p class="card-text">Explore the force of gravity acting on an object with our interactive calculator.
-                            Understand how mass and the gravitational field strength influence the gravitational force an object
-                            experiences. Whether you're studying the force on different planets or curious about gravitational
-                            differences, this tool provides clear insights into the fundamental forces at play.</p>
+                                <!-- Force (F) Input -->
+                                <div class="input-group mb-3 bg-light p-2 rounded">
+                                    <label for="inputF" class="input-group-text label-col">Force&nbsp;<span
+                                            class="d-none d-md-inline">(F<sub>g</sub>)</span>:</label>
+                                    <input type="number" class="form-control" id="inputF" name="force">
+                                    <select class="form-select" id="unitForce" name="unit_force"
+                                        aria-label="Select unit of force">
+                                        <option value="N" selected>N (Newtons)</option>
+                                        <option value="kN">kN (Kilonewtons)</option>
+                                        <option value="mN">mN (Millinewtons)</option>
+                                        <option value="μN">μN (Micronewtons)</option>
+                                        <option value="MN">MN (Meganewtons)</option>
+                                        <option value="GN">GN (Giganewtons)</option>
+                                        <option value="dyn">dyn (Dynes)</option>
+                                        <option value="lbf">lbf (Pound-force)</option>
+                                        <option value="kgf">kgf (Kilogram-force)</option>
+                                        <option value="gf">gf (Gram-force)</option>
+                                        <option value="tf">tf (Ton-force, metric)</option>
+                                        <option value="kip">kip (Kip force)</option>
+                                        <option value="ozf">ozf (Ounce-force)</option>
+                                    </select>
+                                </div>
+
+                                <!-- Mass (m) Input -->
+                                <div class="input-group mb-3 bg-light p-2 rounded">
+                                    <label for="inputM" class="input-group-text label-col">Mass&nbsp;<span
+                                            class="d-none d-md-inline">(m)</span>:</label>
+                                    <input type="number" class="form-control" id="inputM" name="mass">
+                                    <select class="form-select" id="unitMass" name="unit_mass"
+                                        aria-label="Select unit of mass">
+                                        <option value="kg">kg (kilograms)</option>
+                                        <option value="g">g (Grams)</option>
+                                        <option value="mg">mg (Milligrams)</option>
+                                        <option value="μg">μg (Micrograms)</option>
+                                        <option value="lb">lb (Pounds)</option>
+                                        <option value="oz">oz (Ounces)</option>
+                                        <option value="t">t (Metric tons)</option>
+                                        <option value="st">st (Stones)</option>
+                                        <option value="cwt">cwt (Hundredweights)</option>
+                                        <option value="ton">ton (US tons / Short tons)</option>
+                                        <option value="long_ton">long_ton (Long tons)</option>
+                                        <option value="gr">gr (Grains)</option>
+                                        <option value="dwt">dwt (Pennyweights)</option>
+                                        <option value="carat">carat (Carats)</option>
+                                        <option value="amu">amu (Atomic mass units)</option>
+                                        <option value="slug">slug (Slugs)</option>
+                                    </select>
+                                </div>
+
+                                <!-- Gravity (g) Input -->
+                                <div class="input-group mb-3 bg-light p-2 rounded">
+                                    <label for="inputG" class="input-group-text label-col">Gravity&nbsp;<span
+                                            class="d-none d-md-inline">(g)</span>:</label>
+                                    <input type="number" class="form-control" id="inputG" name="gravity">
+                                    <select class="form-select" id="unitGravity" name="unit_gravity"
+                                        aria-label="Select gravity">
+                                        <option value="g" selected>g (ms⁻²)</option>
+                                        <option value="e">Earth (9.807 ms⁻²)</option>
+                                        <option value="me">Mercury (3.70 ms⁻²)</option>
+                                        <option value="ve">Venus (8.87 ms⁻²)</option>
+                                        <option value="ma">Mars (3.71 ms⁻²)</option>
+                                        <option value="ju">Jupiter (24.79 ms⁻²)</option>
+                                        <option value="sa">Saturn (10.44 ms⁻²)</option>
+                                        <option value="ur">Uranus (8.69 ms⁻²)</option>
+                                        <option value="ne">Neptune (11.15 ms⁻²)</option>
+                                        <option value="pl">Pluto (0.620 ms⁻²)</option>
+                                        <option value="mo">Moon (1.625 ms⁻²)</option>
+                                        <option value="su">Sun (274 ms⁻²)</option>
+                                        <option value="io">Io (Jupiter's moon) (1.796 ms⁻²)</option>
+                                        <option value="eu">Europa (Jupiter's moon) (1.314 ms⁻²)</option>
+                                        <option value="ga">Ganymede (Jupiter's moon) (1.428 ms⁻²)</option>
+                                        <option value="ca">Callisto (Jupiter's moon) (1.235 ms⁻²)</option>
+                                        <option value="ti">Titan (Saturn's moon) (1.352 ms⁻²)</option>
+                                        <option value="tr">Triton (Neptune's moon) (0.779 ms⁻²)</option>
+                                        <option value="gal">Gal (Galileos)</option>
+                                        <option value="fts2">fts⁻² (feet per second squared)</option>
+                                        <option value="kmh2">kmh⁻² (kilometers per hour squared)</option>
+                                        <option value="mih2">mih⁻² (miles per hour squared)</option>
+                                    </select>
+                                </div>
+                                <div class="row">
+                                    <!-- Clear Button -->
+                                    <div class="col text-center">
+                                        <button type="button" class="btn copy-button" id="clearButton">Clear</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Right Column for Equations -->
+                    <div class="col-lg-6 d-flex">
+                        <div class="equations-container bg-white p-4 shadow-sm flex-fill">
+                            <h3 class="text-center mb-3">Equations Used</h3>
+                            <!-- Equation Containers -->
+                            <div id="equation1" class="equation mb-3"></div>
+                            <div id="equation2" class="equation mb-3"></div>
+                            <div id="equation3" class="equation mb-3"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Content Section -->
+                <div class="col-12 mt-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Understanding Gravity</h5>
+                            <p class="card-text">Explore the force of gravity acting on an object with our interactive
+                                calculator.
+                                Understand how mass and the gravitational field strength influence the gravitational
+                                force an object
+                                experiences. Whether you're studying the force on different planets or curious about
+                                gravitational
+                                differences, this tool provides clear insights into the fundamental forces at play.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Modal -->
-        <div class="modal fade" id="massWarningModal" tabindex="-1" role="dialog" aria-labelledby="massWarningModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content speech-bubble">
-                    <div class="modal-body">
-                        Negative mass is not physically possible. Please enter a positive value for mass.
+            <!-- Modal -->
+            <div class="modal fade" id="massWarningModal" tabindex="-1" role="dialog"
+                aria-labelledby="massWarningModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content speech-bubble">
+                        <div class="modal-body">
+                            Negative mass is not physically possible. Please enter a positive value for mass.
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- ... Scroll Button ... -->
+            <button onclick="scrollToTop()" id="scrollToTopButton" class="scroll-button"><span
+                    class="material-symbols-outlined">
+                    arrow_upward
+                </span></button>
         </div>
-        <!-- ... Scroll Button ... -->
-        <button onclick="scrollToTop()" id="scrollToTopButton" class="scroll-button"><span class="material-symbols-outlined">
-                arrow_upward
-            </span></button>
-    </div>
     </main>
     <!-- ... Footer Content ... -->
     <div id="footer-container"></div>

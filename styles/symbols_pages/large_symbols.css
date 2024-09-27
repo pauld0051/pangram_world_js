@@ -3,66 +3,102 @@
 }
 
 .alphabet-card {
-            margin-bottom: 30px;
-        }
+    margin-bottom: 30px;
+}
 
-        /* Styles for the Main Heading Card */
+/* Styles for the Main Heading Card */
 .card.bg-primary {
-    background-color: #e0e0e0 !important; /* Use a neutral color with !important */
-    border: none !important; /* Ensure border is removed */
-    color: #333 !important; /* Set text color */
+    background-color: #e0e0e0 !important;
+    /* Use a neutral color with !important */
+    border: none !important;
+    /* Ensure border is removed */
+    color: #333 !important;
+    /* Set text color */
 }
 
 .card.bg-primary .card-body {
-    padding: 20px !important; /* Adjust padding for the heading card */
+    padding: 20px !important;
+    /* Adjust padding for the heading card */
 }
 
 .card.bg-primary h1 {
-    font-size: 2rem !important; /* Adjust font size */
-    margin-bottom: 0 !important; /* Remove bottom margin */
+    font-size: 2rem !important;
+    /* Adjust font size */
+    margin-bottom: 0 !important;
+    /* Remove bottom margin */
 }
 
 /* CSS for LARGE alphabet keys */
 .alphabet-key {
-    display: inline-flex; /* Use Flexbox for alignment */
-    flex-direction: column; /* Vertical alignment */
-    align-items: center; /* Center items horizontally */
-    justify-content: center; /* Center items vertically */
-    padding: 15px; /* Adjust padding */
-    margin: 5px; /* Adjust margin */
-    border: 1px solid #ddd; /* Border style */
-    border-radius: 8px; /* Rounded corners */
-    background-color: #f8f9fa; /* Background color */
-    font-size: 12px; /* Font size for the name */
-    width: 120px; /* Adjust width to fit both letter and name */
-    height: 160px; /* Adjust height to fit both letter and name */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.2s ease; /* Smooth hover transition */
+    display: inline-flex;
+    /* Use Flexbox for alignment */
+    flex-direction: column;
+    /* Vertical alignment */
+    align-items: center;
+    /* Center items horizontally */
+    justify-content: center;
+    /* Center items vertically */
+    padding: 15px;
+    /* Adjust padding */
+    margin: 5px;
+    /* Adjust margin */
+    border: 1px solid #ddd;
+    /* Border style */
+    border-radius: 8px;
+    /* Rounded corners */
+    background-color: #f8f9fa;
+    /* Background color */
+    font-size: 12px;
+    /* Font size for the name */
+    width: 120px;
+    /* Adjust width to fit both letter and name */
+    height: 160px;
+    /* Adjust height to fit both letter and name */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+    transition: background-color 0.2s ease;
+    /* Smooth hover transition */
 }
 
 .alphabet-key:hover {
-    background-color: #e2e6ea; /* Hover background color */
+    background-color: #e2e6ea;
+    /* Hover background color */
 }
 
 .alphabet-key .letter {
-    font-size: 30px; /* Size of the Greek letter */
-    font-weight: bold; /* Bold font */
-    text-align: center; /* Center text */
-    height: 35px; /* Fixed height for the letter */
-    line-height: 35px; /* Align vertically within the fixed height */
-    margin-bottom: 5px; /* Space between letter and name */
+    font-size: 30px;
+    /* Size of the Greek letter */
+    font-weight: bold;
+    /* Bold font */
+    text-align: center;
+    /* Center text */
+    height: 35px;
+    /* Fixed height for the letter */
+    line-height: 35px;
+    /* Align vertically within the fixed height */
+    margin-bottom: 5px;
+    /* Space between letter and name */
 }
 
 .alphabet-key .name {
-    font-size: 14px; /* Size of the name text */
-    color: #666; /* Lighter text color */
-    text-align: center; /* Center text */
-    line-height: 16px; /* Align vertically within the fixed height */
-    height: 32px; /* Fixed height for the name */
-    overflow: hidden; /* Hide overflow if necessary */
-    display: flex; /* Ensure centered alignment */
-    align-items: center; /* Center text vertically */
-    justify-content: center; /* Center text horizontally */
+    font-size: 14px;
+    /* Size of the name text */
+    color: #666;
+    /* Lighter text color */
+    text-align: center;
+    /* Center text */
+    line-height: 16px;
+    /* Align vertically within the fixed height */
+    height: 32px;
+    /* Fixed height for the name */
+    overflow: hidden;
+    /* Hide overflow if necessary */
+    display: flex;
+    /* Ensure centered alignment */
+    align-items: center;
+    /* Center text vertically */
+    justify-content: center;
+    /* Center text horizontally */
 }
 
 /* Main Heading Section */
@@ -73,20 +109,25 @@
 }
 
 .main-heading h1 {
-    font-size: 2.5rem; /* Adjust font size */
+    font-size: 2.5rem;
+    /* Adjust font size */
     margin-bottom: 0;
-    color: #fff; /* White color for heading */
+    color: #fff;
+    /* White color for heading */
 }
 
 .main-heading p {
-    font-size: 1.2rem; /* Adjust font size for subtitle */
-    color: #f1f1f1; /* Light gray for subtitle */
+    font-size: 1.2rem;
+    /* Adjust font size for subtitle */
+    color: #f1f1f1;
+    /* Light gray for subtitle */
     margin-top: 5px;
 }
 
 /* Instruction Card */
 .instruction-card {
-    background-color: #f8f9fa; /* Light background for instruction card */
+    background-color: #f8f9fa;
+    /* Light background for instruction card */
     border: 1px solid #e2e6ea;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
@@ -105,10 +146,12 @@
 
 /* Adjust the width of the cards */
 .card.alphabet-card {
-    width: calc(100% - 30px); /* Adjust width based on parent and margin */
+    width: calc(100% - 30px);
+    /* Adjust width based on parent and margin */
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 15px; /* Margin below each card */
+    margin-bottom: 15px;
+    /* Margin below each card */
 }
 
 /* Adjust the main container spacing */
@@ -120,60 +163,91 @@
 /* Adjust the layout for different screen sizes */
 @media (max-width: 768px) {
     .card.alphabet-card {
-        width: 100%; /* Full width on small screens */
+        width: 100%;
+        /* Full width on small screens */
     }
 }
 
 /* Outer container styling */
 .outer-container {
-    background-color: rgba(231, 218, 218, 0.99); /* Light newspaper-like color */
-    border: 1px solid rgba(200, 200, 200, 0.5); /* Light gray border for definition */
-    border-radius: 8px; /* Rounded corners for a soft look */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    padding: 20px; /* Inner padding */
-    max-width: 80%; /* Max width of 80% of the viewport */
-    margin: 0 auto; /* Center the container horizontally */
+    background-color: rgba(231, 218, 218, 0.99);
+    /* Light newspaper-like color */
+    border: 1px solid rgba(200, 200, 200, 0.5);
+    /* Light gray border for definition */
+    border-radius: 8px;
+    /* Rounded corners for a soft look */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
+    padding: 20px;
+    /* Inner padding */
+    max-width: 80%;
+    /* Max width of 80% of the viewport */
+    margin: 0 auto;
+    /* Center the container horizontally */
 }
 
 .constant-key {
-    width: 250px; /* Adjust width to accommodate longer content */
-    height: auto; /* Allow dynamic height */
-    padding: 15px; /* Padding for better spacing */
-    font-size: 1.2rem; /* Increase font size for better readability */
-    line-height: 1.5; /* Line height to properly space text */
-    display: flex; /* Flexbox for centering */
-    flex-direction: column; /* Arrange contents vertically */
-    justify-content: center; /* Center content */
-    align-items: center; /* Center content */
-    text-align: center; /* Center align text */
-    margin: 10px; /* Space between keys */
-    background-color: #f9f9f9; /* Light background */
-    border: 1px solid #ddd; /* Light border */
-    border-radius: 8px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor to indicate it's clickable */
+    width: 250px;
+    /* Adjust width to accommodate longer content */
+    height: auto;
+    /* Allow dynamic height */
+    padding: 15px;
+    /* Padding for better spacing */
+    font-size: 1.2rem;
+    /* Increase font size for better readability */
+    line-height: 1.5;
+    /* Line height to properly space text */
+    display: flex;
+    /* Flexbox for centering */
+    flex-direction: column;
+    /* Arrange contents vertically */
+    justify-content: center;
+    /* Center content */
+    align-items: center;
+    /* Center content */
+    text-align: center;
+    /* Center align text */
+    margin: 10px;
+    /* Space between keys */
+    background-color: #f9f9f9;
+    /* Light background */
+    border: 1px solid #ddd;
+    /* Light border */
+    border-radius: 8px;
+    /* Rounded corners */
+    cursor: pointer;
+    /* Pointer cursor to indicate it's clickable */
 }
 
 #common-constants-container {
-    display: flex; /* Use flexbox for the container */
-    flex-wrap: wrap; /* Allow wrapping of items */
-    justify-content: center; /* Center all keys within the container */
-    align-items: center; /* Align keys vertically in the container */
-    gap: 10px; /* Space between keys */
+    display: flex;
+    /* Use flexbox for the container */
+    flex-wrap: wrap;
+    /* Allow wrapping of items */
+    justify-content: center;
+    /* Center all keys within the container */
+    align-items: center;
+    /* Align keys vertically in the container */
+    gap: 10px;
+    /* Space between keys */
 }
 
 /* ---> FIX OVERSIZED KEYS <--- */
 /* Custom styling for the Acetate key */
 #acetate-key {
-    width: 200px; /* Adjust width as needed */
+    width: 200px;
+    /* Adjust width as needed */
 }
 
 /* Custom styling for the Acetate key */
 #complex-number-key {
-    width: 200px; /* Adjust width as needed */
+    width: 200px;
+    /* Adjust width as needed */
 }
 
 #rational-number-key {
-    width: 200px; /* Adjust width as needed */
+    width: 200px;
+    /* Adjust width as needed */
 }
 
 /* ---> FIX OVERSIZED KEYS *END* <--- */
