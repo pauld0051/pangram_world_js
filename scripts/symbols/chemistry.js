@@ -89,7 +89,7 @@ const commonAnions = [
     { letter: 'CrO₄²⁻', unicode: 'CrO\u2084\u00B2\u207B', name: 'Chromate' },
     { letter: 'HCO₃⁻', unicode: 'HCO\u2083\u207B', name: 'Hydrogen Carbonate' },
     { letter: 'Cr₂O₇²⁻', unicode: 'Cr\u2082O\u2087\u00B2\u207B', name: 'Dichromate' },
-    { letter: 'CH₃COO⁻', unicode: 'CH\u2083COO\u207B', name: 'Acetate' },
+    { letter: 'CH₃COO⁻', unicode: 'CH\u2083COO\u207B', name: 'Acetate', id: 'acetate-key' },
     { letter: 'HCOO⁻', unicode: 'HCOO\u207B', name: 'Formate' },
     { letter: 'CN⁻', unicode: 'CN\u207B', name: 'Cyanide' },
     { letter: 'NH₂⁻', unicode: 'NH\u2082\u207B', name: 'Amide' },
@@ -172,40 +172,45 @@ commonConstants.forEach(constant => {
     container.appendChild(keyDiv);
 });
 
-    // Function to create keys for chemistry symbols
-    function createKeys(containerId, symbols) {
-        const container = document.getElementById(containerId);
-        symbols.forEach(item => {
-            const key = document.createElement('div');
-            key.className = 'alphabet-key';
-            
-            // Create span for the letter (symbol)
-            const letterSpan = document.createElement('span');
-            letterSpan.className = 'letter';
-            letterSpan.innerText = item.letter;
-            
-            // Create span for the name (descriptor)
-            const nameSpan = document.createElement('span');
-            nameSpan.className = 'name';
-            nameSpan.innerText = item.name;
-            
-            // Add both elements to the key
-            key.appendChild(letterSpan);
-            key.appendChild(nameSpan);
-            
-            // Set the data-unicode attribute for copying
-            key.dataset.unicode = item.unicode;
-            
-            // Add click event to copy to clipboard and show tooltip
-            key.onclick = function (event) {
-                copyToClipboard(item.unicode);
-                showTooltip("Copied", event); // Show tooltip at click position
-            };
-            
-            // Append the key to the container
-            container.appendChild(key);
-        });
-    }
+   // Function to create keys for chemistry symbols
+function createKeys(containerId, symbols) {
+    const container = document.getElementById(containerId);
+    symbols.forEach(item => {
+        const key = document.createElement('div');
+        key.className = 'alphabet-key';
+        
+        // Add the unique id if provided (for Acetate key)
+        if (item.id) {
+            key.id = item.id;
+        }
+
+        // Create span for the letter (symbol)
+        const letterSpan = document.createElement('span');
+        letterSpan.className = 'letter';
+        letterSpan.innerText = item.letter;
+        
+        // Create span for the name (descriptor)
+        const nameSpan = document.createElement('span');
+        nameSpan.className = 'name';
+        nameSpan.innerText = item.name;
+        
+        // Add both elements to the key
+        key.appendChild(letterSpan);
+        key.appendChild(nameSpan);
+        
+        // Set the data-unicode attribute for copying
+        key.dataset.unicode = item.unicode;
+        
+        // Add click event to copy to clipboard and show tooltip
+        key.onclick = function (event) {
+            copyToClipboard(item.unicode);
+            showTooltip("Copied", event); // Show tooltip at click position
+        };
+        
+        // Append the key to the container
+        container.appendChild(key);
+    });
+}
 
     function copyToClipboard(text) {
     // Create a temporary textarea element

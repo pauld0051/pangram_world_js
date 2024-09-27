@@ -162,3 +162,8 @@
     gap: 10px; /* Space between keys */
 }
 
+/* Custom styling for the Acetate key */
+#acetate-key {
+    width: 200px; /* Adjust width as needed */
+}
+
