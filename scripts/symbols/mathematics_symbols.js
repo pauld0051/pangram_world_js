@@ -109,9 +109,9 @@ document.addEventListener("DOMContentLoaded", function () {
         { letter: '∅', unicode: '∅', name: 'Empty Set' },
         { letter: 'ℕ', unicode: 'ℕ', name: 'Set of Natural Numbers' },
         { letter: 'ℤ', unicode: 'ℤ', name: 'Set of Integers' },
-        { letter: 'ℚ', unicode: 'ℚ', name: 'Set of Rational Numbers' },
+        { letter: 'ℚ', unicode: 'ℚ', name: 'Set of Rational Numbers', id: 'rational-number-key' },
         { letter: 'ℝ', unicode: 'ℝ', name: 'Set of Real Numbers' },
-        { letter: 'ℂ', unicode: 'ℂ', name: 'Set of Complex Numbers' },
+        { letter: 'ℂ', unicode: 'ℂ', name: 'Set of Complex Numbers', id: 'complex-number-key' },
         { letter: 'π', unicode: 'π', name: 'Pi' },
         { letter: 'ℵ', unicode: 'ℵ', name: 'Aleph' },
         { letter: '⊖', unicode: '⊖', name: 'Circled Minus' },
@@ -187,38 +187,54 @@ document.addEventListener("DOMContentLoaded", function () {
         { letter: '∆', unicode: '∆', name: 'Change or Delta' }
     ];
 
-    // Function to create keys for each group
-    function createKeys(containerId, symbols) {
+    // Ordinal Number Superscripts
+const ordinalSuperscripts = [
+    { letter: '1ˢᵗ', unicode: '1\u02E2\u1D57', name: 'First' }, // Unicode for 'st'
+    { letter: '2ⁿᵈ', unicode: '2\u207F\u1D48', name: 'Second' }, // Unicode for 'nd'
+    { letter: '3ʳᵒ', unicode: '3\u02B3\u1D52', name: 'Third' },  // Unicode for 'rd'
+    { letter: '4ᵗʰ', unicode: '4\u1D57\u02B0', name: 'Fourth' }, // Unicode for 'th'
+    { letter: '5ᵗʰ', unicode: '5\u1D57\u02B0', name: 'Fifth' },
+    { letter: '6ᵗʰ', unicode: '6\u1D57\u02B0', name: 'Sixth' },
+    { letter: '7ᵗʰ', unicode: '7\u1D57\u02B0', name: 'Seventh' },
+    { letter: '8ᵗʰ', unicode: '8\u1D57\u02B0', name: 'Eighth' },
+    { letter: '9ᵗʰ', unicode: '9\u1D57\u02B0', name: 'Ninth' },
+    { letter: '10ᵗʰ', unicode: '10\u1D57\u02B0', name: 'Tenth' },
+    { letter: '0ᵗʰ', unicode: '0\u1D57\u02B0', name: 'Zeroth' },
+    { letter: 'ˢᵗ', unicode: '\u02E2\u1D57', name: 'Superscript st' },
+    { letter: 'ⁿᵈ', unicode: '\u207F\u1D48', name: 'Superscript nd' },
+    { letter: 'ʳᵈ', unicode: '\u02B3\u1D48', name: 'Superscript rd' },
+    { letter: 'ᵗʰ', unicode: '\u1D57\u02B0', name: 'Superscript th' }
+];
+
+     function createKeys(containerId, symbols) {
         const container = document.getElementById(containerId);
-        if (!container) return; // Check if container exists
         symbols.forEach(item => {
             const key = document.createElement('div');
             key.className = 'alphabet-key';
             
-            // Create span for the letter (symbol)
+            // Add the unique id if provided (for Acetate key)
+            if (item.id) {
+                key.id = item.id;
+            }
+
             const letterSpan = document.createElement('span');
             letterSpan.className = 'letter';
             letterSpan.innerText = item.letter;
-            
-            // Create span for the name (descriptor)
+
             const nameSpan = document.createElement('span');
             nameSpan.className = 'name';
             nameSpan.innerText = item.name;
             
-            // Add both elements to the key
             key.appendChild(letterSpan);
             key.appendChild(nameSpan);
-            
-            // Set the data-unicode attribute for copying
+
             key.dataset.unicode = item.unicode;
-            
-            // Add click event to copy to clipboard and show tooltip
+
             key.onclick = function (event) {
                 copyToClipboard(item.unicode);
-                showTooltip("Copied", event); // Show tooltip at click position
+                showTooltip("Copied", event);
             };
-            
-            // Append the key to the container
+
             container.appendChild(key);
         });
     }
@@ -290,4 +306,5 @@ document.addEventListener("DOMContentLoaded", function () {
     createKeys('algebraic-symbols-container', algebraicSymbols);
     createKeys('geometry-symbols-container', geometrySymbols);
     createKeys('calculus-symbols-container', calculusSymbols);
+    createKeys('ordinal-superscripts-container', ordinalSuperscripts);
 });
