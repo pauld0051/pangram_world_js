@@ -109,6 +109,9 @@ const cryptogrammicLetters = [
     { letter: 'ᛶ', unicode: '\u16F6', name: 'Eh' },
     { letter: 'ᛷ', unicode: '\u16F7', name: 'Ac' },
     { letter: 'ᛸ', unicode: '\u16F8', name: 'Aesc' },
+    //{ letter: '᛹', unicode: '\u16F9', name: 'Branch Yr' },
+    //{ letter: '᛺', unicode: '\u16FA', name: 'Twig Yr' },
+    //{ letter: '᛻', unicode: '\u16FB', name: 'Cweorth' }
 ];
 
 

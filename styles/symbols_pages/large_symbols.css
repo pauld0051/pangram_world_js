@@ -22,37 +22,47 @@
     margin-bottom: 0 !important; /* Remove bottom margin */
 }
 
-/* CSS for Greek alphabet keys */
+/* CSS for LARGE alphabet keys */
 .alphabet-key {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
-    margin: 5px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f8f9fa;
-    font-size: 24px;
-    width: 80px; /* Adjust width to fit both letter and name */
-    height: 80px; /* Adjust height to fit both letter and name */
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+    display: inline-flex; /* Use Flexbox for alignment */
+    flex-direction: column; /* Vertical alignment */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+    padding: 15px; /* Adjust padding */
+    margin: 5px; /* Adjust margin */
+    border: 1px solid #ddd; /* Border style */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #f8f9fa; /* Background color */
+    font-size: 12px; /* Font size for the name */
+    width: 120px; /* Adjust width to fit both letter and name */
+    height: 160px; /* Adjust height to fit both letter and name */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.2s ease; /* Smooth hover transition */
 }
 
 .alphabet-key:hover {
-    background-color: #e2e6ea;
+    background-color: #e2e6ea; /* Hover background color */
 }
 
 .alphabet-key .letter {
     font-size: 30px; /* Size of the Greek letter */
-    font-weight: bold;
+    font-weight: bold; /* Bold font */
+    text-align: center; /* Center text */
+    height: 35px; /* Fixed height for the letter */
+    line-height: 35px; /* Align vertically within the fixed height */
     margin-bottom: 5px; /* Space between letter and name */
 }
 
 .alphabet-key .name {
     font-size: 14px; /* Size of the name text */
-    color: #666; /* Slightly lighter color for the name */
+    color: #666; /* Lighter text color */
+    text-align: center; /* Center text */
+    line-height: 16px; /* Align vertically within the fixed height */
+    height: 32px; /* Fixed height for the name */
+    overflow: hidden; /* Hide overflow if necessary */
+    display: flex; /* Ensure centered alignment */
+    align-items: center; /* Center text vertically */
+    justify-content: center; /* Center text horizontally */
 }
 
 /* Main Heading Section */
