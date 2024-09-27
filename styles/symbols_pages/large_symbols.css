@@ -134,3 +134,31 @@
     max-width: 80%; /* Max width of 80% of the viewport */
     margin: 0 auto; /* Center the container horizontally */
 }
+
+.constant-key {
+    width: 250px; /* Adjust width to accommodate longer content */
+    height: auto; /* Allow dynamic height */
+    padding: 15px; /* Padding for better spacing */
+    font-size: 1.2rem; /* Increase font size for better readability */
+    line-height: 1.5; /* Line height to properly space text */
+    display: flex; /* Flexbox for centering */
+    flex-direction: column; /* Arrange contents vertically */
+    justify-content: center; /* Center content */
+    align-items: center; /* Center content */
+    text-align: center; /* Center align text */
+    margin: 10px; /* Space between keys */
+    background-color: #f9f9f9; /* Light background */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor to indicate it's clickable */
+}
+
+
+#common-constants-container {
+    display: flex; /* Use flexbox for the container */
+    flex-wrap: wrap; /* Allow wrapping of items */
+    justify-content: center; /* Center all keys within the container */
+    align-items: center; /* Align keys vertically in the container */
+    gap: 10px; /* Space between keys */
+}
+
