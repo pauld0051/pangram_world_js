@@ -32,109 +32,102 @@
 <body>
     <main>
         <div id="header-container"></div>
-        <div class="container my-5">
-            <!-- Main Heading Section -->
-            <div class="row mb-3">
-                <div class="col-md-12">
-                    <div class="main-heading text-center p-4">
-                        <h1 class="display-4 text-white">Runic Alphabet Copy Tool</h1>
-                        <p class="lead text-light">Easily copy runic letters for use on social media or other platforms.</p>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="row mb-2">
-                <!-- Elder Futhark Letters Card -->
-                <div class="col-md-6 mb-2">
-                    <div class="card alphabet-card">
-                        <div class="card-header text-center">
-                            Elder Futhark Letters
-                        </div>
-                        <div class="card-body text-center" id="elder-futhark-container">
-                            <!-- Keys will be injected here by JavaScript -->
+        <div class="outer-container mx-auto my-5">
+            <div class="container my-5">
+                <!-- Main Heading Section -->
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <div class="main-heading text-center p-4">
+                            <h1 class="display-4 text-white">Runic Alphabet Copy Tool</h1>
+                            <p class="lead text-light">Easily copy runic letters for use on social media or other platforms.
+                            </p>
                         </div>
                     </div>
                 </div>
-                <!-- Younger Futhark Letters Card -->
-                <div class="col-md-6 mb-2">
-                    <div class="card alphabet-card">
-                        <div class="card-header text-center">
-                            Younger Futhark Letters
+    
+                <!-- Two-column layout for Runic Letters -->
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                        <!-- Elder Futhark Letters Card -->
+                        <div class="card alphabet-card mb-3">
+                            <div class="card-header text-center">
+                                Elder Futhark Letters
+                            </div>
+                            <div class="card-body text-center" id="elder-futhark-container">
+                                <!-- Keys will be injected here by JavaScript -->
+                            </div>
                         </div>
-                        <div class="card-body text-center" id="younger-futhark-container">
-                            <!-- Keys will be injected here by JavaScript -->
+    
+                        <!-- Anglo-Saxon Futhorc Letters Card -->
+                        <div class="card alphabet-card mb-3">
+                            <div class="card-header text-center">
+                                Anglo-Saxon Futhorc Letters
+                            </div>
+                            <div class="card-body text-center" id="anglo-saxon-container">
+                                <!-- Keys will be injected here by JavaScript -->
+                            </div>
+                        </div>
+    
+                        <!-- Tolkienian Extensions Card -->
+                        <div class="card alphabet-card mb-3">
+                            <div class="card-header text-center">
+                                Tolkienian Extensions
+                            </div>
+                            <div class="card-body text-center" id="tolkienian-extensions-container">
+                                <!-- Keys will be injected here by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <!-- Younger Futhark Letters Card -->
+                        <div class="card alphabet-card mb-3">
+                            <div class="card-header text-center">
+                                Younger Futhark Letters
+                            </div>
+                            <div class="card-body text-center" id="younger-futhark-container">
+                                <!-- Keys will be injected here by JavaScript -->
+                            </div>
+                        </div>
+    
+                        <!-- Medieval Runes and Punctuation Card -->
+                        <div class="card alphabet-card mb-3">
+                            <div class="card-header text-center">
+                                Medieval Runes and Punctuation
+                            </div>
+                            <div class="card-body text-center" id="medieval-runes-container">
+                                <!-- Keys will be injected here by JavaScript -->
+                            </div>
+                        </div>
+    
+                        <!-- Cryptogrammic Letters Card -->
+                        <div class="card alphabet-card mb-3">
+                            <div class="card-header text-center">
+                                Cryptogrammic Letters
+                            </div>
+                            <div class="card-body text-center" id="cryptogrammic-letters-container">
+                                <!-- Keys will be injected here by JavaScript -->
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        
-            <div class="row mb-2">
-                <!-- Anglo-Saxon Futhorc Letters Card -->
-                <div class="col-md-6 mb-4">
-                    <div class="card alphabet-card">
-                        <div class="card-header text-center">
-                            Anglo-Saxon Futhorc Letters
-                        </div>
-                        <div class="card-body text-center" id="anglo-saxon-container">
-                            <!-- Keys will be injected here by JavaScript -->
-                        </div>
-                    </div>
-                </div>
-                <!-- Medieval Runes and Punctuation Card -->
-                <div class="col-md-6 mb-2">
-                    <div class="card alphabet-card">
-                        <div class="card-header text-center">
-                            Medieval Runes and Punctuation
-                        </div>
-                        <div class="card-body text-center" id="medieval-runes-container">
-                            <!-- Keys will be injected here by JavaScript -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            <!-- New row for Tolkienian Extensions and Cryptogrammic Letters -->
-            <div class="row mb-2">
-                <!-- Tolkienian Extensions Card -->
-                <div class="col-md-6 mb-2">
-                    <div class="card alphabet-card">
-                        <div class="card-header text-center">
-                            Tolkienian Extensions
-                        </div>
-                        <div class="card-body text-center" id="tolkienian-extensions-container">
-                            <!-- Keys will be injected here by JavaScript -->
-                        </div>
-                    </div>
-                </div>
-        
-                <!-- Cryptogrammic Letters Card -->
-                <div class="col-md-6 mb-2">
-                    <div class="card alphabet-card">
-                        <div class="card-header text-center">
-                            Cryptogrammic Letters
-                        </div>
-                        <div class="card-body text-center" id="cryptogrammic-letters-container">
-                            <!-- Keys will be injected here by JavaScript -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            <!-- Instruction Card -->
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card instruction-card text-center p-4">
-                        <div class="card-body">
-                            <h5 class="card-title">How to Use</h5>
-                            <p class="card-text">Click on any runic letter above to copy it to your clipboard. Then, you can
-                                paste it into your social media posts, comments, or any other platform. It's that simple!</p>
+    
+                <!-- Instruction Card -->
+                <div class="row mt-5">
+                    <div class="col-md-12">
+                        <div class="card instruction-card text-center p-4">
+                            <div class="card-body">
+                                <h5 class="card-title">How to Use</h5>
+                                <p class="card-text">Click on any runic letter above to copy it to your clipboard. Then, you
+                                    can paste it into your social media posts, comments, or any other platform. It's that
+                                    simple!</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </main>
+
     <!-- .. Scroll Button ... -->
     <button onclick="scrollToTop()" id="scrollToTopButton" class="scroll-button"><span
             class="material-symbols-outlined">

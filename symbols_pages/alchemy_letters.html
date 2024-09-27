@@ -29,24 +29,26 @@
     <script src="/scripts/main.js" defer></script>
 </head>
 <body>
-    <main>
-        <div id="header-container"></div>
+<main>
+    <div id="header-container"></div>
+    <!-- New outer container for newspaper-like look -->
+    <div class="outer-container mx-auto my-5">
         <div class="container my-5">
             <!-- Main Heading Section -->
             <div class="row mb-5">
                 <div class="col-md-12">
                     <div class="main-heading text-center p-4">
                         <h1 class="display-4 text-white">Alchemical Symbols Copy Tool 🜁</h1>
-                        <p class="lead text-light">Easily copy alchemical symbols for use on social media or other platforms.
-                        </p>
+                        <p class="lead text-light">Easily copy alchemical symbols for use on social media or other
+                            platforms.</p>
                     </div>
                 </div>
             </div>
-        
-            <!-- Alchemical Symbols Section -->
-            <div class="row mb-4">
-                <div class="col-md-6">
-                    <div class="card alphabet-card">
+
+            <!-- Two-column layout for cards -->
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <div class="card alphabet-card mb-3">
                         <div class="card-header text-center">
                             Base Elements
                         </div>
@@ -54,22 +56,8 @@
                             <!-- Keys will be injected here by JavaScript -->
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card alphabet-card">
-                        <div class="card-header text-center">
-                            Planetary Metals
-                        </div>
-                        <div class="card-body text-center" id="planetary-metals-container">
-                            <!-- Keys will be injected here by JavaScript -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="row mb-4">
-                <div class="col-md-6">
-                    <div class="card alphabet-card">
+
+                    <div class="card alphabet-card mb-3">
                         <div class="card-header text-center">
                             Alchemical Substances
                         </div>
@@ -77,22 +65,8 @@
                             <!-- Keys will be injected here by JavaScript -->
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card alphabet-card">
-                        <div class="card-header text-center">
-                            Alchemical Processes
-                        </div>
-                        <div class="card-body text-center" id="alchemical-processes-container">
-                            <!-- Keys will be injected here by JavaScript -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="row mb-4">
-                <div class="col-md-6">
-                    <div class="card alphabet-card">
+
+                    <div class="card alphabet-card mb-3">
                         <div class="card-header text-center">
                             Alchemical Instruments
                         </div>
@@ -101,8 +75,27 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="card alphabet-card">
+
+                <div class="col-lg-6 col-md-12">
+                    <div class="card alphabet-card mb-3">
+                        <div class="card-header text-center">
+                            Planetary Metals
+                        </div>
+                        <div class="card-body text-center" id="planetary-metals-container">
+                            <!-- Keys will be injected here by JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="card alphabet-card mb-3">
+                        <div class="card-header text-center">
+                            Alchemical Processes
+                        </div>
+                        <div class="card-body text-center" id="alchemical-processes-container">
+                            <!-- Keys will be injected here by JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="card alphabet-card mb-3">
                         <div class="card-header text-center">
                             Miscellaneous Symbols
                         </div>
@@ -112,23 +105,24 @@
                     </div>
                 </div>
             </div>
-        
+
             <!-- Instruction Card -->
-            <div class="row">
+            <div class="row mt-5">
                 <div class="col-md-12">
                     <div class="card instruction-card text-center p-4">
                         <div class="card-body">
                             <h5 class="card-title">How to Use</h5>
-                            <p class="card-text">Click on any alchemical symbol above to copy it to your clipboard. Then, you
-                                can paste it into your social media posts, comments, or any other platform. It's that simple!
-                            </p>
+                            <p class="card-text">Click on any alchemical symbol above to copy it to your clipboard.
+                                Then, you can paste it into your social media posts, comments, or any other platform.
+                                It's that simple!</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</main>
 
-    </main>
     <!-- .. Scroll Button ... -->
     <button onclick="scrollToTop()" id="scrollToTopButton" class="scroll-button"><span
             class="material-symbols-outlined">
