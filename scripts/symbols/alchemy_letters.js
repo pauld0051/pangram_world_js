@@ -2,142 +2,142 @@ document.addEventListener("DOMContentLoaded", function () {
     // Array for alchemical symbols
    // Base Elements (4 Characters)
 const baseElements = [
-    { letter: '🜁', unicode: '\u1F701', name: 'Air' },
-    { letter: '🜂', unicode: '\u1F702', name: 'Fire' },
-    { letter: '🜃', unicode: '\u1F703', name: 'Water' },
-    { letter: '🜄', unicode: '\u1F704', name: 'Earth' }
+    { letter: '🜁', unicode: '🜁', name: 'Air' },
+    { letter: '🜂', unicode: '🜂', name: 'Fire' },
+    { letter: '🜃', unicode: '🜃', name: 'Water' },
+    { letter: '🜄', unicode: '🜄', name: 'Earth' }
 ];
 
 // Planetary Metals (7 Characters)
 const planetaryMetals = [
-    { letter: '🜇', unicode: '\u1F707', name: 'Gold (Sol)' },
-    { letter: '🜈', unicode: '\u1F708', name: 'Silver (Luna)' },
-    { letter: '🜉', unicode: '\u1F709', name: 'Iron (Mars)' },
-    { letter: '🜊', unicode: '\u1F70A', name: 'Copper (Venus)' },
-    { letter: '🜋', unicode: '\u1F70B', name: 'Mercury (Mercurius)' },
-    { letter: '🜍', unicode: '\u1F70D', name: 'Tin (Jupiter)' },
-    { letter: '🜎', unicode: '\u1F70E', name: 'Lead (Saturn)' }
+    { letter: '🜇', unicode: '🜇', name: 'Gold (Sol)' }, // Using the symbol directly
+    { letter: '🜈', unicode: '🜈', name: 'Silver (Luna)' },
+    { letter: '🜉', unicode: '🜉', name: 'Iron (Mars)' },
+    { letter: '🜊', unicode: '🜊', name: 'Copper (Venus)' },
+    { letter: '🜋', unicode: '🜋', name: 'Mercury (Mercurius)' },
+    { letter: '🜍', unicode: '🜍', name: 'Tin (Jupiter)' },
+    { letter: '🜎', unicode: '🜎', name: 'Lead (Saturn)' }
 ];
 
 // Alchemical Substances (39 Characters)
 const alchemicalSubstances = [
-    { letter: '🜍', unicode: '\u1F70D', name: 'Salt' },
-    { letter: '🜏', unicode: '\u1F70F', name: 'Vitriol' },
-    { letter: '🜐', unicode: '\u1F710', name: 'Sulphur' },
-    { letter: '🜑', unicode: '\u1F711', name: 'Mercury Sublimate' },
-    { letter: '🜒', unicode: '\u1F712', name: 'Aqua Fortis' },
-    { letter: '🜓', unicode: '\u1F713', name: 'Aqua Regia' },
-    { letter: '🜔', unicode: '\u1F714', name: 'Aqua Vitae' },
-    { letter: '🜕', unicode: '\u1F715', name: 'Spirit' },
-    { letter: '🜖', unicode: '\u1F716', name: 'Tincture' },
-    { letter: '🜗', unicode: '\u1F717', name: 'Gum' },
-    { letter: '🜘', unicode: '\u1F718', name: 'Brimstone' },
-    { letter: '🜙', unicode: '\u1F719', name: 'Salammoniac' },
-    { letter: '🜚', unicode: '\u1F71A', name: 'Sal' },
-    { letter: '🜛', unicode: '\u1F71B', name: 'Salt' },
-    { letter: '🜜', unicode: '\u1F71C', name: 'Saltpetre' },
-    { letter: '🜝', unicode: '\u1F71D', name: 'Spirit' },
-    { letter: '🜞', unicode: '\u1F71E', name: 'Antimony' },
-    { letter: '🜟', unicode: '\u1F71F', name: 'Sulphur' },
-    { letter: '🜠', unicode: '\u1F720', name: 'Arsenic' },
-    { letter: '🜡', unicode: '\u1F721', name: 'Borax' },
-    { letter: '🜢', unicode: '\u1F722', name: 'Camphor' },
-    { letter: '🜣', unicode: '\u1F723', name: 'Iron' },
-    { letter: '🜤', unicode: '\u1F724', name: 'Copper' },
-    { letter: '🜥', unicode: '\u1F725', name: 'Lead' },
-    { letter: '🜦', unicode: '\u1F726', name: 'Fixed Sulphur' },
-    { letter: '🜧', unicode: '\u1F727', name: 'Common Salt' },
-    { letter: '🜨', unicode: '\u1F728', name: 'Red Vitriol' },
-    { letter: '🜩', unicode: '\u1F729', name: 'White Vitriol' },
-    { letter: '🜪', unicode: '\u1F72A', name: 'Arsenic' },
-    { letter: '🜫', unicode: '\u1F72B', name: 'Antimony' },
-    { letter: '🜬', unicode: '\u1F72C', name: 'Arsenic' },
-    { letter: '🜭', unicode: '\u1F72D', name: 'Borax' },
-    { letter: '🜮', unicode: '\u1F72E', name: 'Camphor' },
-    { letter: '🜯', unicode: '\u1F72F', name: 'Iron' },
-    { letter: '🜰', unicode: '\u1F730', name: 'Copper' },
-    { letter: '🜱', unicode: '\u1F731', name: 'Lead' },
-    { letter: '🜲', unicode: '\u1F732', name: 'Tin' },
-    { letter: '🜳', unicode: '\u1F733', name: 'Gold' },
-    { letter: '🜴', unicode: '\u1F734', name: 'Silver' }
+    { letter: '🜍', unicode: '🜍', name: 'Salt' },
+    { letter: '🜏', unicode: '🜏', name: 'Vitriol' },
+    { letter: '🜐', unicode: '🜐', name: 'Sulphur' },
+    { letter: '🜑', unicode: '🜑', name: 'Mercury Sublimate' },
+    { letter: '🜒', unicode: '🜒', name: 'Aqua Fortis' },
+    { letter: '🜓', unicode: '🜓', name: 'Aqua Regia' },
+    { letter: '🜔', unicode: '🜔', name: 'Aqua Vitae' },
+    { letter: '🜕', unicode: '🜕', name: 'Spirit' },
+    { letter: '🜖', unicode: '🜖', name: 'Tincture' },
+    { letter: '🜗', unicode: '🜗', name: 'Gum' },
+    { letter: '🜘', unicode: '🜘', name: 'Brimstone' },
+    { letter: '🜙', unicode: '🜙', name: 'Salammoniac' },
+    { letter: '🜚', unicode: '🜚', name: 'Sal' },
+    { letter: '🜛', unicode: '🜛', name: 'Salt' },
+    { letter: '🜜', unicode: '🜜', name: 'Saltpetre' },
+    { letter: '🜝', unicode: '🜝', name: 'Spirit' },
+    { letter: '🜞', unicode: '🜞', name: 'Antimony' },
+    { letter: '🜟', unicode: '🜟', name: 'Sulphur' },
+    { letter: '🜠', unicode: '🜠', name: 'Arsenic' },
+    { letter: '🜡', unicode: '🜡', name: 'Borax' },
+    { letter: '🜢', unicode: '🜢', name: 'Camphor' },
+    { letter: '🜣', unicode: '🜣', name: 'Iron' },
+    { letter: '🜤', unicode: '🜤', name: 'Copper' },
+    { letter: '🜥', unicode: '🜥', name: 'Lead' },
+    { letter: '🜦', unicode: '🜦', name: 'Fixed Sulphur' },
+    { letter: '🜧', unicode: '🜧', name: 'Common Salt' },
+    { letter: '🜨', unicode: '🜨', name: 'Red Vitriol' },
+    { letter: '🜩', unicode: '🜩', name: 'White Vitriol' },
+    { letter: '🜪', unicode: '🜪', name: 'Arsenic' },
+    { letter: '🜫', unicode: '🜫', name: 'Antimony' },
+    { letter: '🜬', unicode: '🜬', name: 'Arsenic' },
+    { letter: '🜭', unicode: '🜭', name: 'Borax' },
+    { letter: '🜮', unicode: '🜮', name: 'Camphor' },
+    { letter: '🜯', unicode: '🜯', name: 'Iron' },
+    { letter: '🜰', unicode: '🜰', name: 'Copper' },
+    { letter: '🜱', unicode: '🜱', name: 'Lead' },
+    { letter: '🜲', unicode: '🜲', name: 'Tin' },
+    { letter: '🜳', unicode: '🜳', name: 'Gold' },
+    { letter: '🜴', unicode: '🜴', name: 'Silver' }
 ];
 
 // Alchemical Processes (34 Characters)
 const alchemicalProcesses = [
-    { letter: '🝀', unicode: '\u1F740', name: 'Conjunction' },
-    { letter: '🝁', unicode: '\u1F741', name: 'Separation' },
-    { letter: '🝂', unicode: '\u1F742', name: 'Putrefaction' },
-    { letter: '🝃', unicode: '\u1F743', name: 'Cohobation' },
-    { letter: '🝄', unicode: '\u1F744', name: 'Solution' },
-    { letter: '🝅', unicode: '\u1F745', name: 'Fixation' },
-    { letter: '🝆', unicode: '\u1F746', name: 'Amalgamation' },
-    { letter: '🝇', unicode: '\u1F747', name: 'Sublimation' },
-    { letter: '🝈', unicode: '\u1F748', name: 'Calcination' },
-    { letter: '🝉', unicode: '\u1F749', name: 'Cementation' },
-    { letter: '🝊', unicode: '\u1F74A', name: 'Distillation' },
-    { letter: '🝋', unicode: '\u1F74B', name: 'Fermentation' },
-    { letter: '🝌', unicode: '\u1F74C', name: 'Multiplication' },
-    { letter: '🝍', unicode: '\u1F74D', name: 'Projection' },
-    { letter: '🝎', unicode: '\u1F74E', name: 'Digestion' },
-    { letter: '🝏', unicode: '\u1F74F', name: 'Cibation' },
-    { letter: '🝐', unicode: '\u1F750', name: 'Decoction' },
-    { letter: '🝑', unicode: '\u1F751', name: 'Circulation' },
-    { letter: '🝒', unicode: '\u1F752', name: 'Solution' },
-    { letter: '🝓', unicode: '\u1F753', name: 'Putrefaction' },
-    { letter: '🝔', unicode: '\u1F754', name: 'Distillation' },
-    { letter: '🝕', unicode: '\u1F755', name: 'Fermentation' },
-    { letter: '🝖', unicode: '\u1F756', name: 'Multiplication' },
-    { letter: '🝗', unicode: '\u1F757', name: 'Projection' },
-    { letter: '🝘', unicode: '\u1F758', name: 'Digestion' },
-    { letter: '🝙', unicode: '\u1F759', name: 'Cibation' },
-    { letter: '🝚', unicode: '\u1F75A', name: 'Decoction' },
-    { letter: '🝛', unicode: '\u1F75B', name: 'Circulation' },
-    { letter: '🝜', unicode: '\u1F75C', name: 'Conjunction' },
-    { letter: '🝝', unicode: '\u1F75D', name: 'Separation' },
-    { letter: '🝞', unicode: '\u1F75E', name: 'Putrefaction' },
-    { letter: '🝟', unicode: '\u1F75F', name: 'Cohobation' },
-    { letter: '🝠', unicode: '\u1F760', name: 'Solution' },
-    { letter: '🝡', unicode: '\u1F761', name: 'Fixation' }
+    { letter: '🝀', unicode: '🝀', name: 'Conjunction' },
+    { letter: '🝁', unicode: '🝁', name: 'Separation' },
+    { letter: '🝂', unicode: '🝂', name: 'Putrefaction' },
+    { letter: '🝃', unicode: '🝃', name: 'Cohobation' },
+    { letter: '🝄', unicode: '🝄', name: 'Solution' },
+    { letter: '🝅', unicode: '🝅', name: 'Fixation' },
+    { letter: '🝆', unicode: '🝆', name: 'Amalgamation' },
+    { letter: '🝇', unicode: '🝇', name: 'Sublimation' },
+    { letter: '🝈', unicode: '🝈', name: 'Calcination' },
+    { letter: '🝉', unicode: '🝉', name: 'Cementation' },
+    { letter: '🝊', unicode: '🝊', name: 'Distillation' },
+    { letter: '🝋', unicode: '🝋', name: 'Fermentation' },
+    { letter: '🝌', unicode: '🝌', name: 'Multiplication' },
+    { letter: '🝍', unicode: '🝍', name: 'Projection' },
+    { letter: '🝎', unicode: '🝎', name: 'Digestion' },
+    { letter: '🝏', unicode: '🝏', name: 'Cibation' },
+    { letter: '🝐', unicode: '🝐', name: 'Decoction' },
+    { letter: '🝑', unicode: '🝑', name: 'Circulation' },
+    { letter: '🝒', unicode: '🝒', name: 'Solution' },
+    { letter: '🝓', unicode: '🝓', name: 'Putrefaction' },
+    { letter: '🝔', unicode: '🝔', name: 'Distillation' },
+    { letter: '🝕', unicode: '🝕', name: 'Fermentation' },
+    { letter: '🝖', unicode: '🝖', name: 'Multiplication' },
+    { letter: '🝗', unicode: '🝗', name: 'Projection' },
+    { letter: '🝘', unicode: '🝘', name: 'Digestion' },
+    { letter: '🝙', unicode: '🝙', name: 'Cibation' },
+    { letter: '🝚', unicode: '🝚', name: 'Decoction' },
+    { letter: '🝛', unicode: '🝛', name: 'Circulation' },
+    { letter: '🝜', unicode: '🝜', name: 'Conjunction' },
+    { letter: '🝝', unicode: '🝝', name: 'Separation' },
+    { letter: '🝞', unicode: '🝞', name: 'Putrefaction' },
+    { letter: '🝟', unicode: '🝟', name: 'Cohobation' },
+    { letter: '🝠', unicode: '🝠', name: 'Solution' },
+    { letter: '🝡', unicode: '🝡', name: 'Fixation' }
 ];
 
 // Alchemical Instruments (11 Characters)
 const alchemicalInstruments = [
-    { letter: '🝬', unicode: '\u1F76C', name: 'Philosopher\'s Stone' },
-    { letter: '🝭', unicode: '\u1F76D', name: 'Philosopher\'s Egg' },
-    { letter: '🝮', unicode: '\u1F76E', name: 'Hermetic Seal' },
-    { letter: '🝯', unicode: '\u1F76F', name: 'Crucible' },
-    { letter: '🝰', unicode: '\u1F770', name: 'Alchemical Furnace' },
-    { letter: '🝱', unicode: '\u1F771', name: 'Alembic' },
-    { letter: '🝲', unicode: '\u1F772', name: 'Cucurbit' },
-    { letter: '🝳', unicode: '\u1F773', name: 'Retort' },
-    { letter: '🝴', unicode: '\u1F774', name: 'Pelican' },
-    { letter: '🝵', unicode: '\u1F775', name: 'Hermetic Vase' },
-    { letter: '🝶', unicode: '\u1F776', name: 'Crucible' }
+    { letter: '🝬', unicode: '🝬', name: 'Philosopher\'s Stone' },
+    { letter: '🝭', unicode: '🝭', name: 'Philosopher\'s Egg' },
+    { letter: '🝮', unicode: '🝮', name: 'Hermetic Seal' },
+    { letter: '🝯', unicode: '🝯', name: 'Crucible' },
+    { letter: '🝰', unicode: '🝰', name: 'Alchemical Furnace' },
+    { letter: '🝱', unicode: '🝱', name: 'Alembic' },
+    { letter: '🝲', unicode: '🝲', name: 'Cucurbit' },
+    { letter: '🝳', unicode: '🝳', name: 'Retort' },
+    //{ letter: '🝴', unicode: '🝴', name: 'Pelican' },
+    //{ letter: '🝵', unicode: '🝵', name: 'Hermetic Vase' },
+    //{ letter: '🝶', unicode: '🝶', name: 'Crucible' }
 ];
 
 // Miscellaneous Symbols (21 Characters)
 const miscellaneousSymbols = [
-    { letter: '🜀', unicode: '\u1F700', name: 'Quintessence' },
-    { letter: '🜆', unicode: '\u1F705', name: 'Borax' },
-    { letter: '🜇', unicode: '\u1F706', name: 'Sal-ammoniac' },
-    { letter: '🜶', unicode: '\u1F776', name: 'Symbol for Projection' },
-    { letter: '🜷', unicode: '\u1F777', name: 'Symbol for Tincture' },
-    { letter: '🜸', unicode: '\u1F778', name: 'Symbol for Spirit' },
-    { letter: '🜹', unicode: '\u1F779', name: 'Symbol for Sulphur' },
-    { letter: '🜺', unicode: '\u1F77A', name: 'Symbol for Salt' },
-    { letter: '🜻', unicode: '\u1F77B', name: 'Symbol for Mercury' },
-    { letter: '🜼', unicode: '\u1F77C', name: 'Symbol for Water' },
-    { letter: '🜽', unicode: '\u1F77D', name: 'Symbol for Fire' },
-    { letter: '🜾', unicode: '\u1F77E', name: 'Symbol for Air' },
-    { letter: '🝁', unicode: '\u1F741', name: 'Symbol for Separation' },
-    { letter: '🝂', unicode: '\u1F742', name: 'Symbol for Putrefaction' },
-    { letter: '🝃', unicode: '\u1F743', name: 'Symbol for Cohobation' },
-    { letter: '🝄', unicode: '\u1F744', name: 'Symbol for Solution' },
-    { letter: '🝅', unicode: '\u1F745', name: 'Symbol for Fixation' },
-    { letter: '🝆', unicode: '\u1F746', name: 'Symbol for Amalgamation' },
-    { letter: '🝇', unicode: '\u1F747', name: 'Symbol for Sublimation' },
-    { letter: '🝈', unicode: '\u1F748', name: 'Symbol for Calcination' },
-    { letter: '🝉', unicode: '\u1F749', name: 'Symbol for Cementation' }
+    { letter: '🜀', unicode: '🜀', name: 'Quintessence' },
+    { letter: '🜆', unicode: '🜆', name: 'Borax' },
+    { letter: '🜇', unicode: '🜇', name: 'Sal-ammoniac' },
+    { letter: '🜶', unicode: '🜶', name: 'Symbol for Projection' },
+    { letter: '🜷', unicode: '🜷', name: 'Symbol for Tincture' },
+    { letter: '🜸', unicode: '🜸', name: 'Symbol for Spirit' },
+    { letter: '🜹', unicode: '🜹', name: 'Symbol for Sulphur' },
+    { letter: '🜺', unicode: '🜺', name: 'Symbol for Salt' },
+    { letter: '🜻', unicode: '🜻', name: 'Symbol for Mercury' },
+    { letter: '🜼', unicode: '🜼', name: 'Symbol for Water' },
+    { letter: '🜽', unicode: '🜽', name: 'Symbol for Fire' },
+    { letter: '🜾', unicode: '🜾', name: 'Symbol for Air' },
+    { letter: '🝁', unicode: '🝁', name: 'Symbol for Separation' },
+    { letter: '🝂', unicode: '🝂', name: 'Symbol for Putrefaction' },
+    { letter: '🝃', unicode: '🝃', name: 'Symbol for Cohobation' },
+    { letter: '🝄', unicode: '🝄', name: 'Symbol for Solution' },
+    { letter: '🝅', unicode: '🝅', name: 'Symbol for Fixation' },
+    { letter: '🝆', unicode: '🝆', name: 'Symbol for Amalgamation' },
+    { letter: '🝇', unicode: '🝇', name: 'Symbol for Sublimation' },
+    { letter: '🝈', unicode: '🝈', name: 'Symbol for Calcination' },
+    { letter: '🝉', unicode: '🝉', name: 'Symbol for Cementation' }
 ];
 
     // Function to create keys for alchemical symbols
@@ -175,15 +175,16 @@ const miscellaneousSymbols = [
         });
     }
 
-    // Function to copy to clipboard
     function copyToClipboard(text) {
-        const tempInput = document.createElement('input');
-        tempInput.value = text;
-        document.body.appendChild(tempInput);
-        tempInput.select();
-        document.execCommand('copy');
-        document.body.removeChild(tempInput);
-    }
+    // Create a temporary textarea element
+    const tempTextarea = document.createElement('textarea');
+    tempTextarea.value = text; // Set the text content (Unicode symbol)
+    document.body.appendChild(tempTextarea); // Append to the document
+    tempTextarea.select(); // Select the text
+    tempTextarea.setSelectionRange(0, 99999); // For mobile devices
+    document.execCommand('copy'); // Execute copy command
+    document.body.removeChild(tempTextarea); // Remove the temporary element
+}
 
     // Function to show tooltip
     function showTooltip(message, event) {
