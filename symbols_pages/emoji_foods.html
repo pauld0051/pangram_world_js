@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Pangram World" />
+    <meta property="og:description"
+        content="For all your Physics needs with some extra social media helpers to really get your game on!" />
+    <meta property="og:image" content="https://www.pangram-world.com/static/images/pangram-world-title-trsp.png" />
+    <meta property="og:url" content="https://www.pangram-world.com" />
+    <title>Pangram World - Emoji Hands</title>
+    <link rel="stylesheet" href="/styles/bootstrap.css">
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/symbols_pages/large_symbols.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="shortcut icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="shortcut icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="shortcut icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <script src="/scripts/handlebars/dist/handlebars.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="/scripts/bootstrap.bundle.js"></script>
+    <script src="/scripts/main.js" defer></script>
+</head>
+<body>
+<main>
+    <div id="header-container"></div>
+    <!-- New outer container for newspaper-like look -->
+    <div class="outer-container mx-auto my-5">
+        <div class="container my-5">
+            <!-- Main Heading Section -->
+            <div class="row mb-5">
+                <div class="col-md-12">
+                    <div class="main-heading text-center p-4">
+                        <h1 class="display-4 text-white">Emoji Copy Tool 😄🍔🍣</h1>
+                        <p class="lead text-light">Easily copy various emoji categories for use on social media or other
+                            platforms.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emoji Body Parts Symbols Card -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card alphabet-card">
+                        <div class="card-header text-center">
+                            Body Part Emojis
+                        </div>
+                        <div class="card-body text-center" id="body-emojis-container">
+                            <!-- Keys will be injected here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emoji Fruits Symbols Card -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card alphabet-card">
+                        <div class="card-header text-center">
+                            Fruit Emojis
+                        </div>
+                        <div class="card-body text-center" id="fruit-emojis-container">
+                            <!-- Keys will be injected here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emoji Vegetables Symbols Card -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card alphabet-card">
+                        <div class="card-header text-center">
+                            Vegetable Emojis
+                        </div>
+                        <div class="card-body text-center" id="vegetable-emojis-container">
+                            <!-- Keys will be injected here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emoji Nuts Symbols Card -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card alphabet-card">
+                        <div class="card-header text-center">
+                            Nut Emojis
+                        </div>
+                        <div class="card-body text-center" id="nut-emojis-container">
+                            <!-- Keys will be injected here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emoji Baked Goods Symbols Card -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card alphabet-card">
+                        <div class="card-header text-center">
+                            Baked Goods Emojis
+                        </div>
+                        <div class="card-body text-center" id="baked-goods-emojis-container">
+                            <!-- Keys will be injected here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emoji Sweets Symbols Card -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card alphabet-card">
+                        <div class="card-header text-center">
+                            Sweets Emojis
+                        </div>
+                        <div class="card-body text-center" id="sweets-emojis-container">
+                            <!-- Keys will be injected here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emoji Fast Food Symbols Card -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card alphabet-card">
+                        <div class="card-header text-center">
+                            Fast Food Emojis
+                        </div>
+                        <div class="card-body text-center" id="fast-food-emojis-container">
+                            <!-- Keys will be injected here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emoji Meals Symbols Card -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card alphabet-card">
+                        <div class="card-header text-center">
+                            Meal Emojis
+                        </div>
+                        <div class="card-body text-center" id="meal-emojis-container">
+                            <!-- Keys will be injected here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emoji Drinks Symbols Card -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card alphabet-card">
+                        <div class="card-header text-center">
+                            Drink Emojis
+                        </div>
+                        <div class="card-body text-center" id="drink-emojis-container">
+                            <!-- Keys will be injected here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emoji Seafood Symbols Card -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card alphabet-card">
+                        <div class="card-header text-center">
+                            Seafood Emojis
+                        </div>
+                        <div class="card-body text-center" id="seafood-emojis-container">
+                            <!-- Keys will be injected here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emoji Prepared Food Symbols Card -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card alphabet-card">
+                        <div class="card-header text-center">
+                            Prepared Food Emojis
+                        </div>
+                        <div class="card-body text-center" id="prepared-food-emojis-container">
+                            <!-- Keys will be injected here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emoji Condiments & Ingredients Symbols Card -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card alphabet-card">
+                        <div class="card-header text-center">
+                            Condiments & Ingredients Emojis
+                        </div>
+                        <div class="card-body text-center" id="condiments-ingredients-emojis-container">
+                            <!-- Keys will be injected here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instruction Card -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card instruction-card text-center p-4">
+                        <div class="card-body">
+                            <h5 class="card-title">How to Use</h5>
+                            <p class="card-text">Click on any emoji above to copy it to your clipboard. Then, you can
+                                paste it into your social media posts, comments, or any other platform. It's that
+                                simple!</p>
+                            <small>Note: Some emojis may render differently depending on your device and platform. This
+                                behavior is outside of this tool's control.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+    <!-- .. Scroll Button ... -->
+    <button onclick="scrollToTop()" id="scrollToTopButton" class="scroll-button"><span
+            class="material-symbols-outlined">
+            arrow_upward
+        </span></button>
+    <!-- ... Footer Content ... -->
+    <div id="footer-container"></div>
+    <script src="../scripts/symbols/emoji_foods.js" defer></script>
+</body>
+</html>

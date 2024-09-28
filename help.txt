@@ -18,11 +18,25 @@ Symbol Pages to add:
 
 10. Emojis and Emoticons
 
-    Faces: 😊, 😢, 😎, 😂
-    Hands: 👍, 👎, 👏, 🤝
-    Objects: 💻, 📱, 📅, 📧
-    Weather: ☀️, ☔, ❄️, 🌈
-    Flags: 🌐 Various country flags
+    Emoji Food & Drink:
+
+    🍕 (pizza), 🍔 (burger), 🍣 (sushi), ☕ (coffee), etc.
+
+Emoji Activities:
+
+    ⚽ (soccer), 🎸 (guitar), 🎨 (art palette), 🏀 (basketball), etc.
+
+Emoji Travel & Places:
+
+    ✈️ (airplane), 🚗 (car), 🏠 (house), 🗽 (Statue of Liberty), etc.
+
+Emoji Objects:
+
+    💻 (laptop), 📱 (phone), 🕯️ (candle), etc.
+
+Emoji Symbols:
+
+    ❤️ (heart), 🔢 (numbers), 🔞 (no minors), etc.
 
 11. Dingbats and Decorative Symbols
 

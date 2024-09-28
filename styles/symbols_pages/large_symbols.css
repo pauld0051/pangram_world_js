@@ -320,11 +320,15 @@
 #backhand-index-pointing-left,
 #backhand-index-pointing-right,
 #backhand-index-pointing-up,
-#backhand-index-pointing-down {
+#backhand-index-pointing-down,
+#upward-pointing-index-finger,
+#upward-pointing-index-finger2,
+#downward-pointing-index-finger {
     width: 200px;
 }
 
 #cloud-lightning-rain {
     width: 200px;
 }
+
 /* ---> FIX OVERSIZED KEYS *END* <--- */
