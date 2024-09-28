@@ -260,4 +260,49 @@
     /* Adjust width as needed */
 }
 
+#left-right-arrow-with-stroke {
+    width: 200px;
+    /* Adjust width as needed */
+}
+
+#rightwards-arrow-from-bar {
+    width: 200px;
+    /* Adjust width as needed */
+}
+
+#upwards-two-headed-arrow {
+    width: 200px;
+    /* Adjust width as needed */
+}
+
+#downwards-two-headed-arrow {
+    width: 200px;
+    /* Adjust width as needed */
+}
+
+#anticlockwise-top-semicircle-arrow {
+    width: 200px;
+    /* Adjust width as needed */
+}
+
+#clockwise-top-semicircle-arrow {
+    width: 200px;
+    /* Adjust width as needed */
+}
+
+#anticlockwise-open-circle-arrow {
+    width: 200px;
+    /* Adjust width as needed */
+}
+
+#clockwise-open-circle-arrow {
+    width: 200px;
+    /* Adjust width as needed */
+}
+
+#wave-arrow-right {
+    width: 200px;
+    /* Adjust width as needed */
+}
+
 /* ---> FIX OVERSIZED KEYS *END* <--- */

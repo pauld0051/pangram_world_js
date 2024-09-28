@@ -3,3 +3,57 @@ KaTeX Commands
 <script defer src="node_modules/katex/dist/katex.min.js"></script>
 <script defer src="node_modules/katex/dist/contrib/auto-render.min.js"
 onload="renderMathInElement(document.body);"></script>
+
+Symbol Pages to add:
+8. Arrows and Pointers
+
+    Basic arrows (→, ←, ↑, ↓)
+    Double arrows (⇐, ⇒, ⇔)
+    Curved arrows (↩, ↪)
+
+9. Box Drawing and Block Elements
+
+    Borders and dividers (─, ═, │)
+    Block elements for spacing or designs (█, ▒, ▓)
+
+10. Emojis and Emoticons
+
+    Faces: 😊, 😢, 😎, 😂
+    Hands: 👍, 👎, 👏, 🤝
+    Objects: 💻, 📱, 📅, 📧
+    Weather: ☀️, ☔, ❄️, 🌈
+    Flags: 🌐 Various country flags
+
+11. Dingbats and Decorative Symbols
+
+    Stars (★, ☆, ✦)
+    Hearts (♥, ♡, ❣)
+    Flowers (❀, ✿, ❁)
+    Check marks (✔, ☑, ✓)
+
+12. Language-Specific Characters
+
+    Latin Extended: Æ, Ø, ß
+    Cyrillic: Я, Ж, Ф
+    Hebrew: א, ב, ג
+    Arabic: ا, ب, ج
+
+13. Number Forms and Fractions
+
+    Superscripts and subscripts (⁰, ¹, ₂, ₃)
+    Vulgar fractions (⅓, ⅔, ⅛, ⅜)
+
+14. Geometric Shapes
+
+    Basic shapes (■, □, ▲, ▼)
+    Patterns and symbols for creating designs (◦, ●, ▬, ▀)
+
+15. Game Symbols
+
+    Chess pieces (♔, ♕, ♖, ♗)
+    Card suits (♠, ♥, ♦, ♣)
+    Dice faces (⚀, ⚁, ⚂, ⚃)
+
+16. Symbol Combinations
+
+    Often-used combinations like "tm" (™), "copy" (©), and "reg" (®).
