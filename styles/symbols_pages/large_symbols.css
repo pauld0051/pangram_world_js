@@ -260,49 +260,63 @@
     /* Adjust width as needed */
 }
 
-#left-right-arrow-with-stroke {
-    width: 200px;
-    /* Adjust width as needed */
-}
-
-#rightwards-arrow-from-bar {
-    width: 200px;
-    /* Adjust width as needed */
-}
-
-#upwards-two-headed-arrow {
-    width: 200px;
-    /* Adjust width as needed */
-}
-
-#downwards-two-headed-arrow {
-    width: 200px;
-    /* Adjust width as needed */
-}
-
-#anticlockwise-top-semicircle-arrow {
-    width: 200px;
-    /* Adjust width as needed */
-}
-
-#clockwise-top-semicircle-arrow {
-    width: 200px;
-    /* Adjust width as needed */
-}
-
-#anticlockwise-open-circle-arrow {
-    width: 200px;
-    /* Adjust width as needed */
-}
-
-#clockwise-open-circle-arrow {
-    width: 200px;
-    /* Adjust width as needed */
-}
-
+/* Arrows and Pointers */
+#left-right-arrow-with-stroke,
+#rightwards-arrow-from-bar,
+#upwards-two-headed-arrow,
+#downwards-two-headed-arrow,
+#anticlockwise-top-semicircle-arrow,
+#clockwise-top-semicircle-arrow,
+#anticlockwise-open-circle-arrow,
+#clockwise-open-circle-arrow,
 #wave-arrow-right {
     width: 200px;
-    /* Adjust width as needed */
 }
+
+
+/* Box Drawing Symbols */
+#light-horizontal,
+#double-horizontal,
+#light-vertical,
+#double-vertical,
+#light-down-and-right,
+#light-down-and-left,
+#light-up-and-right,
+#light-up-and-left,
+#light-vertical-horizontal,
+#double-vertical-horizontal,
+#light-up-horizontal,
+#light-down-horizontal,
+#light-vertical-right,
+#light-vertical-left,
+#double-down-and-right,
+#double-down-and-left,
+#double-up-and-right,
+#double-up-and-left {
+    width: 200px;
+}
+
+/* Block Elements */
+#full-block,
+#dark-shade,
+#medium-shade,
+#light-shade,
+#lower-one-quarter-block,
+#lower-one-third-block,
+#lower-one-half-block,
+#lower-two-thirds-block,
+#lower-three-quarters-block,
+#lower-seven-eighths-block,
+#left-seven-eighths-block,
+#left-three-quarters-block,
+#left-five-eighths-block,
+#left-half-block,
+#left-three-eighths-block,
+#left-one-quarter-block,
+#left-one-eighth-block {
+    width: 200px;
+}
+
+
 
 /* ---> FIX OVERSIZED KEYS *END* <--- */
