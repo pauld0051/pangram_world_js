@@ -151,3 +151,72 @@
     margin: 0 auto;
     /* Center the container horizontally */
 }
+
+/* ---> FIX OVERSIZED KEYS <--- */
+/* Custom styling for the Acetate key */
+#comet {
+    width: 200px;
+    /* Adjust width as needed */
+}
+
+#first-quarter-moon {
+    width: 200px;
+    /* Adjust width as needed */
+}
+
+#last-quarter-moon {
+    width: 200px;
+    /* Adjust width as needed */
+}
+
+#new-moon {
+    width: 200px;
+    /* Adjust width as needed */
+}
+
+#full-moon {
+    width: 200px;
+    /* Adjust width as needed */
+}
+
+#med-white-circle {
+    width: 200px;
+    /* Adjust width as needed */
+}
+
+#med-black-circle {
+    width: 200px;
+    /* Adjust width as needed */
+}
+
+#non-binary {
+    width: 200px;
+    /* Adjust width as needed */
+}
+
+#androgynous {
+    width: 200px;
+    /* Adjust width as needed */
+}
+
+#heterosexual {
+    width: 200px;
+    /* Adjust width as needed */
+}
+
+#male-restroom {
+    width: 200px;
+    /* Adjust width as needed */
+}
+
+#female-restroom {
+    width: 200px;
+    /* Adjust width as needed */
+}
+
+#unisex-restroom {
+    width: 200px;
+    /* Adjust width as needed */
+}
+
+/* ---> FIX OVERSIZED KEYS *END* <--- */
