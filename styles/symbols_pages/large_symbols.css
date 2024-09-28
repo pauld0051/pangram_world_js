@@ -317,6 +317,11 @@
     width: 200px;
 }
 
-
+#backhand-index-pointing-left,
+#backhand-index-pointing-right,
+#backhand-index-pointing-up,
+#backhand-index-pointing-down {
+    width: 200px;
+}
 
 /* ---> FIX OVERSIZED KEYS *END* <--- */

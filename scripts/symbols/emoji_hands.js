@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       letter: "🖐",
       unicode: "🖐",
-      name: "Hand with Fingers Splayed",
+      name: "Fingers Splayed",
       id: "hand-with-fingers-splayed",
     },
     { letter: "✋", unicode: "✋", name: "Raised Hand", id: "raised-hand" },
