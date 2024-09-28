@@ -89,25 +89,6 @@ document.addEventListener("DOMContentLoaded", function () {
       name: "Checkered Flag",
       id: "checkered-flag",
     },
-    { letter: "🏆", unicode: "🏆", name: "Trophy", id: "trophy" },
-    {
-      letter: "🏅",
-      unicode: "🏅",
-      name: "Third Place Medal",
-      id: "third-place-medal",
-    },
-    {
-      letter: "🥈",
-      unicode: "🥈",
-      name: "Second Place Medal",
-      id: "second-place-medal",
-    },
-    {
-      letter: "🥇",
-      unicode: "🥇",
-      name: "First Place Medal",
-      id: "first-place-medal",
-    },
     {
       letter: "🤾‍♀️",
       unicode: "🤾‍♀️",
@@ -237,6 +218,12 @@ document.addEventListener("DOMContentLoaded", function () {
       { letter: "🥈", unicode: "🥈", name: "Silver Medal", id: "silver-medal" },
       { letter: "🥉", unicode: "🥉", name: "Bronze Medal", id: "bronze-medal" },
       { letter: "🏆", unicode: "🏆", name: "Trophy", id: "trophy" },
+      {
+        letter: "🏅",
+        unicode: "🏅",
+        name: "Star Medal",
+        id: "star-medal",
+      },
     ];
 
   function createKeys(containerId, symbols) {

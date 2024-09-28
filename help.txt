@@ -18,14 +18,6 @@ Symbol Pages to add:
 
 10. Emojis and Emoticons
 
-    Emoji Food & Drink:
-
-    🍕 (pizza), 🍔 (burger), 🍣 (sushi), ☕ (coffee), etc.
-
-Emoji Activities:
-
-    ⚽ (soccer), 🎸 (guitar), 🎨 (art palette), 🏀 (basketball), etc.
-
 Emoji Travel & Places:
 
     ✈️ (airplane), 🚗 (car), 🏠 (house), 🗽 (Statue of Liberty), etc.
@@ -37,6 +29,8 @@ Emoji Objects:
 Emoji Symbols:
 
     ❤️ (heart), 🔢 (numbers), 🔞 (no minors), etc.
+
+emoji medical
 
 11. Dingbats and Decorative Symbols
 

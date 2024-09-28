@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "country-flag-emoji-polyfill": "^0.1.8",
     "handlebars": "^4.7.8",
     "katex": "^0.16.11"
   }
