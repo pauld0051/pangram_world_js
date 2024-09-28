@@ -375,39 +375,15 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Create keys for all categories
-  // Fruits
   createKeys("fruit-emojis-container", fruitEmojis);
-
-  // Vegetables
   createKeys("vegetable-emojis-container", vegetableEmojis);
-
-  // Nuts
   createKeys("nut-emojis-container", nutEmojis);
-
-  // Baked Goods
   createKeys("baked-goods-emojis-container", bakedGoodsEmojis);
-
-  // Sweets
   createKeys("sweets-emojis-container", sweetsEmojis);
-
-  // Fast Food
   createKeys("fast-food-emojis-container", fastFoodEmojis);
-
-  // Meals
   createKeys("meal-emojis-container", mealEmojis);
-
-  // Drinks
   createKeys("drink-emojis-container", drinkEmojis);
-
-  // Seafood
   createKeys("seafood-emojis-container", seafoodEmojis);
-
-  // Prepared Food
   createKeys("prepared-food-emojis-container", preparedFoodEmojis);
-
-  // Condiments & Ingredients
-  createKeys(
-    "condiments-ingredients-emojis-container",
-    condimentsIngredientsEmojis
-  );
+  createKeys("condiments-ingredients-emojis-container", condimentsIngredientsEmojis);
 });
