@@ -5,16 +5,6 @@ KaTeX Commands
 onload="renderMathInElement(document.body);"></script>
 
 Symbol Pages to add:
-8. Arrows and Pointers
-
-    Basic arrows (→, ←, ↑, ↓)
-    Double arrows (⇐, ⇒, ⇔)
-    Curved arrows (↩, ↪)
-
-9. Box Drawing and Block Elements
-
-    Borders and dividers (─, ═, │)
-    Block elements for spacing or designs (█, ▒, ▓)
 
 10. Emojis and Emoticons
 
