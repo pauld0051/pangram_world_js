@@ -1,10 +1,11 @@
 {
-    "cSpell.words": [
-        "colours",
-        "Galileos",
-        "Giganewtons",
-        "liga",
-        "Micronewtons",
-        "Millinewtons"
-    ]
+  "cSpell.words": [
+    "colours",
+    "Galileos",
+    "Giganewtons",
+    "liga",
+    "Micronewtons",
+    "Millinewtons"
+  ],
+  "liveServer.settings.port": 5501
 }

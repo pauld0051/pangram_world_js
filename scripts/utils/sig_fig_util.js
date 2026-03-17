@@ -1,56 +1,74 @@
 // sig_fig_util.js
 
-export function calculateSigFigs(number) {
-  if (number == null || isNaN(number)) return 0;
+function normaliseInput(value) {
+  if (value == null) return "";
+  return String(value).trim();
+}
 
-  // Convert number to string to handle it uniformly
-  let numStr = number.toString().trim();
+export function calculateSigFigs(value) {
+  let str = normaliseInput(value);
 
-  if (/e/i.test(numStr)) {
-    // For scientific notation, calculate sig figs of the base part
-    const [base, exponent] = numStr.split(/e/i);
-    return calculateSigFigs(base);
+  if (str === "") return 0;
+
+  // Remove sign
+  str = str.replace(/^[+-]/, "");
+
+  // Scientific notation
+  if (/e/i.test(str)) {
+    const [coefficient] = str.split(/e/i);
+    return calculateSigFigs(coefficient);
   }
 
-  // Remove leading zeros for numbers greater than 1
-  if (!numStr.includes(".")) {
-    numStr = numStr.replace(/^0+/, "");
+  // Reject invalid numeric-like strings
+  if (!/^\d*\.?\d+$/.test(str) && !/^\d+\.$/.test(str)) {
+    return 0;
   }
 
-  // Handle cases like "0.00123" (leading zeros are not significant)
-  if (numStr.startsWith("0.")) {
-    numStr = numStr.replace(/^0+/, "");
+  // Decimal numbers
+  if (str.includes(".")) {
+    // Remove decimal point
+    const digits = str.replace(".", "");
+
+    // Leading zeros are not significant
+    const trimmed = digits.replace(/^0+/, "");
+
+    return trimmed.length;
   }
 
-  // For negative numbers, remove the negative sign for calculations
-  if (numStr.startsWith("-")) {
-    numStr = numStr.substring(1);
-  }
+  // Integers without decimal point
+  // Leading zeros are not significant, trailing zeros are ambiguous and usually not significant
+  // So 1200 => 2 sig figs, 00120 => 2 sig figs
+  const noLeadingZeros = str.replace(/^0+/, "");
+  const noTrailingZeros = noLeadingZeros.replace(/0+$/, "");
 
-  // Count significant figures
-  let sigFigs = 0;
-  let seenNonZero = false;
-
-  for (const char of numStr) {
-    if (char === ".") continue;
-    if (char !== "0") seenNonZero = true;
-    if (seenNonZero) sigFigs++;
-  }
-
-  return sigFigs;
+  return noTrailingZeros.length;
 }
 
 export function findLeastSigFigs(inputs) {
-  let leastSigFigs = Infinity;
+  let least = Infinity;
 
-  inputs.forEach((input) => {
-    if (input != null && !isNaN(input) && input !== "") {
-      const sigFigs = calculateSigFigs(input);
-      if (sigFigs < leastSigFigs) {
-        leastSigFigs = sigFigs;
-      }
+  for (const value of inputs) {
+    const str = normaliseInput(value);
+    if (str === "") continue;
+
+    const sigFigs = calculateSigFigs(str);
+    if (sigFigs > 0 && sigFigs < least) {
+      least = sigFigs;
     }
-  });
+  }
 
-  return leastSigFigs === Infinity ? 0 : leastSigFigs;
+  return least === Infinity ? 0 : least;
+}
+
+export function formatToSigFigs(value, sigFigs) {
+  if (!Number.isFinite(value)) return "";
+  if (!Number.isInteger(sigFigs) || sigFigs < 1) return String(value);
+  return Number(value).toPrecision(sigFigs);
+}
+
+export function formatPlainNumber(value) {
+  if (!Number.isFinite(value)) return "";
+
+  // Avoid ugly binary float noise and avoid forced trailing zeros
+  return Number.parseFloat(Number(value).toPrecision(12)).toString();
 }

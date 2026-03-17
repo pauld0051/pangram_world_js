@@ -8,10 +8,6 @@ Symbol Pages to add:
 
 10. Emojis and Emoticons
 
-Emoji Travel & Places:
-
-    ✈️ (airplane), 🚗 (car), 🏠 (house), 🗽 (Statue of Liberty), etc.
-
 Emoji Objects:
 
     💻 (laptop), 📱 (phone), 🕯️ (candle), etc.
@@ -19,8 +15,6 @@ Emoji Objects:
 Emoji Symbols:
 
     ❤️ (heart), 🔢 (numbers), 🔞 (no minors), etc.
-
-emoji medical
 
 11. Dingbats and Decorative Symbols
 

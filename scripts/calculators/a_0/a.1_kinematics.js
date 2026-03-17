@@ -4,9 +4,11 @@ import {
   convertAcceleration,
   convertTime,
 } from "../../utils/units.js";
+
 import {
-  calculateSigFigs,
   findLeastSigFigs,
+  formatToSigFigs,
+  formatPlainNumber,
 } from "../../utils/sig_fig_util.js";
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -20,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Unit selection elements
   const unitDisplacementSelect = document.getElementById("unitDisplacement");
   const unitInitialVelocitySelect = document.getElementById(
-    "unitInitialVelocity"
+    "unitInitialVelocity",
   );
   const unitFinalVelocitySelect = document.getElementById("unitFinalVelocity");
   const unitAccelerationSelect = document.getElementById("unitAcceleration");
@@ -29,198 +31,112 @@ document.addEventListener("DOMContentLoaded", function () {
   // Other elements
   const sigFigCheckbox = document.getElementById("sigFigCheckbox");
   const clearButton = document.getElementById("clearButton");
-  const SPEED_OF_LIGHT = 299792458; // Speed of light in meters per second
+  const SPEED_OF_LIGHT = 299792458;
 
-  // Track locked fields
+  const fieldMap = {
+    s: displacementInput,
+    u: initialVelocityInput,
+    v: finalVelocityInput,
+    a: accelerationInput,
+    t: timeInput,
+  };
+
+  const unitMap = {
+    s: unitDisplacementSelect,
+    u: unitInitialVelocitySelect,
+    v: unitFinalVelocitySelect,
+    a: unitAccelerationSelect,
+    t: unitTimeSelect,
+  };
+
+  const convertToBase = {
+    s: (value, unit) => convertDisplacement(value, unit, "m"),
+    u: (value, unit) => convertVelocity(value, unit, "ms"),
+    v: (value, unit) => convertVelocity(value, unit, "ms"),
+    a: (value, unit) => convertAcceleration(value, unit, "ms2"),
+    t: (value, unit) => convertTime(value, unit, "s"),
+  };
+
+  const convertFromBase = {
+    s: (value, unit) => convertDisplacement(value, "m", unit),
+    u: (value, unit) => convertVelocity(value, "ms", unit),
+    v: (value, unit) => convertVelocity(value, "ms", unit),
+    a: (value, unit) => convertAcceleration(value, "ms2", unit),
+    t: (value, unit) => convertTime(value, "s", unit),
+  };
+
   let lockedFields = {
-    displacement: false,
-    initialVelocity: false,
-    finalVelocity: false,
-    acceleration: false,
-    time: false,
+    s: false,
+    u: false,
+    v: false,
+    a: false,
+    t: false,
   };
 
-  // Global object to store the latest calculated values
-  let calculatedValues = {};
-
-  // Track original input values before conversion
-  let originalValues = {
-    displacement: null,
-    initialVelocity: null,
-    finalVelocity: null,
-    acceleration: null,
-    time: null,
+  // Raw strings exactly as entered by the user for the known values
+  let rawInputStrings = {
+    s: "",
+    u: "",
+    v: "",
+    a: "",
+    t: "",
   };
 
-  // Clear all inputs and reset locks
+  // Numeric solved values stored in base SI units
+  let calculatedValuesBase = null;
+
+  // The two currently solved fields
+  let currentUnknowns = [];
+
   clearButton.addEventListener("click", clearAll);
 
   function clearAll() {
-    // Clear input values
-    displacementInput.value = "";
-    initialVelocityInput.value = "";
-    finalVelocityInput.value = "";
-    accelerationInput.value = "";
-    timeInput.value = "";
-
-    // Unlock all inputs
-    unlockAllInputs();
-
-    // Reset locked fields and original values
-    resetLockedFields();
-    resetOriginalValues();
-
-    // Reset calculated values
-    calculatedValues = {};
-  }
-
-  function resetLockedFields() {
-    lockedFields = {
-      displacement: false,
-      initialVelocity: false,
-      finalVelocity: false,
-      acceleration: false,
-      time: false,
-    };
-  }
-
-  function resetOriginalValues() {
-    originalValues = {
-      displacement: null,
-      initialVelocity: null,
-      finalVelocity: null,
-      acceleration: null,
-      time: null,
-    };
-  }
-
-  function lockInput(input, fieldName) {
-    input.readOnly = true; // Lock the field to prevent further edits
-    lockedFields[fieldName] = true; // Mark this field as locked
-  }
-
-  function unlockAllInputs() {
-    // Unlock all input fields
-    displacementInput.readOnly = false;
-    initialVelocityInput.readOnly = false;
-    finalVelocityInput.readOnly = false;
-    accelerationInput.readOnly = false;
-    timeInput.readOnly = false;
-
-    // Reset locked fields
-    resetLockedFields();
-  }
-
-  function clearLockedInput() {
-    Object.keys(lockedFields).forEach((key) => {
-      const inputElement = document.getElementById(
-        `input${key.charAt(0).toUpperCase()}`
-      );
-      if (lockedFields[key] && inputElement) {
-        // Clear and unlock locked fields only
-        inputElement.value = "";
-        inputElement.readOnly = false;
-        lockedFields[key] = false;
-      }
+    Object.keys(fieldMap).forEach((key) => {
+      fieldMap[key].value = "";
+      fieldMap[key].readOnly = false;
+      fieldMap[key].dataset.unit = unitMap[key].value;
     });
+
+    lockedFields = {
+      s: false,
+      u: false,
+      v: false,
+      a: false,
+      t: false,
+    };
+
+    rawInputStrings = {
+      s: "",
+      u: "",
+      v: "",
+      a: "",
+      t: "",
+    };
+
+    calculatedValuesBase = null;
+    currentUnknowns = [];
+    removeExistingTooltips();
   }
 
-  function updateOriginalValue(fieldName, value) {
-    originalValues[fieldName] = value;
+  function lockInput(key) {
+    fieldMap[key].readOnly = true;
+    lockedFields[key] = true;
   }
 
-  function convertAndUpdateInputs(
-    field,
-    inputElement,
-    conversionFunction,
-    originalValue
-  ) {
-    if (originalValue != null && !isNaN(originalValue)) {
-      const fromUnit =
-        inputElement.getAttribute("data-original-unit") || inputElement.value;
-      const toUnit = field.value;
+  function unlockCalculatedInputs() {
+    currentUnknowns.forEach((key) => {
+      fieldMap[key].value = "";
+      fieldMap[key].readOnly = false;
+      lockedFields[key] = false;
+    });
 
-      inputElement.value = conversionFunction(originalValue, fromUnit, toUnit);
-
-      inputElement.setAttribute("data-original-unit", toUnit);
-    }
-  }
-
-  function checkForImpossibleValues(values) {
-    const { u, v, a, t, s } = values;
-    let error = false;
-
-    // Check for impossible values and display tooltips only when needed
-    if (!isNaN(u) && u > SPEED_OF_LIGHT) {
-      showTooltip(
-        "Initial velocity exceeds the speed of light, which is impossible.",
-        initialVelocityInput
-      );
-      error = true;
-    }
-    if (!isNaN(v) && v > SPEED_OF_LIGHT) {
-      showTooltip(
-        "Final velocity exceeds the speed of light, which is impossible.",
-        finalVelocityInput
-      );
-      error = true;
-    }
-    if (!isNaN(a) && a > SPEED_OF_LIGHT) {
-      showTooltip(
-        "Acceleration would result in exceeding the speed of light, which is impossible.",
-        accelerationInput
-      );
-      error = true;
-    }
-    if (!isNaN(t) && t < 0) {
-      showTooltip(
-        "Negative time is not physically possible. Please adjust your inputs.",
-        timeInput
-      );
-      error = true;
-    }
-
-    if (!error) {
-      if (!isNaN(u) && !isNaN(v) && !isNaN(a)) {
-        if ((v - u) / a < 0) {
-          showTooltip(
-            "The combination of initial velocity, final velocity, and acceleration leads to negative time. Please review your inputs.",
-            initialVelocityInput
-          );
-          error = true;
-        }
-      }
-
-      if (!isNaN(v) && !isNaN(a) && !isNaN(s)) {
-        if (v * v - 2 * a * s < 0) {
-          showTooltip(
-            "The combination of final velocity, acceleration, and displacement leads to negative initial velocity squared. Please review your inputs.",
-            finalVelocityInput
-          );
-          error = true;
-        }
-      }
-
-      // Additional check to prevent NaN due to spurious inputs
-      if (!isNaN(u) && !isNaN(v) && !isNaN(t) && !isNaN(a)) {
-        if (isNaN((v - u) / t) || isNaN(a * t)) {
-          showTooltip(
-            "The input values result in an invalid calculation. Please review your inputs.",
-            accelerationInput
-          );
-          error = true;
-        }
-      }
-    }
-
-    return error;
+    currentUnknowns = [];
+    calculatedValuesBase = null;
   }
 
   function showTooltip(message, element) {
-    // Remove existing tooltips first
     removeExistingTooltips();
 
-    // Create a new tooltip element
     const tooltip = document.createElement("div");
     tooltip.className = "copy-tooltip";
     tooltip.innerText = message;
@@ -233,274 +149,341 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.body.appendChild(tooltip);
 
-    // Position the tooltip above the input field
     const rect = element.getBoundingClientRect();
     tooltip.style.left = `${rect.left + window.scrollX}px`;
     tooltip.style.top = `${rect.top + window.scrollY - tooltip.offsetHeight}px`;
 
-    // Automatically remove the tooltip after a delay
     setTimeout(() => {
       if (tooltip.parentElement) {
         document.body.removeChild(tooltip);
       }
-    }, 5000); // Show tooltip for 5 seconds
+    }, 5000);
   }
 
-  // Function to remove all existing tooltips
   function removeExistingTooltips() {
-    const tooltips = document.querySelectorAll(".copy-tooltip");
-    tooltips.forEach((tooltip) => tooltip.remove());
+    document
+      .querySelectorAll(".copy-tooltip")
+      .forEach((tooltip) => tooltip.remove());
+  }
+
+  function parseInputValue(str) {
+    if (str == null) return NaN;
+
+    const trimmed = String(str).trim();
+    if (trimmed === "") return NaN;
+
+    const numericValue = Number(trimmed);
+    return Number.isFinite(numericValue) ? numericValue : NaN;
+  }
+
+  function readCurrentValues() {
+    const entered = {
+      s: displacementInput.value,
+      u: initialVelocityInput.value,
+      v: finalVelocityInput.value,
+      a: accelerationInput.value,
+      t: timeInput.value,
+    };
+
+    const values = {
+      s: parseInputValue(entered.s),
+      u: parseInputValue(entered.u),
+      v: parseInputValue(entered.v),
+      a: parseInputValue(entered.a),
+      t: parseInputValue(entered.t),
+    };
+
+    return { entered, values };
+  }
+
+  function checkForImpossibleValues(values) {
+    const { u, v, a, t, s } = values;
+    let error = false;
+
+    if (!isNaN(u) && Math.abs(u) > SPEED_OF_LIGHT) {
+      showTooltip(
+        "Initial velocity exceeds the speed of light, which is impossible.",
+        initialVelocityInput,
+      );
+      error = true;
+    }
+
+    if (!isNaN(v) && Math.abs(v) > SPEED_OF_LIGHT) {
+      showTooltip(
+        "Final velocity exceeds the speed of light, which is impossible.",
+        finalVelocityInput,
+      );
+      error = true;
+    }
+
+    if (!isNaN(t) && t < 0) {
+      showTooltip(
+        "Negative time is not physically possible. Please adjust your inputs.",
+        timeInput,
+      );
+      error = true;
+    }
+
+    if (!error && !isNaN(u) && !isNaN(v) && !isNaN(a) && a !== 0) {
+      if ((v - u) / a < 0) {
+        showTooltip(
+          "The combination of initial velocity, final velocity, and acceleration leads to negative time. Please review your inputs.",
+          initialVelocityInput,
+        );
+        error = true;
+      }
+    }
+
+    if (!error && !isNaN(v) && !isNaN(a) && !isNaN(s)) {
+      if (v * v - u * u < 2 * a * s && a < 0 && s > 0) {
+        // Leave this as a gentle safeguard, not a full physics validator
+      }
+
+      if (v * v - 2 * a * s < 0 && isNaN(u)) {
+        showTooltip(
+          "The combination of final velocity, acceleration, and displacement leads to an invalid square root. Please review your inputs.",
+          finalVelocityInput,
+        );
+        error = true;
+      }
+    }
+
+    return error;
+  }
+
+  function calculateUnknowns(values) {
+    let { u, v, t, a, s } = values;
+    const unknowns = Object.keys(values).filter((key) => isNaN(values[key]));
+
+    try {
+      if (unknowns.length !== 2) {
+        return null;
+      }
+
+      // Unknown: a and s
+      if (unknowns.includes("a") && unknowns.includes("s")) {
+        if (t === 0) return null;
+        a = (v - u) / t;
+        s = ((u + v) / 2) * t;
+      }
+
+      // Unknown: t and s
+      else if (unknowns.includes("t") && unknowns.includes("s")) {
+        if (a === 0) return null;
+        t = (v - u) / a;
+        s = (v * v - u * u) / (2 * a);
+      }
+
+      // Unknown: a and t
+      else if (unknowns.includes("a") && unknowns.includes("t")) {
+        if (s === 0 || u + v === 0) return null;
+        a = (v * v - u * u) / (2 * s);
+        t = (2 * s) / (u + v);
+      }
+
+      // Unknown: s and v
+      else if (unknowns.includes("s") && unknowns.includes("v")) {
+        s = u * t + 0.5 * a * t * t;
+        v = u + a * t;
+      }
+
+      // Unknown: u and a
+      else if (unknowns.includes("u") && unknowns.includes("a")) {
+        if (t === 0) return null;
+        u = (2 * s - v * t) / t;
+        a = (v - u) / t;
+      }
+
+      // Unknown: u and v
+      else if (unknowns.includes("u") && unknowns.includes("v")) {
+        if (t === 0) return null;
+        u = (s - 0.5 * a * t * t) / t;
+        v = u + a * t;
+      }
+
+      // Unknown: u and t
+      else if (unknowns.includes("u") && unknowns.includes("t")) {
+        if (a === 0) return null;
+        u = Math.sqrt(v * v - 2 * a * s);
+        if (!Number.isFinite(u)) return null;
+        t = (v - u) / a;
+      }
+
+      // Unknown: v and a
+      else if (unknowns.includes("v") && unknowns.includes("a")) {
+        if (t === 0) return null;
+        v = (2 * s) / t - u;
+        a = (v - u) / t;
+      }
+
+      // Unknown: v and t
+      else if (unknowns.includes("v") && unknowns.includes("t")) {
+        const inside = u * u + 2 * a * s;
+        if (inside < 0 || a === 0) return null;
+        v = Math.sqrt(inside);
+        t = (v - u) / a;
+      } else {
+        return null;
+      }
+
+      if ([u, v, t, a, s].some((val) => !Number.isFinite(val))) {
+        return null;
+      }
+
+      return { u, v, t, a, s };
+    } catch {
+      return null;
+    }
+  }
+
+  function getLeastSigFigsFromKnownInputs() {
+    const knownRawInputs = Object.entries(rawInputStrings)
+      .filter(
+        ([key, value]) => !currentUnknowns.includes(key) && value.trim() !== "",
+      )
+      .map(([, value]) => value);
+
+    return findLeastSigFigs(knownRawInputs);
+  }
+
+  function displayCalculatedValues() {
+    if (!calculatedValuesBase || currentUnknowns.length !== 2) return;
+
+    const leastSigFigs = getLeastSigFigsFromKnownInputs();
+
+    currentUnknowns.forEach((key) => {
+      const input = fieldMap[key];
+      const targetUnit = unitMap[key].value;
+      const valueInSelectedUnit = convertFromBase[key](
+        calculatedValuesBase[key],
+        targetUnit,
+      );
+
+      if (!Number.isFinite(valueInSelectedUnit)) {
+        input.value = "";
+        return;
+      }
+
+      input.value =
+        sigFigCheckbox.checked && leastSigFigs > 0
+          ? formatToSigFigs(valueInSelectedUnit, leastSigFigs)
+          : formatPlainNumber(valueInSelectedUnit);
+    });
   }
 
   function calculate() {
-    console.log("Initial Inputs:");
-    console.log(
-      `u: ${initialVelocityInput.value}, v: ${finalVelocityInput.value}, t: ${timeInput.value}, a: ${accelerationInput.value}, s: ${displacementInput.value}`
-    );
+    removeExistingTooltips();
 
-    let u = initialVelocityInput.value
-      ? parseFloat(initialVelocityInput.value)
-      : NaN;
-    let v = finalVelocityInput.value
-      ? parseFloat(finalVelocityInput.value)
-      : NaN;
-    let t = timeInput.value ? parseFloat(timeInput.value) : NaN;
-    let a = accelerationInput.value ? parseFloat(accelerationInput.value) : NaN;
-    let s = displacementInput.value ? parseFloat(displacementInput.value) : NaN;
+    // Clear old calculated outputs before reading current inputs
+    unlockCalculatedInputs();
 
-    let values = { u, v, a, t, s };
+    const { entered, values } = readCurrentValues();
 
-    let knownCount = 0;
-    for (let key in values) {
-      if (!isNaN(values[key])) knownCount++;
-    }
+    // Save raw user-entered strings for sig fig handling
+    rawInputStrings = { ...entered };
+
+    const knownCount = Object.values(values).filter(
+      (value) => !isNaN(value),
+    ).length;
 
     if (knownCount !== 3) {
-      clearLockedInput();
-      console.log("Not enough known values to perform a calculation.");
       return;
     }
 
-    if (checkForImpossibleValues(values)) {
-      console.log("Exiting due to impossible values.");
-      lockAllRemainingFields(
-        Object.keys(values).filter((key) => isNaN(values[key]))
-      ); // Lock fields even when there are errors
+    const valuesInBase = {
+      s: !isNaN(values.s)
+        ? convertToBase.s(values.s, unitDisplacementSelect.value)
+        : NaN,
+      u: !isNaN(values.u)
+        ? convertToBase.u(values.u, unitInitialVelocitySelect.value)
+        : NaN,
+      v: !isNaN(values.v)
+        ? convertToBase.v(values.v, unitFinalVelocitySelect.value)
+        : NaN,
+      a: !isNaN(values.a)
+        ? convertToBase.a(values.a, unitAccelerationSelect.value)
+        : NaN,
+      t: !isNaN(values.t)
+        ? convertToBase.t(values.t, unitTimeSelect.value)
+        : NaN,
+    };
+
+    if (checkForImpossibleValues(valuesInBase)) {
       return;
     }
 
-    const unitInitialVelocity = unitInitialVelocitySelect.value;
-    const unitFinalVelocity = unitFinalVelocitySelect.value;
-    const unitTime = unitTimeSelect.value;
-    const unitAcceleration = unitAccelerationSelect.value;
-    const unitDisplacement = unitDisplacementSelect.value;
-
-    // Store original values before conversion for use in unit conversion later
-    updateOriginalValue("initialVelocity", u);
-    updateOriginalValue("finalVelocity", v);
-    updateOriginalValue("time", t);
-    updateOriginalValue("acceleration", a);
-    updateOriginalValue("displacement", s);
-
-    u = !isNaN(u) ? convertVelocity(u, unitInitialVelocity, "ms") : NaN;
-    v = !isNaN(v) ? convertVelocity(v, unitFinalVelocity, "ms") : NaN;
-    t = !isNaN(t) ? convertTime(t, unitTime, "s") : NaN;
-    a = !isNaN(a) ? convertAcceleration(a, unitAcceleration, "ms2") : NaN;
-    s = !isNaN(s) ? convertDisplacement(s, unitDisplacement, "m") : NaN;
-
-    console.log("Converted Values:");
-    console.log(`u: ${u}, v: ${v}, t: ${t}, a: ${a}, s: ${s}`);
-
-    let unknowns = Object.keys(values).filter((key) => isNaN(values[key]));
+    const unknowns = Object.keys(valuesInBase).filter((key) =>
+      isNaN(valuesInBase[key]),
+    );
 
     if (unknowns.length !== 2) {
-      console.log("Calculation skipped. Not exactly two unknowns present.");
-      lockAllRemainingFields(unknowns); // Lock fields even when calculation skipped
       return;
     }
 
-    // Lock remaining fields regardless of calculation success or failure
-    lockAllRemainingFields(unknowns);
+    const solved = calculateUnknowns(valuesInBase);
 
-    calculatedValues = calculateUnknowns(values, unknowns);
-
-    let minSigFigs = findLeastSigFigs([u, v, a, s, t]);
-
-    if (calculatedValues) {
+    if (!solved) {
       unknowns.forEach((key) => {
-        const input = document.getElementById(`input${key.toUpperCase()}`);
-        if (!isNaN(calculatedValues[key])) {
-          const valueToDisplay = sigFigCheckbox.checked
-            ? calculatedValues[key].toPrecision(minSigFigs)
-            : calculatedValues[key].toFixed(10);
-
-          input.value = valueToDisplay;
-        } else {
-          showTooltip(
-            "The calculation resulted in an error. Please adjust your inputs.",
-            input
-          );
-          input.value = ""; // Clear the input value if it's NaN
-        }
+        showTooltip(
+          "The calculation resulted in an error. Please adjust your inputs.",
+          fieldMap[key],
+        );
       });
+      return;
     }
+
+    calculatedValuesBase = solved;
+    currentUnknowns = unknowns;
+
+    currentUnknowns.forEach((key) => lockInput(key));
+    displayCalculatedValues();
   }
 
-  function lockAllRemainingFields(unknowns) {
-    unknowns.forEach((key) => {
-      const input = document.getElementById(`input${key.toUpperCase()}`);
-      if (input) {
-        lockInput(input, key);
-      }
+  function handleUnitChange(changedKey) {
+    // Convert user-entered values only, never the calculated locked ones
+    Object.keys(fieldMap).forEach((key) => {
+      if (lockedFields[key]) return;
+
+      const input = fieldMap[key];
+      const raw = input.value.trim();
+      if (raw === "") return;
+
+      const numericValue = Number(raw);
+      if (!Number.isFinite(numericValue)) return;
+
+      const oldUnit = input.dataset.unit || unitMap[key].value;
+      const newUnit = unitMap[key].value;
+
+      if (oldUnit === newUnit) return;
+
+      const baseValue = convertToBase[key](numericValue, oldUnit);
+      const convertedValue = convertFromBase[key](baseValue, newUnit);
+
+      input.value = formatPlainNumber(convertedValue);
+      input.dataset.unit = newUnit;
     });
+
+    calculate();
   }
 
-  function calculateUnknowns(values, unknowns) {
-    let { u, v, t, a, s } = values;
+  Object.keys(fieldMap).forEach((key) => {
+    fieldMap[key].dataset.unit = unitMap[key].value;
 
-    try {
-      if (unknowns.includes("a") && unknowns.includes("s")) {
-        a = (v - u) / t;
-        s = ((u + v) / 2) * t;
-      } else if (unknowns.includes("t") && unknowns.includes("s")) {
-        t = (v - u) / a;
-        s = (v * v - u * u) / (2 * a);
-      } else if (unknowns.includes("a") && unknowns.includes("t")) {
-        a = (v * v - u * u) / (2 * s);
-        t = (2 * s) / (u + v);
-      } else if (unknowns.includes("s") && unknowns.includes("v")) {
-        s = u * t + 0.5 * a * t * t;
-        v = u + a * t;
-      } else if (unknowns.includes("u") && unknowns.includes("a")) {
-        u = (2 * s - v * t) / t;
-        a = (v - u) / t;
-      } else if (unknowns.includes("u") && unknowns.includes("t")) {
-        a = (2 * (s - u * t)) / (t * t);
-        v = u + a * t;
-      } else if (unknowns.includes("u") && unknowns.includes("s")) {
-        v = Math.sqrt(u * u + 2 * a * s);
-        t = (v - u) / a;
-      } else if (unknowns.includes("t") && unknowns.includes("a")) {
-        s = v * t - 0.5 * a * t * t;
-        u = v - a * t;
-      } else if (unknowns.includes("v") && unknowns.includes("t")) {
-        u = (2 * s) / t - v;
-        a = (v - u) / t;
-      } else {
-        console.log("No valid combinations found.");
-        return null;
-      }
-
-      // Check if any calculated value is NaN
-      if ([u, v, t, a, s].some((val) => isNaN(val))) {
-        console.error("NaN detected in calculations.");
-        return null;
-      }
-    } catch (e) {
-      console.error("Error during calculation:", e);
-      return null;
-    }
-
-    return { u, v, t, a, s };
-  }
-
-  [
-    displacementInput,
-    initialVelocityInput,
-    finalVelocityInput,
-    accelerationInput,
-    timeInput,
-  ].forEach((input) => {
-    input.addEventListener("input", () => {
-      if (!input.readOnly) {
-        clearLockedInput();
+    fieldMap[key].addEventListener("input", () => {
+      if (!fieldMap[key].readOnly) {
         calculate();
       }
     });
-  });
 
-  [
-    unitDisplacementSelect,
-    unitInitialVelocitySelect,
-    unitFinalVelocitySelect,
-    unitAccelerationSelect,
-    unitTimeSelect,
-  ].forEach((select) => {
-    select.addEventListener("change", () => {
-      // Convert and update inputs based on new units selected
-      convertAndUpdateInputs(
-        select,
-        displacementInput,
-        convertDisplacement,
-        originalValues.displacement
-      );
-      convertAndUpdateInputs(
-        select,
-        initialVelocityInput,
-        convertVelocity,
-        originalValues.initialVelocity
-      );
-      convertAndUpdateInputs(
-        select,
-        finalVelocityInput,
-        convertVelocity,
-        originalValues.finalVelocity
-      );
-      convertAndUpdateInputs(
-        select,
-        accelerationInput,
-        convertAcceleration,
-        originalValues.acceleration
-      );
-      convertAndUpdateInputs(
-        select,
-        timeInput,
-        convertTime,
-        originalValues.time
-      );
-
-      // Recalculate with new units and update the locked inputs
-      calculate();
+    unitMap[key].addEventListener("change", () => {
+      handleUnitChange(key);
     });
   });
 
-  // Ensure the correct significant figures are used on change
   sigFigCheckbox.addEventListener("change", () => {
-    applySigFigs(); // Apply significant figures dynamically to calculated values only
+    displayCalculatedValues();
   });
 
-  function applySigFigs() {
-    Object.keys(calculatedValues).forEach((key) => {
-      const input = document.getElementById(`input${key.toUpperCase()}`);
-      if (input && !isNaN(calculatedValues[key])) {
-        const minSigFigs = findLeastSigFigs([
-          calculatedValues.u,
-          calculatedValues.v,
-          calculatedValues.a,
-          calculatedValues.s,
-          calculatedValues.t,
-        ]);
-        const valueToDisplay = sigFigCheckbox.checked
-          ? calculatedValues[key].toPrecision(minSigFigs)
-          : calculatedValues[key].toFixed(10);
-
-        input.value = valueToDisplay;
-      }
-    });
-  }
-
-  // Initialize original units for the inputs
-  [
-    displacementInput,
-    initialVelocityInput,
-    finalVelocityInput,
-    accelerationInput,
-    timeInput,
-  ].forEach((input) => {
-    input.setAttribute("data-original-unit", input.value);
-  });
-
-  // Call calculate initially to ensure everything is set correctly
   calculate();
 });
 
@@ -515,33 +498,31 @@ document.addEventListener("DOMContentLoaded", () => {
     katex.render(
       "\\Large \\color{#333}{v = u + a \\cdot t}",
       document.getElementById("equation1"),
-      options
+      options,
     );
     katex.render(
       "\\Large \\color{#333}{s = u \\cdot t + \\frac{1}{2} \\cdot a \\cdot t^2}",
       document.getElementById("equation2"),
-      options
+      options,
     );
     katex.render(
       "\\Large \\color{#333}{v^2 = u^2 + 2 \\cdot a \\cdot s}",
       document.getElementById("equation3"),
-      options
+      options,
     );
     katex.render(
       "\\Large \\color{#333}{s = \\frac{(u + v)}{2} \\cdot t}",
       document.getElementById("equation4"),
-      options
+      options,
     );
     katex.render(
       "\\Large \\color{#333}{s = v \\cdot t - \\frac{1}{2} \\cdot a \\cdot t^2}",
       document.getElementById("equation5"),
-      options
+      options,
     );
-
-    console.log("Kinematic equations rendered successfully.");
   } else {
     console.error(
-      "KaTeX is not defined. Ensure KaTeX is loaded before rendering equations."
+      "KaTeX is not defined. Ensure KaTeX is loaded before rendering equations.",
     );
   }
 });
