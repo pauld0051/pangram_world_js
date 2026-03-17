@@ -378,6 +378,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const { entered, values } = readCurrentValues();
 
+    const invalidFields = getInvalidNumericFields(entered);
+
+    if (invalidFields.length > 0) {
+      invalidFields.forEach((key) => {
+        showTooltip("Please enter a valid number.", fieldMap[key]);
+      });
+      return;
+    }
+
     // Save raw user-entered strings for sig fig handling
     rawInputStrings = { ...entered };
 
@@ -447,7 +456,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const raw = input.value.trim();
       if (raw === "") return;
 
-      const numericValue = Number(raw);
+      const numericValue = parseNumericInput(raw);
       if (!Number.isFinite(numericValue)) return;
 
       const oldUnit = input.dataset.unit || unitMap[key].value;
