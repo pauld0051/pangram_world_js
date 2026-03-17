@@ -11,6 +11,11 @@ import {
   formatPlainNumber,
 } from "../../utils/sig_fig_util.js";
 
+import {
+  parseNumericInput,
+  getInvalidNumericFields,
+} from "../../utils/number_input.js";
+
 document.addEventListener("DOMContentLoaded", function () {
   // Input elements
   const displacementInput = document.getElementById("inputS");
@@ -167,13 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function parseInputValue(str) {
-    if (str == null) return NaN;
-
-    const trimmed = String(str).trim();
-    if (trimmed === "") return NaN;
-
-    const numericValue = Number(trimmed);
-    return Number.isFinite(numericValue) ? numericValue : NaN;
+    return parseNumericInput(str);
   }
 
   function readCurrentValues() {
