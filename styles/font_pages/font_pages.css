@@ -1,0 +1,74 @@
+.tool-panel,
+.info-panel,
+.output-card {
+    background: #ffffff;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.08);
+}
+
+.tool-panel,
+.info-panel {
+    height: 100%;
+}
+
+.form-label {
+    font-weight: 600;
+}
+
+.output-box {
+    min-height: 110px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    cursor: pointer;
+    border: 2px solid #dee2e6;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    transition: all 0.15s ease-in-out;
+    user-select: all;
+}
+
+.output-box:hover {
+    border-color: #0d6efd;
+    background: #eef5ff;
+}
+
+.output-box.copied {
+    border-color: #198754;
+    background: #edf9f1;
+}
+
+.helper-text {
+    font-size: 0.95rem;
+    color: #6c757d;
+}
+
+.copy-note {
+    font-size: 0.9rem;
+    color: #198754;
+    min-height: 1.25rem;
+}
+
+textarea.form-control {
+    min-height: 180px;
+    resize: vertical;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.example-chip {
+    display: inline-block;
+    margin: 0.25rem 0.35rem 0 0;
+    padding: 0.35rem 0.65rem;
+    border-radius: 999px;
+    background: #e9ecef;
+    border: 0;
+    font-size: 0.92rem;
+}
+
+.example-chip:hover {
+    background: #dfe3e6;
+}

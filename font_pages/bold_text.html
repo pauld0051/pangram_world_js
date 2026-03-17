@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pangram World - Bold Text Generator</title>
+
+    <meta property="og:title" content="Pangram World - Bold Text Generator">
+    <meta property="og:description"
+        content="Turn normal text into Unicode bold and bold italic text for Facebook and social media.">
+    <meta property="og:image" content="https://www.pangram-world.com/static/images/pangram-world-title-trsp.png">
+    <meta property="og:url" content="https://www.pangram-world.com/bold_text.html">
+
+    <link rel="stylesheet" href="../styles/bootstrap.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/font_pages/font_pages.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="shortcut icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="shortcut icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="shortcut icon" type="image/png" sizes="192x192" href="../android-chrome-192x192.png">
+    <link rel="shortcut icon" type="image/png" sizes="512x512" href="../android-chrome-512x512.png">
+
+    <!-- ... Head Scripts ... -->
+    <script src="../scripts/handlebars/dist/handlebars.min.js"></script> <!--Must Come First-->
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="../scripts/bootstrap.bundle.js"></script>
+    <script src="../scripts/main.js"></script>
+</head>
+<body>
+    <div id="header-container"></div>
+    
+    <main>
+        <div class="container my-5">
+            <div class="row g-4">
+                <div class="col-lg-6 d-flex">
+                    <div class="tool-panel p-4 w-100">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h2 class="mb-0">Unicode Bold Text Generator</h2>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="inputText" class="form-label">Type your text</label>
+                            <textarea id="inputText" class="form-control" placeholder="Type or paste your text here..."
+                                aria-label="Input text"></textarea>
+                            <div class="helper-text mt-2">
+                                Your text is converted live into Unicode bold styles that can be copied into Facebook,
+                                social media posts, bios, and more.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="section-title mb-2">Quick examples</div>
+                            <button type="button" class="example-chip" data-example="I want bold">I want bold</button>
+                            <button type="button" class="example-chip" data-example="This is my post title">This is my
+                                post title</button>
+                            <button type="button" class="example-chip" data-example="Physics is beautiful">Physics is
+                                beautiful</button>
+                            <button type="button" class="example-chip" data-example="Read my new fantasy novel">Read my
+                                new fantasy novel</button>
+                        </div>
+
+                        <div class="d-flex gap-2 flex-wrap">
+                            <button type="button" id="clearButton" class="btn btn-outline-secondary">Clear</button>
+                            <button type="button" id="pasteExampleButton" class="btn btn-primary">Use sample
+                                text</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 d-flex">
+                    <div class="info-panel p-4 w-100">
+                        <h3 class="mb-3">How it works</h3>
+                        <p>
+                            This tool converts ordinary Latin letters and numbers into Unicode mathematical characters
+                            that look bold or bold italic.
+                        </p>
+                        <p>
+                            Click any output box to copy the result. Then paste it into Facebook, Instagram, X, Threads,
+                            or wherever else you want your text to stand out.
+                        </p>
+                        <p class="mb-0">
+                            Not every platform or font renders every Unicode character perfectly, because apparently the
+                            internet still enjoys a bit of chaos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4 mt-1">
+                <div class="col-lg-6">
+                    <div class="output-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h4 class="mb-0">Unicode Bold</h4>
+                            <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
+                                data-target="boldOutput">
+                                Copy
+                            </button>
+                        </div>
+                        <div id="boldOutput" class="output-box" tabindex="0" role="button"
+                            aria-label="Bold output, click to copy"></div>
+                        <div id="boldCopyNote" class="copy-note mt-2"></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="output-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h4 class="mb-0">Unicode Bold Italic</h4>
+                            <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
+                                data-target="boldItalicOutput">
+                                Copy
+                            </button>
+                        </div>
+                        <div id="boldItalicOutput" class="output-box" tabindex="0" role="button"
+                            aria-label="Bold italic output, click to copy"></div>
+                        <div id="boldItalicCopyNote" class="copy-note mt-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="output-card p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h4 class="mb-0">Unicode Serif Bold</h4>
+                        <button type="button" class="btn btn-sm btn-outline-primary copy-btn" data-target="serifBoldOutput">
+                            Copy
+                        </button>
+                    </div>
+                    <div id="serifBoldOutput" class="output-box" tabindex="0" role="button"
+                        aria-label="Serif bold output, click to copy"></div>
+                    <div id="serifBoldCopyNote" class="copy-note mt-2"></div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="output-card p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h4 class="mb-0">Unicode Serif Bold Italic</h4>
+                        <button type="button" class="btn btn-sm btn-outline-primary copy-btn" data-target="serifBoldItalicOutput">
+                            Copy
+                        </button>
+                    </div>
+                    <div id="serifBoldItalicOutput" class="output-box" tabindex="0" role="button"
+                        aria-label="Serif bold italic output, click to copy"></div>
+                    <div id="serifBoldItalicCopyNote" class="copy-note mt-2"></div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="output-card p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h4 class="mb-0">Unicode Bold Script</h4>
+                        <button type="button" class="btn btn-sm btn-outline-primary copy-btn" data-target="scriptBoldOutput">
+                            Copy
+                        </button>
+                    </div>
+                    <div id="scriptBoldOutput" class="output-box" tabindex="0" role="button"
+                        aria-label="Bold script output, click to copy"></div>
+                    <div id="scriptBoldCopyNote" class="copy-note mt-2"></div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="output-card p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h4 class="mb-0">Unicode Double-Struck</h4>
+                        <button type="button" class="btn btn-sm btn-outline-primary copy-btn" data-target="doubleStruckOutput">
+                            Copy
+                        </button>
+                    </div>
+                    <div id="doubleStruckOutput" class="output-box" tabindex="0" role="button"
+                        aria-label="Double-struck output, click to copy"></div>
+                    <div id="doubleStruckCopyNote" class="copy-note mt-2"></div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="output-card p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h4 class="mb-0">Unicode Bold Fraktur</h4>
+                        <button type="button" class="btn btn-sm btn-outline-primary copy-btn" data-target="frakturBoldOutput">
+                            Copy
+                        </button>
+                    </div>
+                    <div id="frakturBoldOutput" class="output-box" tabindex="0" role="button"
+                        aria-label="Bold fraktur output, click to copy"></div>
+                    <div id="frakturBoldCopyNote" class="copy-note mt-2"></div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="output-card p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h4 class="mb-0">Unicode Monospace</h4>
+                        <button type="button" class="btn btn-sm btn-outline-primary copy-btn" data-target="monospaceOutput">
+                            Copy
+                        </button>
+                    </div>
+                    <div id="monospaceOutput" class="output-box" tabindex="0" role="button"
+                        aria-label="Monospace output, click to copy"></div>
+                    <div id="monospaceCopyNote" class="copy-note mt-2"></div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="output-card p-4">
+                        <h5 class="mb-3">Example output</h5>
+                        <p class="mb-2">If someone types:</p>
+                        <p class="mb-3">I want bold</p>
+                        <p class="mb-2">They will get:</p>
+                        <p class="mb-2">Bold: 𝗜 𝘄𝗮𝗻𝘁 𝗯𝗼𝗹𝗱</p>
+                        <p class="mb-0">Bold italic: 𝙄 𝙬𝙖𝙣𝙩 𝙗𝙤𝙡𝙙</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script src="../scripts/font_pages/bold_text.js"></script>
+</body>
+</html>
