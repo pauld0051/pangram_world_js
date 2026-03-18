@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
   const inputText = document.getElementById("inputText");
 
-  const circledOutput = document.getElementById("circledOutput");
-  const squaredOutput = document.getElementById("squaredOutput");
+  const hollowSquareOutput = document.getElementById("hollowSquareOutput");
+  const solidSquareOutput = document.getElementById("solidSquareOutput");
 
-  const circledCopyNote = document.getElementById("circledCopyNote");
-  const squaredCopyNote = document.getElementById("squaredCopyNote");
+  const hollowSquareCopyNote = document.getElementById("hollowSquareCopyNote");
+  const solidSquareCopyNote = document.getElementById("solidSquareCopyNote");
 
   const alternatingSolidHollowOutput = document.getElementById(
     "alternatingSolidHollowOutput",
@@ -26,120 +26,81 @@ document.addEventListener("DOMContentLoaded", () => {
   const exampleButtons = document.querySelectorAll("[data-example]");
   const copyButtons = document.querySelectorAll(".copy-btn");
 
-  const CIRCLED_UPPER_START = 0x24b6; // Ⓐ
-  const CIRCLED_LOWER_START = 0x24d0; // ⓐ
-
-  const CIRCLED_DIGIT_MAP = {
-    0: "⓪",
-    1: "①",
-    2: "②",
-    3: "③",
-    4: "④",
-    5: "⑤",
-    6: "⑥",
-    7: "⑦",
-    8: "⑧",
-    9: "⑨",
+  const HOLLOW_SQUARE_MAP = {
+    A: "🄰",
+    B: "🄱",
+    C: "🄲",
+    D: "🄳",
+    E: "🄴",
+    F: "🄵",
+    G: "🄶",
+    H: "🄷",
+    I: "🄸",
+    J: "🄹",
+    K: "🄺",
+    L: "🄻",
+    M: "🄼",
+    N: "🄽",
+    O: "🄾",
+    P: "🄿",
+    Q: "🅀",
+    R: "🅁",
+    S: "🅂",
+    T: "🅃",
+    U: "🅄",
+    V: "🅅",
+    W: "🅆",
+    X: "🅇",
+    Y: "🅈",
+    Z: "🅉",
   };
 
-  const SQUARED_MAP = {
-    A: "🅐",
-    B: "🅑",
-    C: "🅒",
-    D: "🅓",
-    E: "🅔",
-    F: "🅕",
-    G: "🅖",
-    H: "🅗",
-    I: "🅘",
-    J: "🅙",
-    K: "🅚",
-    L: "🅛",
-    M: "🅜",
-    N: "🅝",
-    O: "🅞",
-    P: "🅟",
-    Q: "🅠",
-    R: "🅡",
-    S: "🅢",
-    T: "🅣",
-    U: "🅤",
-    V: "🅥",
-    W: "🅦",
-    X: "🅧",
-    Y: "🅨",
-    Z: "🅩",
+  const SOLID_SQUARE_MAP = {
+    A: "🅰",
+    B: "🅱",
+    C: "🅲",
+    D: "🅳",
+    E: "🅴",
+    F: "🅵",
+    G: "🅶",
+    H: "🅷",
+    I: "🅸",
+    J: "🅹",
+    K: "🅺",
+    L: "🅻",
+    M: "🅼",
+    N: "🅽",
+    O: "🅾",
+    P: "🅿",
+    Q: "🆀",
+    R: "🆁",
+    S: "🆂",
+    T: "🆃",
+    U: "🆄",
+    V: "🆅",
+    W: "🆆",
+    X: "🆇",
+    Y: "🆈",
+    Z: "🆉",
   };
 
-  const NEGATIVE_CIRCLED_DIGIT_MAP = {
-    1: "❶",
-    2: "❷",
-    3: "❸",
-    4: "❹",
-    5: "❺",
-    6: "❻",
-    7: "❼",
-    8: "❽",
-    9: "❾",
-    10: "❿",
-    0: "⓿",
-  };
-
-  function mapCircled(char) {
-    const code = char.codePointAt(0);
-
-    const isUpper = code >= 65 && code <= 90;
-    const isLower = code >= 97 && code <= 122;
-    const isDigit = code >= 48 && code <= 57;
-
-    if (isUpper) {
-      return String.fromCodePoint(CIRCLED_UPPER_START + (code - 65));
-    }
-
-    if (isLower) {
-      return String.fromCodePoint(CIRCLED_LOWER_START + (code - 97));
-    }
-
-    if (isDigit) {
-      return CIRCLED_DIGIT_MAP[char] || char;
-    }
-
-    return char;
+  function mapHollowSquare(char) {
+    const upperChar = char.toUpperCase();
+    return HOLLOW_SQUARE_MAP[upperChar] || char;
   }
 
-  function mapSquared(char) {
+  function mapSolidSquare(char) {
     const upperChar = char.toUpperCase();
-
-    if (SQUARED_MAP[upperChar]) {
-      return SQUARED_MAP[upperChar];
-    }
-
-    if (NEGATIVE_CIRCLED_DIGIT_MAP[char]) {
-      return NEGATIVE_CIRCLED_DIGIT_MAP[char];
-    }
-
-    return char;
+    return SOLID_SQUARE_MAP[upperChar] || char;
   }
 
   function mapAlternatingCharacter(char, useSolid) {
     const code = char.codePointAt(0);
-
     const isUpper = code >= 65 && code <= 90;
     const isLower = code >= 97 && code <= 122;
-    const isDigit = code >= 48 && code <= 57;
 
     if (isUpper || isLower) {
-      if (useSolid) {
-        return SQUARED_MAP[char.toUpperCase()] || char;
-      }
-      return mapCircled(char);
-    }
-
-    if (isDigit) {
-      if (useSolid) {
-        return NEGATIVE_CIRCLED_DIGIT_MAP[char] || char;
-      }
-      return CIRCLED_DIGIT_MAP[char] || char;
+      return useSolid ? mapSolidSquare(char) : mapHollowSquare(char);
     }
 
     return null;
@@ -148,8 +109,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function convertText(text, style) {
     return Array.from(text)
       .map((char) => {
-        if (style === "circled") return mapCircled(char);
-        if (style === "squared") return mapSquared(char);
+        if (style === "hollowSquare") return mapHollowSquare(char);
+        if (style === "solidSquare") return mapSolidSquare(char);
         return char;
       })
       .join("");
@@ -194,8 +155,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateOutputs() {
     const input = normaliseStyledUnicodeToPlain(inputText.value || "");
 
-    circledOutput.textContent = convertText(input, "circled");
-    squaredOutput.textContent = convertText(input, "squared");
+    hollowSquareOutput.textContent = convertText(input, "hollowSquare");
+    solidSquareOutput.textContent = convertText(input, "solidSquare");
     alternatingSolidHollowOutput.textContent =
       convertAlternatingSolidHollow(input);
     alternatingHollowSolidOutput.textContent =
@@ -205,13 +166,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function clearCopyNotes() {
-    circledCopyNote.textContent = "";
-    squaredCopyNote.textContent = "";
+    hollowSquareCopyNote.textContent = "";
+    solidSquareCopyNote.textContent = "";
     alternatingSolidHollowCopyNote.textContent = "";
     alternatingHollowSolidCopyNote.textContent = "";
 
-    circledOutput.classList.remove("copied");
-    squaredOutput.classList.remove("copied");
+    hollowSquareOutput.classList.remove("copied");
+    solidSquareOutput.classList.remove("copied");
     alternatingSolidHollowOutput.classList.remove("copied");
     alternatingHollowSolidOutput.classList.remove("copied");
   }
@@ -245,7 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   pasteExampleButton.addEventListener("click", () => {
-    inputText.value = "I think this is bubble text... but circle text is fine";
+    inputText.value = "Square text is fine";
     updateOutputs();
     inputText.focus();
   });
@@ -258,12 +219,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  circledOutput.addEventListener("click", () => {
-    copyText(circledOutput.textContent, circledOutput, circledCopyNote);
+  hollowSquareOutput.addEventListener("click", () => {
+    copyText(
+      hollowSquareOutput.textContent,
+      hollowSquareOutput,
+      hollowSquareCopyNote,
+    );
   });
 
-  squaredOutput.addEventListener("click", () => {
-    copyText(squaredOutput.textContent, squaredOutput, squaredCopyNote);
+  solidSquareOutput.addEventListener("click", () => {
+    copyText(
+      solidSquareOutput.textContent,
+      solidSquareOutput,
+      solidSquareCopyNote,
+    );
   });
 
   alternatingSolidHollowOutput.addEventListener("click", () => {
@@ -287,10 +256,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const targetId = button.dataset.target;
       const outputElement = document.getElementById(targetId);
 
-      if (targetId === "circledOutput") {
-        copyText(outputElement.textContent, outputElement, circledCopyNote);
-      } else if (targetId === "squaredOutput") {
-        copyText(outputElement.textContent, outputElement, squaredCopyNote);
+      if (targetId === "hollowSquareOutput") {
+        copyText(
+          outputElement.textContent,
+          outputElement,
+          hollowSquareCopyNote,
+        );
+      } else if (targetId === "solidSquareOutput") {
+        copyText(outputElement.textContent, outputElement, solidSquareCopyNote);
       } else if (targetId === "alternatingSolidHollowOutput") {
         copyText(
           outputElement.textContent,

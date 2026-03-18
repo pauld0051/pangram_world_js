@@ -343,7 +343,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateOutputs() {
-    const input = inputText.value || "";
+    const input = normaliseStyledUnicodeToPlain(inputText.value || "");
 
     italicOutput.textContent = convertText(input, "italic");
     boldItalicOutput.textContent = convertText(input, "boldItalic");

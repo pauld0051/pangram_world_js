@@ -397,7 +397,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateOutputs() {
-    const input = inputText.value || "";
+    const input = normaliseStyledUnicodeToPlain(inputText.value || "");
     boldOutput.textContent = convertText(input, "bold");
     boldItalicOutput.textContent = convertText(input, "boldItalic");
     serifBoldOutput.textContent = convertText(input, "serifBold");
