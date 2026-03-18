@@ -6,6 +6,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const circledCopyNote = document.getElementById("circledCopyNote");
   const squaredCopyNote = document.getElementById("squaredCopyNote");
+  
+  const alternatingSolidHollowOutput = document.getElementById(
+    "alternatingSolidHollowOutput",
+  );
+  const alternatingHollowSolidOutput = document.getElementById(
+    "alternatingHollowSolidOutput",
+  );
+
+  const alternatingSolidHollowCopyNote = document.getElementById(
+    "alternatingSolidHollowCopyNote",
+  );
+  const alternatingHollowSolidCopyNote = document.getElementById(
+    "alternatingHollowSolidCopyNote",
+  );
 
   const clearButton = document.getElementById("clearButton");
   const pasteExampleButton = document.getElementById("pasteExampleButton");
@@ -105,7 +119,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     return char;
-  }
+    }
+    
+    function mapAlternatingCharacter(char, useSolid) {
+      const code = char.codePointAt(0);
+
+      const isUpper = code >= 65 && code <= 90;
+      const isLower = code >= 97 && code <= 122;
+      const isDigit = code >= 48 && code <= 57;
+
+      if (isUpper || isLower) {
+        if (useSolid) {
+          return SQUARED_MAP[char.toUpperCase()] || char;
+        }
+        return mapCircled(char);
+      }
+
+      if (isDigit) {
+        if (useSolid) {
+          return NEGATIVE_CIRCLED_DIGIT_MAP[char] || char;
+        }
+        return CIRCLED_DIGIT_MAP[char] || char;
+      }
+
+      return null;
+    }
 
   function convertText(text, style) {
     return Array.from(text)
@@ -115,13 +153,59 @@ document.addEventListener("DOMContentLoaded", () => {
         return char;
       })
       .join("");
-  }
+    }
+    
+    function convertAlternatingSolidHollow(text) {
+      let result = "";
+      let alternatingIndex = 0;
+
+      for (const char of text) {
+        const mapped = mapAlternatingCharacter(
+          char,
+          alternatingIndex % 2 === 0,
+        );
+
+        if (mapped !== null) {
+          result += mapped;
+          alternatingIndex += 1;
+        } else {
+          result += char;
+        }
+      }
+
+      return result;
+    }
+
+    function convertAlternatingHollowSolid(text) {
+      let result = "";
+      let alternatingIndex = 0;
+
+      for (const char of text) {
+        const mapped = mapAlternatingCharacter(
+          char,
+          alternatingIndex % 2 !== 0,
+        );
+
+        if (mapped !== null) {
+          result += mapped;
+          alternatingIndex += 1;
+        } else {
+          result += char;
+        }
+      }
+
+      return result;
+    }
 
   function updateOutputs() {
     const input = inputText.value || "";
 
     circledOutput.textContent = convertText(input, "circled");
     squaredOutput.textContent = convertText(input, "squared");
+    alternatingSolidHollowOutput.textContent =
+      convertAlternatingSolidHollow(input);
+    alternatingHollowSolidOutput.textContent =
+      convertAlternatingHollowSolid(input);
 
     clearCopyNotes();
   }
@@ -129,9 +213,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function clearCopyNotes() {
     circledCopyNote.textContent = "";
     squaredCopyNote.textContent = "";
+    alternatingSolidHollowCopyNote.textContent = "";
+    alternatingHollowSolidCopyNote.textContent = "";
 
     circledOutput.classList.remove("copied");
     squaredOutput.classList.remove("copied");
+    alternatingSolidHollowOutput.classList.remove("copied");
+    alternatingHollowSolidOutput.classList.remove("copied");
   }
 
   async function copyText(text, outputElement, noteElement) {
@@ -183,6 +271,22 @@ document.addEventListener("DOMContentLoaded", () => {
   squaredOutput.addEventListener("click", () => {
     copyText(squaredOutput.textContent, squaredOutput, squaredCopyNote);
   });
+    
+  alternatingSolidHollowOutput.addEventListener("click", () => {
+    copyText(
+      alternatingSolidHollowOutput.textContent,
+      alternatingSolidHollowOutput,
+      alternatingSolidHollowCopyNote,
+    );
+  });
+
+  alternatingHollowSolidOutput.addEventListener("click", () => {
+    copyText(
+      alternatingHollowSolidOutput.textContent,
+      alternatingHollowSolidOutput,
+      alternatingHollowSolidCopyNote,
+    );
+  });
 
   copyButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -193,6 +297,18 @@ document.addEventListener("DOMContentLoaded", () => {
         copyText(outputElement.textContent, outputElement, circledCopyNote);
       } else if (targetId === "squaredOutput") {
         copyText(outputElement.textContent, outputElement, squaredCopyNote);
+      } else if (targetId === "alternatingSolidHollowOutput") {
+        copyText(
+          outputElement.textContent,
+          outputElement,
+          alternatingSolidHollowCopyNote,
+        );
+      } else if (targetId === "alternatingHollowSolidOutput") {
+        copyText(
+          outputElement.textContent,
+          outputElement,
+          alternatingHollowSolidCopyNote,
+        );
       }
     });
   });
