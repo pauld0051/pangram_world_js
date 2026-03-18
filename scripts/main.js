@@ -85,11 +85,13 @@ window.onscroll = function () {
 };
 
 function scrollFunction() {
-  // Check the scroll position and show/hide the button
+  const scrollButton = document.getElementById("scrollToTopButton");
+  if (!scrollButton) return;
+
   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    document.getElementById("scrollToTopButton").style.display = "block";
+    scrollButton.style.display = "block";
   } else {
-    document.getElementById("scrollToTopButton").style.display = "none";
+    scrollButton.style.display = "none";
   }
 }
 
