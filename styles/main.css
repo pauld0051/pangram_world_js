@@ -1,19 +1,13 @@
 /* Apply background image to the entire body */
 body {
-    background-image: url('../images/texture_2.png');
-    background-size: cover;
-    /* This will scale the image to cover the entire background */
-    background-repeat: no-repeat;
-    /* Prevents the image from repeating */
-    background-attachment: fixed;
+    background: linear-gradient(99deg, #eef2f6 0%, #d8e0ea 100%);
     font-family: 'Roboto', sans-serif;
     display: flex;
     flex-direction: column;
     margin: 0;
-    /* Remove any default margin around the body */
     padding: 0;
-    /* Remove any default padding */
 }
+
 
 /* Apply styles to body and HTML */
 html,
@@ -36,7 +30,53 @@ main {
 }
 
 .header-color {
-    background-color: #faf0e6 !important;
+    background: linear-gradient(135deg, #111827 0%, #1f2937 68%, #2b3c52 100%) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.header-color .nav-link,
+.header-color .navbar-brand,
+.header-color .navbar-toggler {
+    color: #f8f1e7 !important;
+}
+
+.header-color .nav-link:hover,
+.header-color .nav-link:focus,
+.header-color .nav-link.active {
+    color: #f4d58d !important;
+}
+
+.header-color .navbar-toggler {
+    border-color: rgba(248, 241, 231, 0.35);
+}
+
+.header-color .navbar-toggler-icon {
+    filter: invert(1) brightness(2);
+}
+
+.header-color .dropdown-menu {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+}
+
+.header-color .dropdown-item {
+    color: #1f2937;
+}
+
+.header-color .dropdown-item:hover,
+.header-color .dropdown-item:focus {
+    background: #f8fafc;
+    color: #111827;
+}
+
+.tool-panel,
+.info-panel,
+.output-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
 }
 
 /* Apply styles to footer */
