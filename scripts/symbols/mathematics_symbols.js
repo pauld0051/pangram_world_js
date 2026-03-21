@@ -33,11 +33,52 @@ document.addEventListener("DOMContentLoaded", function () {
     { letter: "⅒", unicode: "⅒", name: "One Tenth" },
   ];
 
-  // Less Common Fractions (Without Duplicates)
   const lessCommonFractions = [
-    { letter: "¹³⁄₁₀", unicode: "¹³⁄₁₀", name: "Thirteen Tenths" }, // 1.3
-    { letter: "⁴⁄₃", unicode: "⁴⁄₃", name: "Four Thirds" }, // Improper fraction
-    { letter: "¹¹⁄₄", unicode: "¹¹⁄₄", name: "Eleven Quarters" }, // Improper fraction
+    { letter: "²⁄₇", unicode: "²⁄₇", name: "Two Sevenths" },
+    { letter: "³⁄₇", unicode: "³⁄₇", name: "Three Sevenths" },
+    { letter: "⁴⁄₇", unicode: "⁴⁄₇", name: "Four Sevenths" },
+    { letter: "⁵⁄₇", unicode: "⁵⁄₇", name: "Five Sevenths" },
+    { letter: "⁶⁄₇", unicode: "⁶⁄₇", name: "Six Sevenths" },
+
+    { letter: "¹⁄₁₁", unicode: "¹⁄₁₁", name: "One Eleventh" },
+    { letter: "²⁄₁₁", unicode: "²⁄₁₁", name: "Two Elevenths" },
+    { letter: "³⁄₁₁", unicode: "³⁄₁₁", name: "Three Elevenths" },
+    { letter: "⁴⁄₁₁", unicode: "⁴⁄₁₁", name: "Four Elevenths" },
+    { letter: "⁵⁄₁₁", unicode: "⁵⁄₁₁", name: "Five Elevenths" },
+    { letter: "⁶⁄₁₁", unicode: "⁶⁄₁₁", name: "Six Elevenths" },
+    { letter: "⁷⁄₁₁", unicode: "⁷⁄₁₁", name: "Seven Elevenths" },
+    { letter: "⁸⁄₁₁", unicode: "⁸⁄₁₁", name: "Eight Elevenths" },
+    { letter: "⁹⁄₁₁", unicode: "⁹⁄₁₁", name: "Nine Elevenths" },
+    { letter: "¹⁰⁄₁₁", unicode: "¹⁰⁄₁₁", name: "Ten Elevenths" },
+
+    { letter: "¹⁄₁₂", unicode: "¹⁄₁₂", name: "One Twelfth" },
+    { letter: "⁵⁄₁₂", unicode: "⁵⁄₁₂", name: "Five Twelfths" },
+    { letter: "⁷⁄₁₂", unicode: "⁷⁄₁₂", name: "Seven Twelfths" },
+    { letter: "¹¹⁄₁₂", unicode: "¹¹⁄₁₂", name: "Eleven Twelfths" },
+
+    { letter: "¹⁄₁₃", unicode: "¹⁄₁₃", name: "One Thirteenth" },
+    { letter: "²⁄₁₃", unicode: "²⁄₁₃", name: "Two Thirteenths" },
+    { letter: "³⁄₁₃", unicode: "³⁄₁₃", name: "Three Thirteenths" },
+    { letter: "⁴⁄₁₃", unicode: "⁴⁄₁₃", name: "Four Thirteenths" },
+    { letter: "⁵⁄₁₃", unicode: "⁵⁄₁₃", name: "Five Thirteenths" },
+    { letter: "⁶⁄₁₃", unicode: "⁶⁄₁₃", name: "Six Thirteenths" },
+    { letter: "⁷⁄₁₃", unicode: "⁷⁄₁₃", name: "Seven Thirteenths" },
+    { letter: "⁸⁄₁₃", unicode: "⁸⁄₁₃", name: "Eight Thirteenths" },
+    { letter: "⁹⁄₁₃", unicode: "⁹⁄₁₃", name: "Nine Thirteenths" },
+    { letter: "¹⁰⁄₁₃", unicode: "¹⁰⁄₁₃", name: "Ten Thirteenths" },
+    { letter: "¹¹⁄₁₃", unicode: "¹¹⁄₁₃", name: "Eleven Thirteenths" },
+    { letter: "¹²⁄₁₃", unicode: "¹²⁄₁₃", name: "Twelve Thirteenths" },
+
+    { letter: "⁴⁄₃", unicode: "⁴⁄₃", name: "Four Thirds" },
+    { letter: "⁵⁄₃", unicode: "⁵⁄₃", name: "Five Thirds" },
+    { letter: "⁷⁄₄", unicode: "⁷⁄₄", name: "Seven Quarters" },
+    { letter: "¹¹⁄₄", unicode: "¹¹⁄₄", name: "Eleven Quarters" },
+    { letter: "⁶⁄₅", unicode: "⁶⁄₅", name: "Six Fifths" },
+    { letter: "⁷⁄₅", unicode: "⁷⁄₅", name: "Seven Fifths" },
+    { letter: "⁸⁄₅", unicode: "⁸⁄₅", name: "Eight Fifths" },
+    { letter: "⁹⁄₅", unicode: "⁹⁄₅", name: "Nine Fifths" },
+    { letter: "⁷⁄₆", unicode: "⁷⁄₆", name: "Seven Sixths" },
+    { letter: "¹³⁄₁₀", unicode: "¹³⁄₁₀", name: "Thirteen Tenths" },
   ];
 
   // Basic Arithmetic Operators
