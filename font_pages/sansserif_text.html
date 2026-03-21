@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pangram World - Sans Serif Text Generator</title>
+
+    <meta property="og:title" content="Pangram World - Sans Serif Text Generator">
+    <meta property="og:description"
+        content="Convert plain text into Unicode sans serif styles, including bold, italic, bold italic, lowercase, uppercase, and alternating case forms.">
+    <meta property="og:image" content="https://www.pangram-world.com/static/images/pangram-world-title-trsp.png">
+    <meta property="og:url" content="https://www.pangram-world.com/font_pages/sansserif_text.html">
+
+    <link rel="stylesheet" href="../styles/bootstrap.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/font_pages/font_pages.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="shortcut icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="shortcut icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="shortcut icon" type="image/png" sizes="192x192" href="../android-chrome-192x192.png">
+    <link rel="shortcut icon" type="image/png" sizes="512x512" href="../android-chrome-512x512.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <script src="../scripts/handlebars/dist/handlebars.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="../scripts/bootstrap.bundle.js"></script>
+    <script src="../scripts/main.js"></script>
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <main>
+        <div class="container my-5">
+            <div class="row g-4">
+                <div class="col-lg-6 d-flex">
+                    <div class="tool-panel p-4 w-100">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h2 class="mb-0">Sans Serif Text Generator</h2>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="inputText" class="form-label">Type your text</label>
+                            <textarea id="inputText" class="form-control" placeholder="Type or paste your text here..."
+                                aria-label="Input text"></textarea>
+                            <div class="helper-text mt-2">
+                                Convert your text into Unicode sans serif, sans serif bold, sans serif italic, and sans
+                                serif bold italic styles, including alternating case versions.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="section-title mb-2">Quick examples</div>
+                            <button type="button" class="example-chip" data-example="Sans serif text">Sans serif
+                                text</button>
+                            <button type="button" class="example-chip" data-example="Pangram World">Pangram
+                                World</button>
+                            <button type="button" class="example-chip" data-example="Physics notes 101">Physics notes
+                                101</button>
+                            <button type="button" class="example-chip" data-example="Read my fantasy book">Read my
+                                fantasy book</button>
+                        </div>
+
+                        <div class="d-flex gap-2 flex-wrap">
+                            <button type="button" id="clearButton" class="btn btn-outline-secondary">Clear</button>
+                            <button type="button" id="pasteExampleButton" class="btn btn-primary">Use sample
+                                text</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 d-flex">
+                    <div class="info-panel p-4 w-100">
+                        <h3 class="mb-3">How it works</h3>
+                        <p>
+                            This tool converts plain Latin letters and numbers into Unicode sans serif styles.
+                        </p>
+                        <p>
+                            Click any output box or copy button to copy the result.
+                        </p>
+                        <p class="mb-0">
+                            Some characters render differently across devices and fonts, because Unicode likes chaos
+                            just enough to be annoying.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4 mt-1">
+                <div class="col-lg-6">
+                    <div class="output-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h4 class="mb-0">Sans Serif</h4>
+                            <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
+                                data-target="sansSerifOutput">Copy</button>
+                        </div>
+                        <div id="sansSerifOutput" class="output-box" tabindex="0" role="button"></div>
+                        <div id="sansSerifCopyNote" class="copy-note mt-2"></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="output-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h4 class="mb-0">Sans Serif Lowercase</h4>
+                            <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
+                                data-target="sansSerifLowercaseOutput">Copy</button>
+                        </div>
+                        <div id="sansSerifLowercaseOutput" class="output-box" tabindex="0" role="button"></div>
+                        <div id="sansSerifLowercaseCopyNote" class="copy-note mt-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4 mt-1">
+                <div class="col-lg-6">
+                    <div class="output-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h4 class="mb-0">Sans Serif Uppercase</h4>
+                            <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
+                                data-target="sansSerifUppercaseOutput">Copy</button>
+                        </div>
+                        <div id="sansSerifUppercaseOutput" class="output-box" tabindex="0" role="button"></div>
+                        <div id="sansSerifUppercaseCopyNote" class="copy-note mt-2"></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="output-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h4 class="mb-0">Sans Serif Bold</h4>
+                            <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
+                                data-target="sansSerifBoldOutput">Copy</button>
+                        </div>
+                        <div id="sansSerifBoldOutput" class="output-box" tabindex="0" role="button"></div>
+                        <div id="sansSerifBoldCopyNote" class="copy-note mt-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4 mt-1">
+                <div class="col-lg-6">
+                    <div class="output-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h4 class="mb-0">Sans Serif Italic</h4>
+                            <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
+                                data-target="sansSerifItalicOutput">Copy</button>
+                        </div>
+                        <div id="sansSerifItalicOutput" class="output-box" tabindex="0" role="button"></div>
+                        <div id="sansSerifItalicCopyNote" class="copy-note mt-2"></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="output-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h4 class="mb-0">Sans Serif Bold Italic</h4>
+                            <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
+                                data-target="sansSerifBoldItalicOutput">Copy</button>
+                        </div>
+                        <div id="sansSerifBoldItalicOutput" class="output-box" tabindex="0" role="button"></div>
+                        <div id="sansSerifBoldItalicCopyNote" class="copy-note mt-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4 mt-1">
+                <div class="col-lg-6">
+                    <div class="output-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h4 class="mb-0">Sans Serif Lower Upper</h4>
+                            <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
+                                data-target="sansSerifLowerUpperOutput">Copy</button>
+                        </div>
+                        <div id="sansSerifLowerUpperOutput" class="output-box" tabindex="0" role="button"></div>
+                        <div id="sansSerifLowerUpperCopyNote" class="copy-note mt-2"></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="output-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h4 class="mb-0">Sans Serif Upper Lower</h4>
+                            <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
+                                data-target="sansSerifUpperLowerOutput">Copy</button>
+                        </div>
+                        <div id="sansSerifUpperLowerOutput" class="output-box" tabindex="0" role="button"></div>
+                        <div id="sansSerifUpperLowerCopyNote" class="copy-note mt-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4 mt-1">
+                <div class="col-lg-6">
+                    <div class="output-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h4 class="mb-0">Sans Serif Bold Lower Upper</h4>
+                            <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
+                                data-target="sansSerifBoldLowerUpperOutput">Copy</button>
+                        </div>
+                        <div id="sansSerifBoldLowerUpperOutput" class="output-box" tabindex="0" role="button"></div>
+                        <div id="sansSerifBoldLowerUpperCopyNote" class="copy-note mt-2"></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="output-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h4 class="mb-0">Sans Serif Bold Upper Lower</h4>
+                            <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
+                                data-target="sansSerifBoldUpperLowerOutput">Copy</button>
+                        </div>
+                        <div id="sansSerifBoldUpperLowerOutput" class="output-box" tabindex="0" role="button"></div>
+                        <div id="sansSerifBoldUpperLowerCopyNote" class="copy-note mt-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4 mt-1">
+                <div class="col-lg-6">
+                    <div class="output-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h4 class="mb-0">Sans Serif Italic Lower Upper</h4>
+                            <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
+                                data-target="sansSerifItalicLowerUpperOutput">Copy</button>
+                        </div>
+                        <div id="sansSerifItalicLowerUpperOutput" class="output-box" tabindex="0" role="button"></div>
+                        <div id="sansSerifItalicLowerUpperCopyNote" class="copy-note mt-2"></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="output-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h4 class="mb-0">Sans Serif Italic Upper Lower</h4>
+                            <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
+                                data-target="sansSerifItalicUpperLowerOutput">Copy</button>
+                        </div>
+                        <div id="sansSerifItalicUpperLowerOutput" class="output-box" tabindex="0" role="button"></div>
+                        <div id="sansSerifItalicUpperLowerCopyNote" class="copy-note mt-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4 mt-1">
+                <div class="col-lg-6">
+                    <div class="output-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h4 class="mb-0">Sans Serif Bold Italic Lower Upper</h4>
+                            <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
+                                data-target="sansSerifBoldItalicLowerUpperOutput">Copy</button>
+                        </div>
+                        <div id="sansSerifBoldItalicLowerUpperOutput" class="output-box" tabindex="0" role="button">
+                        </div>
+                        <div id="sansSerifBoldItalicLowerUpperCopyNote" class="copy-note mt-2"></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="output-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h4 class="mb-0">Sans Serif Bold Italic Upper Lower</h4>
+                            <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
+                                data-target="sansSerifBoldItalicUpperLowerOutput">Copy</button>
+                        </div>
+                        <div id="sansSerifBoldItalicUpperLowerOutput" class="output-box" tabindex="0" role="button">
+                        </div>
+                        <div id="sansSerifBoldItalicUpperLowerCopyNote" class="copy-note mt-2"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <button onclick="scrollToTop()" id="scrollToTopButton" class="scroll-button">
+        <span class="material-symbols-outlined">arrow_upward</span>
+    </button>
+
+    <div id="footer-container"></div>
+
+    <script src="../scripts/font_pages/unicode_normalise.js"></script>
+    <script src="../scripts/font_pages/sansserif_text.js"></script>
+</body>
+</html>
