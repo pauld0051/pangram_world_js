@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pangram World - Script Text Generator</title>
+    <title>Pangram World - Double Struck Text Generator</title>
 
-    <meta property="og:title" content="Pangram World - Script Text Generator">
+    <meta property="og:title" content="Pangram World - Double Struck Text Generator">
     <meta property="og:description"
-        content="Turn normal text into Unicode script and bold script text for Facebook and social media.">
+        content="Turn normal text into Unicode double struck and limited double struck italic text for Facebook and social media.">
     <meta property="og:image" content="https://www.pangram-world.com/static/images/pangram-world-title-trsp.png">
-    <meta property="og:url" content="https://www.pangram-world.com/script_text.html">
+    <meta property="og:url" content="https://www.pangram-world.com/doublestruck_text.html">
 
     <link rel="stylesheet" href="../styles/bootstrap.css">
     <link rel="stylesheet" href="../styles/main.css">
@@ -41,7 +41,7 @@
                 <div class="col-lg-6 d-flex">
                     <div class="tool-panel p-4 w-100">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h2 class="mb-0">Unicode Script Text Generator</h2>
+                            <h2 class="mb-0">Unicode Double Struck Text Generator</h2>
                         </div>
 
                         <div class="mb-3">
@@ -49,21 +49,20 @@
                             <textarea id="inputText" class="form-control" placeholder="Type or paste your text here..."
                                 aria-label="Input text"></textarea>
                             <div class="helper-text mt-2">
-                                Your text is converted live into Unicode script variations that can be copied into
+                                Your text is converted live into Unicode double struck styles that can be copied into
                                 Facebook, social media posts, bios, and more.
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <div class="section-title mb-2">Quick examples</div>
-                            <button type="button" class="example-chip" data-example="Just like this">Just like
-                                this</button>
-                            <button type="button" class="example-chip" data-example="Read my fantasy book">Read my
-                                fantasy book</button>
-                            <button type="button" class="example-chip" data-example="Physics is beautiful">Physics is
-                                beautiful</button>
-                            <button type="button" class="example-chip" data-example="Follow for more">Follow for
-                                more</button>
+                            <button type="button" class="example-chip" data-example="Double struck text">Double struck
+                                text</button>
+                            <button type="button" class="example-chip" data-example="Math and physics">Math and
+                                physics</button>
+                            <button type="button" class="example-chip" data-example="123 ABC xyz">123 ABC xyz</button>
+                            <button type="button" class="example-chip" data-example="Read my fantasy novel">Read my
+                                fantasy novel</button>
                         </div>
 
                         <div class="d-flex gap-2 flex-wrap">
@@ -78,15 +77,14 @@
                     <div class="info-panel p-4 w-100">
                         <h3 class="mb-3">How it works</h3>
                         <p>
-                            This tool converts ordinary Latin letters into Unicode script and bold script characters.
+                            This tool converts ordinary Latin letters and numbers into Unicode double struck text.
                         </p>
                         <p>
-                            It also creates mixed styles, including alternating script and bold script, plus alternating
-                            capital and lowercase patterns for display text.
+                            It also includes a limited double struck italic line for the small handful of specialist
+                            Unicode characters that actually exist.
                         </p>
                         <p class="mb-0">
-                            Some platforms handle fancy Unicode better than others. Unicode is brilliant right up until
-                            it decides to be an absolute goblin.
+                            Unicode loves neat categories right up until it absolutely does not.
                         </p>
                     </div>
                 </div>
@@ -96,108 +94,94 @@
                 <div class="col-lg-6">
                     <div class="output-card p-4">
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                            <h4 class="mb-0">Unicode Script</h4>
-                            <button type="button" class="btn btn-sm btn-outline-primary copy-btn" data-target="scriptOutput">
+                            <h4 class="mb-0">Unicode Double Struck</h4>
+                            <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
+                                data-target="doubleStruckOutput">
                                 Copy
                             </button>
                         </div>
-                        <div id="scriptOutput" class="output-box" tabindex="0" role="button"
-                            aria-label="Script output, click to copy"></div>
-                        <div id="scriptCopyNote" class="copy-note mt-2"></div>
+                        <div id="doubleStruckOutput" class="output-box" tabindex="0" role="button"
+                            aria-label="Double struck output, click to copy"></div>
+                        <div id="doubleStruckCopyNote" class="copy-note mt-2"></div>
                     </div>
                 </div>
-            
+
                 <div class="col-lg-6">
                     <div class="output-card p-4">
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                            <h4 class="mb-0">Unicode Bold Script</h4>
-                            <button type="button" class="btn btn-sm btn-outline-primary copy-btn" data-target="boldScriptOutput">
+                            <h4 class="mb-0">Double Struck Italic (Limited Characters)</h4>
+                            <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
+                                data-target="doubleStruckItalicOutput">
                                 Copy
                             </button>
                         </div>
-                        <div id="boldScriptOutput" class="output-box" tabindex="0" role="button"
-                            aria-label="Bold script output, click to copy"></div>
-                        <div id="boldScriptCopyNote" class="copy-note mt-2"></div>
+                        <div id="doubleStruckItalicOutput" class="output-box" tabindex="0" role="button"
+                            aria-label="Double struck italic limited output, click to copy"></div>
+                        <div id="doubleStruckItalicCopyNote" class="copy-note mt-2"></div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="row g-4 mt-1">
                 <div class="col-lg-6">
                     <div class="output-card p-4">
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                            <h4 class="mb-0">Alternating Bold Script / Script</h4>
+                            <h4 class="mb-0">Alternating Double Struck / Normal</h4>
                             <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
-                                data-target="alternatingBoldScriptFirstOutput">
+                                data-target="alternatingDoubleStruckFirstOutput">
                                 Copy
                             </button>
                         </div>
-                        <div id="alternatingBoldScriptFirstOutput" class="output-box" tabindex="0" role="button"
-                            aria-label="Alternating bold script and script output, click to copy"></div>
-                        <div id="alternatingBoldScriptFirstCopyNote" class="copy-note mt-2"></div>
+                        <div id="alternatingDoubleStruckFirstOutput" class="output-box" tabindex="0" role="button"
+                            aria-label="Alternating double struck and normal output, click to copy"></div>
+                        <div id="alternatingDoubleStruckFirstCopyNote" class="copy-note mt-2"></div>
                     </div>
                 </div>
-            
+
                 <div class="col-lg-6">
                     <div class="output-card p-4">
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                            <h4 class="mb-0">Alternating Script / Bold Script</h4>
+                            <h4 class="mb-0">Alternating Normal / Double Struck</h4>
                             <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
-                                data-target="alternatingScriptFirstOutput">
+                                data-target="alternatingNormalFirstOutput">
                                 Copy
                             </button>
                         </div>
-                        <div id="alternatingScriptFirstOutput" class="output-box" tabindex="0" role="button"
-                            aria-label="Alternating script and bold script output, click to copy"></div>
-                        <div id="alternatingScriptFirstCopyNote" class="copy-note mt-2"></div>
+                        <div id="alternatingNormalFirstOutput" class="output-box" tabindex="0" role="button"
+                            aria-label="Alternating normal and double struck output, click to copy"></div>
+                        <div id="alternatingNormalFirstCopyNote" class="copy-note mt-2"></div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="row g-4 mt-1">
                 <div class="col-lg-6">
                     <div class="output-card p-4">
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                            <h4 class="mb-0">Alternating Capitals</h4>
+                            <h4 class="mb-0">Alternating Upper / Lower Double Struck</h4>
                             <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
-                                data-target="alternatingCapsOutput">
+                                data-target="alternatingUpperLowerDoubleStruckOutput">
                                 Copy
                             </button>
                         </div>
-                        <div id="alternatingCapsOutput" class="output-box" tabindex="0" role="button"
-                            aria-label="Alternating capitals output, click to copy"></div>
-                        <div id="alternatingCapsCopyNote" class="copy-note mt-2"></div>
+                        <div id="alternatingUpperLowerDoubleStruckOutput" class="output-box" tabindex="0" role="button"
+                            aria-label="Alternating upper lower double struck output, click to copy"></div>
+                        <div id="alternatingUpperLowerDoubleStruckCopyNote" class="copy-note mt-2"></div>
                     </div>
                 </div>
-            
+
                 <div class="col-lg-6">
                     <div class="output-card p-4">
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                            <h4 class="mb-0">Alternating Lowercase</h4>
+                            <h4 class="mb-0">Alternating Lower / Upper Double Struck</h4>
                             <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
-                                data-target="alternatingLowerOutput">
+                                data-target="alternatingLowerUpperDoubleStruckOutput">
                                 Copy
                             </button>
                         </div>
-                        <div id="alternatingLowerOutput" class="output-box" tabindex="0" role="button"
-                            aria-label="Alternating lowercase output, click to copy"></div>
-                        <div id="alternatingLowerCopyNote" class="copy-note mt-2"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row g-4 mt-1">
-                <div class="col-lg-6">
-                    <div class="output-card p-4">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <h4 class="mb-0">Legacy Script Symbols (Limited Characters)</h4>
-                            <button type="button" class="btn btn-sm btn-outline-primary copy-btn" data-target="legacyScriptOutput">
-                                Copy
-                            </button>
-                        </div>
-                        <div id="legacyScriptOutput" class="output-box" tabindex="0" role="button"
-                            aria-label="Legacy script symbols output, click to copy"></div>
-                        <div id="legacyScriptCopyNote" class="copy-note mt-2"></div>
+                        <div id="alternatingLowerUpperDoubleStruckOutput" class="output-box" tabindex="0" role="button"
+                            aria-label="Alternating lower upper double struck output, click to copy"></div>
+                        <div id="alternatingLowerUpperDoubleStruckCopyNote" class="copy-note mt-2"></div>
                     </div>
                 </div>
             </div>
@@ -207,12 +191,11 @@
                     <div class="output-card p-4">
                         <h5 class="mb-3">Example output</h5>
                         <p class="mb-2">If someone types:</p>
-                        <p class="mb-3">Just like this</p>
+                        <p class="mb-3">Double struck text</p>
                         <p class="mb-2">They might get:</p>
-                        <p class="mb-2">Script: 𝒥𝓊𝓈𝓉 𝓁𝒾𝓀𝑒 𝓉𝒽𝒾𝓈</p>
-                        <p class="mb-2">Bold script: 𝓙𝓾𝓼𝓽 𝓵𝓲𝓴𝓮 𝓽𝓱𝓲𝓼</p>
-                        <p class="mb-2">Alternating bold script / script: 𝓙𝓊𝓼𝓉 𝓵𝒾𝓴𝑒 𝓽𝒽𝓲𝓈</p>
-                        <p class="mb-0">Alternating capitals: 𝒿𝒰𝓈𝒯 𝓁ℐ𝓀ℰ 𝓉ℋ𝒾𝒮</p>
+                        <p class="mb-2">Double struck: 𝔻𝕠𝕦𝕓𝕝𝕖 𝕤𝕥𝕣𝕦𝕔𝕜 𝕥𝕖𝕩𝕥</p>
+                        <p class="mb-2">Alternating double struck / normal: 𝔻o𝕦b𝕝e 𝕤t𝕣u𝕔k 𝕥e𝕩t</p>
+                        <p class="mb-0">Alternating upper / lower double struck: 𝔻𝕠𝕌𝕓𝕃𝕖 𝕊𝕥ℝ𝕦ℂ𝕜 𝕋𝕖𝕏𝕥</p>
                     </div>
                 </div>
             </div>
@@ -225,7 +208,7 @@
 
     <div id="footer-container"></div>
 
-    <script src="../scripts/font_pages/script_text.js"></script>
+    <script src="../scripts/font_pages/doublestruck_text.js"></script>
     <script src="../scripts/font_pages/unicode_normalise.js"></script>
 </body>
 </html>

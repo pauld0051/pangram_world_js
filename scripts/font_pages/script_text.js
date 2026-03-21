@@ -16,6 +16,11 @@ document.addEventListener("DOMContentLoaded", () => {
     "alternatingLowerOutput",
   );
 
+  const legacyScriptOutput = document.getElementById("legacyScriptOutput");
+  const legacyBoldScriptOutput = document.getElementById(
+    "legacyBoldScriptOutput",
+  );
+
   const scriptCopyNote = document.getElementById("scriptCopyNote");
   const boldScriptCopyNote = document.getElementById("boldScriptCopyNote");
   const alternatingBoldScriptFirstCopyNote = document.getElementById(
@@ -29,6 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   const alternatingLowerCopyNote = document.getElementById(
     "alternatingLowerCopyNote",
+  );
+
+  const legacyScriptCopyNote = document.getElementById("legacyScriptCopyNote");
+  const legacyBoldScriptCopyNote = document.getElementById(
+    "legacyBoldScriptCopyNote",
   );
 
   const clearButton = document.getElementById("clearButton");
@@ -94,6 +104,20 @@ document.addEventListener("DOMContentLoaded", () => {
     z: "𝓏",
   };
 
+  const LEGACY_SCRIPT_MAP = {
+    B: "ℬ",
+    E: "ℰ",
+    F: "ℱ",
+    H: "ℋ",
+    I: "ℐ",
+    L: "ℒ",
+    M: "ℳ",
+    R: "ℛ",
+    e: "ℯ",
+    g: "ℊ",
+    o: "ℴ",
+  };
+
   const BOLD_SCRIPT_UPPER_START = 0x1d4d0; // 𝓐
   const BOLD_SCRIPT_LOWER_START = 0x1d4ea; // 𝓪
 
@@ -139,6 +163,24 @@ document.addEventListener("DOMContentLoaded", () => {
     return char;
   }
 
+  function toLegacyScriptChar(char) {
+    if (LEGACY_SCRIPT_MAP[char]) {
+      return LEGACY_SCRIPT_MAP[char];
+    }
+
+    return toScriptChar(char);
+  }
+
+  function toLegacyBoldScriptChar(char) {
+    // Unicode does not really provide a proper separate legacy bold script subset.
+    // Where bold script exists, use it. Otherwise leave the character alone.
+    if (isLatinLetter(char)) {
+      return toBoldScriptChar(char);
+    }
+
+    return char;
+  }
+
   function convertText(text, style) {
     if (style === "script") {
       return Array.from(text)
@@ -149,6 +191,18 @@ document.addEventListener("DOMContentLoaded", () => {
     if (style === "boldScript") {
       return Array.from(text)
         .map((char) => toBoldScriptChar(char))
+        .join("");
+    }
+
+    if (style === "legacyScript") {
+      return Array.from(text)
+        .map((char) => toLegacyScriptChar(char))
+        .join("");
+    }
+
+    if (style === "legacyBoldScript") {
+      return Array.from(text)
+        .map((char) => toLegacyBoldScriptChar(char))
         .join("");
     }
 
@@ -198,19 +252,35 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function clearCopyNotes() {
-    scriptCopyNote.textContent = "";
-    boldScriptCopyNote.textContent = "";
-    alternatingBoldScriptFirstCopyNote.textContent = "";
-    alternatingScriptFirstCopyNote.textContent = "";
-    alternatingCapsCopyNote.textContent = "";
-    alternatingLowerCopyNote.textContent = "";
+    if (scriptCopyNote) scriptCopyNote.textContent = "";
+    if (boldScriptCopyNote) boldScriptCopyNote.textContent = "";
+    if (alternatingBoldScriptFirstCopyNote) {
+      alternatingBoldScriptFirstCopyNote.textContent = "";
+    }
+    if (alternatingScriptFirstCopyNote) {
+      alternatingScriptFirstCopyNote.textContent = "";
+    }
+    if (alternatingCapsCopyNote) alternatingCapsCopyNote.textContent = "";
+    if (alternatingLowerCopyNote) alternatingLowerCopyNote.textContent = "";
+    if (legacyScriptCopyNote) legacyScriptCopyNote.textContent = "";
+    if (legacyBoldScriptCopyNote) legacyBoldScriptCopyNote.textContent = "";
 
-    scriptOutput.classList.remove("copied");
-    boldScriptOutput.classList.remove("copied");
-    alternatingBoldScriptFirstOutput.classList.remove("copied");
-    alternatingScriptFirstOutput.classList.remove("copied");
-    alternatingCapsOutput.classList.remove("copied");
-    alternatingLowerOutput.classList.remove("copied");
+    if (scriptOutput) scriptOutput.classList.remove("copied");
+    if (boldScriptOutput) boldScriptOutput.classList.remove("copied");
+    if (alternatingBoldScriptFirstOutput) {
+      alternatingBoldScriptFirstOutput.classList.remove("copied");
+    }
+    if (alternatingScriptFirstOutput) {
+      alternatingScriptFirstOutput.classList.remove("copied");
+    }
+    if (alternatingCapsOutput) alternatingCapsOutput.classList.remove("copied");
+    if (alternatingLowerOutput) {
+      alternatingLowerOutput.classList.remove("copied");
+    }
+    if (legacyScriptOutput) legacyScriptOutput.classList.remove("copied");
+    if (legacyBoldScriptOutput) {
+      legacyBoldScriptOutput.classList.remove("copied");
+    }
   }
 
   function updateOutputs() {
@@ -219,43 +289,86 @@ document.addEventListener("DOMContentLoaded", () => {
         ? normaliseStyledUnicodeToPlain(inputText.value || "")
         : inputText.value || "";
 
-    scriptOutput.textContent = convertText(input, "script");
-    boldScriptOutput.textContent = convertText(input, "boldScript");
-    alternatingBoldScriptFirstOutput.textContent =
-      convertAlternatingScriptStyles(input, true);
-    alternatingScriptFirstOutput.textContent = convertAlternatingScriptStyles(
-      input,
-      false,
-    );
-    alternatingCapsOutput.textContent = convertAlternatingScriptCase(
-      input,
-      true,
-    );
-    alternatingLowerOutput.textContent = convertAlternatingScriptCase(
-      input,
-      false,
-    );
+    if (scriptOutput) {
+      scriptOutput.textContent = convertText(input, "script");
+    }
+
+    if (boldScriptOutput) {
+      boldScriptOutput.textContent = convertText(input, "boldScript");
+    }
+
+    if (alternatingBoldScriptFirstOutput) {
+      alternatingBoldScriptFirstOutput.textContent =
+        convertAlternatingScriptStyles(input, true);
+    }
+
+    if (alternatingScriptFirstOutput) {
+      alternatingScriptFirstOutput.textContent = convertAlternatingScriptStyles(
+        input,
+        false,
+      );
+    }
+
+    if (alternatingCapsOutput) {
+      alternatingCapsOutput.textContent = convertAlternatingScriptCase(
+        input,
+        true,
+      );
+    }
+
+    if (alternatingLowerOutput) {
+      alternatingLowerOutput.textContent = convertAlternatingScriptCase(
+        input,
+        false,
+      );
+    }
+
+    if (legacyScriptOutput) {
+      legacyScriptOutput.textContent = convertText(input, "legacyScript");
+    }
+
+    if (legacyBoldScriptOutput) {
+      legacyBoldScriptOutput.textContent = convertText(
+        input,
+        "legacyBoldScript",
+      );
+    }
 
     clearCopyNotes();
   }
 
   async function copyText(text, outputElement, noteElement) {
     if (!text.trim()) {
-      noteElement.textContent = "Nothing to copy yet.";
+      if (noteElement) {
+        noteElement.textContent = "Nothing to copy yet.";
+      }
       return;
     }
 
     try {
       await navigator.clipboard.writeText(text);
-      noteElement.textContent = "Copied to clipboard.";
-      outputElement.classList.add("copied");
+
+      if (noteElement) {
+        noteElement.textContent = "Copied to clipboard.";
+      }
+
+      if (outputElement) {
+        outputElement.classList.add("copied");
+      }
 
       setTimeout(() => {
-        noteElement.textContent = "";
-        outputElement.classList.remove("copied");
+        if (noteElement) {
+          noteElement.textContent = "";
+        }
+
+        if (outputElement) {
+          outputElement.classList.remove("copied");
+        }
       }, 1500);
     } catch (error) {
-      noteElement.textContent = "Copy failed. Please copy manually.";
+      if (noteElement) {
+        noteElement.textContent = "Copy failed. Please copy manually.";
+      }
     }
   }
 
@@ -268,62 +381,94 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   pasteExampleButton.addEventListener("click", () => {
-    inputText.value = "Just like this";
+    inputText.value = "Berg oMega Role";
     updateOutputs();
     inputText.focus();
   });
 
   exampleButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      inputText.value = button.dataset.example;
+      inputText.value = button.dataset.example || "";
       updateOutputs();
       inputText.focus();
     });
   });
 
-  scriptOutput.addEventListener("click", () => {
-    copyText(scriptOutput.textContent, scriptOutput, scriptCopyNote);
-  });
+  if (scriptOutput) {
+    scriptOutput.addEventListener("click", () => {
+      copyText(scriptOutput.textContent, scriptOutput, scriptCopyNote);
+    });
+  }
 
-  boldScriptOutput.addEventListener("click", () => {
-    copyText(
-      boldScriptOutput.textContent,
-      boldScriptOutput,
-      boldScriptCopyNote,
-    );
-  });
+  if (boldScriptOutput) {
+    boldScriptOutput.addEventListener("click", () => {
+      copyText(
+        boldScriptOutput.textContent,
+        boldScriptOutput,
+        boldScriptCopyNote,
+      );
+    });
+  }
 
-  alternatingBoldScriptFirstOutput.addEventListener("click", () => {
-    copyText(
-      alternatingBoldScriptFirstOutput.textContent,
-      alternatingBoldScriptFirstOutput,
-      alternatingBoldScriptFirstCopyNote,
-    );
-  });
+  if (alternatingBoldScriptFirstOutput) {
+    alternatingBoldScriptFirstOutput.addEventListener("click", () => {
+      copyText(
+        alternatingBoldScriptFirstOutput.textContent,
+        alternatingBoldScriptFirstOutput,
+        alternatingBoldScriptFirstCopyNote,
+      );
+    });
+  }
 
-  alternatingScriptFirstOutput.addEventListener("click", () => {
-    copyText(
-      alternatingScriptFirstOutput.textContent,
-      alternatingScriptFirstOutput,
-      alternatingScriptFirstCopyNote,
-    );
-  });
+  if (alternatingScriptFirstOutput) {
+    alternatingScriptFirstOutput.addEventListener("click", () => {
+      copyText(
+        alternatingScriptFirstOutput.textContent,
+        alternatingScriptFirstOutput,
+        alternatingScriptFirstCopyNote,
+      );
+    });
+  }
 
-  alternatingCapsOutput.addEventListener("click", () => {
-    copyText(
-      alternatingCapsOutput.textContent,
-      alternatingCapsOutput,
-      alternatingCapsCopyNote,
-    );
-  });
+  if (alternatingCapsOutput) {
+    alternatingCapsOutput.addEventListener("click", () => {
+      copyText(
+        alternatingCapsOutput.textContent,
+        alternatingCapsOutput,
+        alternatingCapsCopyNote,
+      );
+    });
+  }
 
-  alternatingLowerOutput.addEventListener("click", () => {
-    copyText(
-      alternatingLowerOutput.textContent,
-      alternatingLowerOutput,
-      alternatingLowerCopyNote,
-    );
-  });
+  if (alternatingLowerOutput) {
+    alternatingLowerOutput.addEventListener("click", () => {
+      copyText(
+        alternatingLowerOutput.textContent,
+        alternatingLowerOutput,
+        alternatingLowerCopyNote,
+      );
+    });
+  }
+
+  if (legacyScriptOutput) {
+    legacyScriptOutput.addEventListener("click", () => {
+      copyText(
+        legacyScriptOutput.textContent,
+        legacyScriptOutput,
+        legacyScriptCopyNote,
+      );
+    });
+  }
+
+  if (legacyBoldScriptOutput) {
+    legacyBoldScriptOutput.addEventListener("click", () => {
+      copyText(
+        legacyBoldScriptOutput.textContent,
+        legacyBoldScriptOutput,
+        legacyBoldScriptCopyNote,
+      );
+    });
+  }
 
   copyButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -357,6 +502,18 @@ document.addEventListener("DOMContentLoaded", () => {
           outputElement.textContent,
           outputElement,
           alternatingLowerCopyNote,
+        );
+      } else if (targetId === "legacyScriptOutput") {
+        copyText(
+          outputElement.textContent,
+          outputElement,
+          legacyScriptCopyNote,
+        );
+      } else if (targetId === "legacyBoldScriptOutput") {
+        copyText(
+          outputElement.textContent,
+          outputElement,
+          legacyBoldScriptCopyNote,
         );
       }
     });
