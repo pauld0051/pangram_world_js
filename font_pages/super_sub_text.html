@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pangram World - Super and Subscript Text Generator</title>
+
+    <meta property="og:title" content="Pangram World - Super and Subscript Text Generator">
+    <meta property="og:description"
+        content="Convert selected text into Unicode superscript and subscript characters for science, maths, chemistry, and social media posts.">
+    <meta property="og:image" content="https://www.pangram-world.com/static/images/pangram-world-title-trsp.png">
+    <meta property="og:url" content="https://www.pangram-world.com/super_sub_text.html">
+
+    <link rel="stylesheet" href="../styles/bootstrap.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/font_pages/font_pages.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="shortcut icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="shortcut icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="shortcut icon" type="image/png" sizes="192x192" href="../android-chrome-192x192.png">
+    <link rel="shortcut icon" type="image/png" sizes="512x512" href="../android-chrome-512x512.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <script src="../scripts/handlebars/dist/handlebars.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="../scripts/bootstrap.bundle.js"></script>
+    <script src="../scripts/main.js"></script>
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <main>
+        <div class="container my-5">
+            <div class="row g-4">
+                <div class="col-lg-6 d-flex">
+                    <div class="tool-panel p-4 w-100">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h2 class="mb-0">Unicode Super and Subscript Generator</h2>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="inputText" class="form-label">Type your text</label>
+                            <textarea id="inputText" class="form-control" placeholder="Type or paste your text here..."
+                                aria-label="Input text"></textarea>
+                            <div class="helper-text mt-2">
+                                Highlight part of the text, then click a button to turn only that selection into
+                                superscript or subscript.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="section-title mb-2">Selection actions</div>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <button type="button" id="subscriptButton" class="btn btn-outline-primary">
+                                    Subscript selected
+                                </button>
+                                <button type="button" id="superscriptButton" class="btn btn-outline-primary">
+                                    Superscript selected
+                                </button>
+                                <button type="button" id="normaliseButton" class="btn btn-outline-secondary">
+                                    Restore selected
+                                </button>
+                                <button type="button" id="clearButton" class="btn btn-outline-secondary">
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="section-title mb-2">Quick examples</div>
+                            <button type="button" class="example-chip" data-example="CO2">CO2</button>
+                            <button type="button" class="example-chip" data-example="H2O">H2O</button>
+                            <button type="button" class="example-chip" data-example="x2">x2</button>
+                            <button type="button" class="example-chip" data-example="ms-2">ms-2</button>
+                            <button type="button" class="example-chip" data-example="vt">vt</button>
+                            <button type="button" class="example-chip" data-example="Na+">Na+</button>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="section-title mb-2">Quick inserts</div>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <button type="button" class="example-chip insert-chip" data-insert="²">²</button>
+                                <button type="button" class="example-chip insert-chip" data-insert="³">³</button>
+                                <button type="button" class="example-chip insert-chip" data-insert="⁻">⁻</button>
+                                <button type="button" class="example-chip insert-chip" data-insert="⁺">⁺</button>
+                                <button type="button" class="example-chip insert-chip" data-insert="⁼">⁼</button>
+                                <button type="button" class="example-chip insert-chip" data-insert="₀">₀</button>
+                                <button type="button" class="example-chip insert-chip" data-insert="₁">₁</button>
+                                <button type="button" class="example-chip insert-chip" data-insert="₂">₂</button>
+                                <button type="button" class="example-chip insert-chip" data-insert="₃">₃</button>
+                                <button type="button" class="example-chip insert-chip" data-insert="ₜ">ₜ</button>
+                                <button type="button" class="example-chip insert-chip" data-insert="ₓ">ₓ</button>
+                                <button type="button" class="example-chip insert-chip" data-insert="ᵧ">ᵧ</button>
+                                <button type="button" class="example-chip insert-chip" data-insert="ᶻ">ᶻ</button>
+                                <button type="button" class="example-chip insert-chip" data-insert="ₐ">ₐ</button>
+                                <button type="button" class="example-chip insert-chip" data-insert="ₑ">ₑ</button>
+                                <button type="button" class="example-chip insert-chip" data-insert="ᵢ">ᵢ</button>
+                                <button type="button" class="example-chip insert-chip" data-insert="ₒ">ₒ</button>
+                                <button type="button" class="example-chip insert-chip" data-insert="ᵣ">ᵣ</button>
+                                <button type="button" class="example-chip insert-chip" data-insert="ᵥ">ᵥ</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 d-flex">
+                    <div class="info-panel p-4 w-100">
+                        <h3 class="mb-3">How it works</h3>
+                        <p>
+                            This tool is designed for mixed text, so you can keep most of a phrase normal and only
+                            change the characters you want.
+                        </p>
+                        <p>
+                            That makes it useful for chemistry, physics, and maths, where notation like CO₂, x², vₜ,
+                            and m s⁻² matters.
+                        </p>
+                        <p>
+                            Unicode super and subscript coverage is incomplete, so some letters and symbols do not have
+                            exact equivalents. When that happens, the original character is kept.
+                        </p>
+                        <p class="mb-0">
+                            In other words, Unicode is helpful, but occasionally behaves like a caffeinated goblin.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4 mt-1">
+                <div class="col-12">
+                    <div class="output-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h4 class="mb-0">Output</h4>
+                            <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
+                                data-target="outputText">
+                                Copy
+                            </button>
+                        </div>
+                        <div id="outputText" class="output-box" tabindex="0" role="button"
+                            aria-label="Output text, click to copy"></div>
+                        <div id="outputCopyNote" class="copy-note mt-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="output-card p-4">
+                        <h5 class="mb-3">Example ideas</h5>
+                        <p class="mb-2">Chemistry: CO₂, H₂O, Na⁺</p>
+                        <p class="mb-2">Physics: vₜ, x², m s⁻²</p>
+                        <p class="mb-0">General use: 1ˢᵗ, 2ⁿᵈ, 3ʳᵈ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <button onclick="scrollToTop()" id="scrollToTopButton" class="scroll-button">
+        <span class="material-symbols-outlined">arrow_upward</span>
+    </button>
+
+    <div id="footer-container"></div>
+
+    <script src="../scripts/font_pages/unicode_normalise.js"></script>
+    <script src="../scripts/font_pages/super_sub_text.js"></script>
+</body>
+</html>
