@@ -6,6 +6,24 @@
     box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.08);
 }
 
+/* Outer container styling */
+.outer-container {
+    background-color: rgba(231, 218, 218, 0.99);
+    /* Light newspaper-like color */
+    border: 1px solid rgba(200, 200, 200, 0.5);
+    /* Light gray border for definition */
+    border-radius: 8px;
+    /* Rounded corners for a soft look */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
+    padding: 20px;
+    /* Inner padding */
+    max-width: 80%;
+    /* Max width of 80% of the viewport */
+    margin: 0 auto;
+    /* Center the container horizontally */
+}
+
 .tool-panel,
 .info-panel {
     height: 100%;
