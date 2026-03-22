@@ -16,6 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const clearCheckerButton = document.getElementById("clearCheckerButton");
   const pangramCheckResult = document.getElementById("pangramCheckResult");
   const missingLettersOutput = document.getElementById("missingLettersOutput");
+  
+  let recentGeneratedWords = [];
+  const recentWordMemoryLimit = 80;
 
   const pangramLengthSelector = document.getElementById(
     "pangramLengthSelector",
@@ -255,7 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     const uniqueCount = uniqueWordLetters.size;
-    score += Math.min(uniqueCount, 6);
+    score += Math.min(uniqueCount, 5);
 
     if (preferredShortWords.has(word)) {
       score += wordsRemaining > 2 ? 2 : 4;
@@ -270,18 +273,27 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (awkwardWords.has(word)) {
-      score -= 8;
+      score -= 12;
     }
 
-    if (word.length >= 10) {
-      score -= 2;
+    if (recentGeneratedWords.includes(word)) {
+      score -= 10;
+    }
+
+    if (word.length >= 9) {
+      score -= 3;
+    }
+
+    if (word.length >= 11) {
+      score -= 4;
     }
 
     if (word.length <= 2 && wordsRemaining <= 1) {
       score -= 4;
     }
 
-    score -= Math.max(0, countRareLetters(word) - 1) * 2;
+    const rareLetterCount = countRareLetters(word);
+    score -= Math.max(0, rareLetterCount - 1) * 3;
 
     return score;
   }
