@@ -29,6 +29,106 @@ document.addEventListener("DOMContentLoaded", () => {
   let wordList = [];
   let wordListLoaded = false;
 
+  const bannedWords = new Set([
+    "ii",
+    "iii",
+    "iv",
+    "vi",
+    "vii",
+    "viii",
+    "ix",
+    "xi",
+    "xii",
+    "xiii",
+    "xiv",
+    "xv",
+    "xvi",
+    "xvii",
+    "xviii",
+    "xix",
+    "xx",
+    "xxi",
+    "xxii",
+    "xxiii",
+    "xxiv",
+    "xxv",
+    "xxx",
+    "dx",
+    "lx",
+    "liv",
+    "div",
+    "dix",
+    "mlx",
+    "mmmm",
+  ]);
+
+  const preferredShortWords = new Set([
+    "a",
+    "i",
+    "am",
+    "an",
+    "as",
+    "at",
+    "be",
+    "by",
+    "do",
+    "go",
+    "he",
+    "if",
+    "in",
+    "is",
+    "it",
+    "me",
+    "my",
+    "no",
+    "of",
+    "on",
+    "or",
+    "ox",
+    "so",
+    "to",
+    "up",
+    "us",
+    "we",
+    "and",
+    "for",
+    "not",
+    "the",
+    "you",
+    "our",
+    "out",
+    "too",
+    "any",
+    "all",
+    "but",
+    "can",
+    "day",
+    "far",
+    "few",
+    "get",
+    "had",
+    "has",
+    "her",
+    "him",
+    "his",
+    "how",
+    "its",
+    "may",
+    "new",
+    "now",
+    "off",
+    "old",
+    "one",
+    "own",
+    "see",
+    "she",
+    "ten",
+    "two",
+    "way",
+    "who",
+    "why",
+  ]);
+
   function normaliseText(text) {
     return text.toLowerCase();
   }
@@ -109,47 +209,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function tidyGeneratedSentence(words) {
     if (!words.length) return "";
-    return `${capitaliseFirst(words.join(" "))}.`;
+
+    const formattedWords = words.map((word) => (word === "i" ? "I" : word));
+    const sentence = formattedWords.join(" ");
+
+    return `${capitaliseFirst(sentence)}.`;
   }
 
   function looksUsefulForPangrams(word) {
     if (!/^[a-z]+$/.test(word)) return false;
-    if (word.length < 3) return false;
     if (word.length > 12) return false;
 
-    const bannedWords = new Set([
-      "ii",
-      "iii",
-      "iv",
-      "vi",
-      "vii",
-      "viii",
-      "ix",
-      "xi",
-      "xii",
-      "xiii",
-      "xiv",
-      "xv",
-      "xvi",
-      "xvii",
-      "xviii",
-      "xix",
-      "xx",
-      "xxi",
-      "xxii",
-      "xxiii",
-      "xxiv",
-      "xxv",
-      "xxx",
-      "dx",
-      "lx",
-      "liv",
-      "div",
-      "dix",
-      "mlx",
-      "mmmm",
-    ]);
-
+    if (word.length === 1 && word !== "a" && word !== "i") return false;
     if (bannedWords.has(word)) return false;
 
     return true;
@@ -160,6 +231,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const mediumValueLetters = /[bcfghmpuwy]/;
 
     return [...words].sort((a, b) => {
+      const aPreferredShort = preferredShortWords.has(a) ? 1 : 0;
+      const bPreferredShort = preferredShortWords.has(b) ? 1 : 0;
+      if (aPreferredShort !== bPreferredShort)
+        return bPreferredShort - aPreferredShort;
+
       const aHigh = highValueLetters.test(a) ? 1 : 0;
       const bHigh = highValueLetters.test(b) ? 1 : 0;
       if (aHigh !== bHigh) return bHigh - aHigh;
@@ -211,11 +287,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (mode === "random") {
       pangramLengthNote.textContent =
-        "Random is selected. It will generate between 3 and 15 words.";
+        "Random is selected. It will generate between 4 and 15 words.";
       return;
     }
 
-    pangramLengthNote.textContent = `${mode} words selected. Clicked once, generated once. Nice and savage.`;
+    pangramLengthNote.textContent = `${mode} words selected. Click again at any time to generate another ${mode}-word pangram.`;
   }
 
   function setActiveLengthButton(selectedButton) {
@@ -229,19 +305,32 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function getRandomTargetWordCount() {
-    return Math.floor(Math.random() * 13) + 3;
+    return Math.floor(Math.random() * 12) + 4;
   }
 
   function getPaddingCandidates(usedWords) {
-    const lighterWords = wordList.filter((word) => {
-      if (usedWords.has(word)) return false;
-      if (word.length < 3 || word.length > 8) return false;
+    const shortPreferred = [];
+    const generalCandidates = [];
+
+    wordList.forEach((word) => {
+      if (usedWords.has(word)) return;
+      if (word.length < 1 || word.length > 8) return;
+      if (word.length === 1 && word !== "a" && word !== "i") return;
 
       const uniqueLetters = new Set(extractLetters(word));
-      return uniqueLetters.size <= 6;
+      if (uniqueLetters.size > 6) return;
+
+      if (preferredShortWords.has(word)) {
+        shortPreferred.push(word);
+      } else {
+        generalCandidates.push(word);
+      }
     });
 
-    return shuffleArray(lighterWords);
+    return [
+      ...shuffleArray(shortPreferred),
+      ...shuffleArray(generalCandidates),
+    ];
   }
 
   function padWordsToTargetCount(words, targetCount) {
@@ -402,7 +491,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     updateLengthNote(sourceLabel === "random" ? "random" : targetWords);
-
     generatorStatus.textContent = `Generating a ${targetWords}-word pangram...`;
 
     setTimeout(() => {
@@ -477,6 +565,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (defaultRandomButton) {
     setActiveLengthButton(defaultRandomButton);
   }
+
   updateLengthNote("random");
   loadWordList();
 });
