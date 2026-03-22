@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pangram World - Underline and Strikethrough Text Generator</title>
+
+    <meta property="og:title" content="Pangram World - Underline and Strikethrough Text Generator">
+    <meta property="og:description"
+        content="Turn normal text into Unicode underline and strikethrough styles for Facebook and social media.">
+    <meta property="og:image" content="https://www.pangram-world.com/static/images/pangram-world-title-trsp.png">
+    <meta property="og:url" content="https://www.pangram-world.com/font_pages/line_text.html">
+
+    <link rel="stylesheet" href="../styles/bootstrap.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/font_pages/font_pages.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="shortcut icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="shortcut icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="shortcut icon" type="image/png" sizes="192x192" href="../android-chrome-192x192.png">
+    <link rel="shortcut icon" type="image/png" sizes="512x512" href="../android-chrome-512x512.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <script src="../scripts/handlebars/dist/handlebars.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="../scripts/bootstrap.bundle.js"></script>
+    <script src="../scripts/main.js"></script>
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <main>
+        <div class="outer-container mx-auto my-5">
+            <div class="container my-5">
+                <div class="row g-4">
+                    <div class="col-lg-6 d-flex">
+                        <div class="tool-panel p-4 w-100">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h2 class="mb-0">Unicode Underline and Strikethrough Generator</h2>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="inputText" class="form-label">Type your text</label>
+                                <textarea id="inputText" class="form-control" placeholder="Type or paste your text here..."
+                                    aria-label="Input text"></textarea>
+                                <div class="helper-text mt-2">
+                                    This page is set up for Unicode underline and strikethrough styles, including mixed line effects,
+                                    alternating caps versions, and bold or italic variants where Unicode supports them.
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="section-title mb-2">Quick examples</div>
+                                <button type="button" class="example-chip" data-example="Underline this text">Underline this text</button>
+                                <button type="button" class="example-chip" data-example="Strike this out">Strike this out</button>
+                                <button type="button" class="example-chip" data-example="Physics is still beautiful">Physics is still beautiful</button>
+                                <button type="button" class="example-chip" data-example="Read my new fantasy novel">Read my new fantasy novel</button>
+                            </div>
+
+                            <div class="d-flex gap-2 flex-wrap">
+                                <button type="button" id="clearButton" class="btn btn-outline-secondary">Clear</button>
+                                <button type="button" id="pasteExampleButton" class="btn btn-primary">Use sample text</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 d-flex">
+                        <div class="info-panel p-4 w-100">
+                            <h3 class="mb-3">How it works</h3>
+                            <p>
+                                Most of these styles are created with Unicode combining marks. That means the underline or strike is layered onto each letter rather than drawn with CSS.
+                            </p>
+                            <p>
+                                Bold and italic underline or strike versions are built by combining mathematical bold or italic Unicode letters with those same line marks.
+                            </p>
+                            <p class="mb-0">
+                                Some platforms render combining marks beautifully. Others behave like they were coded during a tea break in 2004.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4 mt-1">
+                    <div class="col-lg-6">
+                        <div class="output-card p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h4 class="mb-0">Underline</h4>
+                                <button type="button" class="btn btn-sm btn-outline-primary copy-btn" data-target="underlineOutput">Copy</button>
+                            </div>
+                            <div id="underlineOutput" class="output-box" tabindex="0" role="button" aria-label="Underline output, click to copy"></div>
+                            <div id="underlineCopyNote" class="copy-note mt-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="output-card p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h4 class="mb-0">Double Underline</h4>
+                                <button type="button" class="btn btn-sm btn-outline-primary copy-btn" data-target="doubleUnderlineOutput">Copy</button>
+                            </div>
+                            <div id="doubleUnderlineOutput" class="output-box" tabindex="0" role="button" aria-label="Double underline output, click to copy"></div>
+                            <div id="doubleUnderlineCopyNote" class="copy-note mt-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="output-card p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h4 class="mb-0">Strikethrough</h4>
+                                <button type="button" class="btn btn-sm btn-outline-primary copy-btn" data-target="strikethroughOutput">Copy</button>
+                            </div>
+                            <div id="strikethroughOutput" class="output-box" tabindex="0" role="button" aria-label="Strikethrough output, click to copy"></div>
+                            <div id="strikethroughCopyNote" class="copy-note mt-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="output-card p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h4 class="mb-0">Short Strikethrough</h4>
+                                <button type="button" class="btn btn-sm btn-outline-primary copy-btn" data-target="shortStrikethroughOutput">Copy</button>
+                            </div>
+                            <div id="shortStrikethroughOutput" class="output-box" tabindex="0" role="button" aria-label="Short strikethrough output, click to copy"></div>
+                            <div id="shortStrikethroughCopyNote" class="copy-note mt-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="output-card p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h4 class="mb-0">Slash Through</h4>
+                                <button type="button" class="btn btn-sm btn-outline-primary copy-btn" data-target="slashThroughOutput">Copy</button>
+                            </div>
+                            <div id="slashThroughOutput" class="output-box" tabindex="0" role="button" aria-label="Slash through output, click to copy"></div>
+                            <div id="slashThroughCopyNote" class="copy-note mt-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="output-card p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h4 class="mb-0">Alternating Underline / Strikethrough</h4>
+                                <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
+                                    data-target="alternatingUnderlineStrikethroughOutput">Copy</button>
+                            </div>
+                            <div id="alternatingUnderlineStrikethroughOutput" class="output-box" tabindex="0" role="button"
+                                aria-label="Alternating underline and strikethrough output, click to copy"></div>
+                            <div id="alternatingUnderlineStrikethroughCopyNote" class="copy-note mt-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="output-card p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h4 class="mb-0">Alternating Strikethrough / Underline</h4>
+                                <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
+                                    data-target="alternatingStrikethroughUnderlineOutput">Copy</button>
+                            </div>
+                            <div id="alternatingStrikethroughUnderlineOutput" class="output-box" tabindex="0" role="button"
+                                aria-label="Alternating strikethrough and underline output, click to copy"></div>
+                            <div id="alternatingStrikethroughUnderlineCopyNote" class="copy-note mt-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="output-card p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h4 class="mb-0">Bold Underline</h4>
+                                <button type="button" class="btn btn-sm btn-outline-primary copy-btn" data-target="boldUnderlineOutput">Copy</button>
+                            </div>
+                            <div id="boldUnderlineOutput" class="output-box" tabindex="0" role="button" aria-label="Bold underline output, click to copy"></div>
+                            <div id="boldUnderlineCopyNote" class="copy-note mt-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="output-card p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h4 class="mb-0">Bold Strikethrough</h4>
+                                <button type="button" class="btn btn-sm btn-outline-primary copy-btn" data-target="boldStrikethroughOutput">Copy</button>
+                            </div>
+                            <div id="boldStrikethroughOutput" class="output-box" tabindex="0" role="button" aria-label="Bold strikethrough output, click to copy"></div>
+                            <div id="boldStrikethroughCopyNote" class="copy-note mt-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="output-card p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h4 class="mb-0">Italic Underline</h4>
+                                <button type="button" class="btn btn-sm btn-outline-primary copy-btn" data-target="italicUnderlineOutput">Copy</button>
+                            </div>
+                            <div id="italicUnderlineOutput" class="output-box" tabindex="0" role="button" aria-label="Italic underline output, click to copy"></div>
+                            <div id="italicUnderlineCopyNote" class="copy-note mt-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="output-card p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h4 class="mb-0">Italic Strikethrough</h4>
+                                <button type="button" class="btn btn-sm btn-outline-primary copy-btn" data-target="italicStrikethroughOutput">Copy</button>
+                            </div>
+                            <div id="italicStrikethroughOutput" class="output-box" tabindex="0" role="button" aria-label="Italic strikethrough output, click to copy"></div>
+                            <div id="italicStrikethroughCopyNote" class="copy-note mt-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="output-card p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h4 class="mb-0">Bold Italic Underline</h4>
+                                <button type="button" class="btn btn-sm btn-outline-primary copy-btn" data-target="boldItalicUnderlineOutput">Copy</button>
+                            </div>
+                            <div id="boldItalicUnderlineOutput" class="output-box" tabindex="0" role="button" aria-label="Bold italic underline output, click to copy"></div>
+                            <div id="boldItalicUnderlineCopyNote" class="copy-note mt-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="output-card p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h4 class="mb-0">Bold Italic Strikethrough</h4>
+                                <button type="button" class="btn btn-sm btn-outline-primary copy-btn" data-target="boldItalicStrikethroughOutput">Copy</button>
+                            </div>
+                            <div id="boldItalicStrikethroughOutput" class="output-box" tabindex="0" role="button" aria-label="Bold italic strikethrough output, click to copy"></div>
+                            <div id="boldItalicStrikethroughCopyNote" class="copy-note mt-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="output-card p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h4 class="mb-0">Underline Alternating Caps</h4>
+                                <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
+                                    data-target="underlineAlternatingCapsOutput">Copy</button>
+                            </div>
+                            <div id="underlineAlternatingCapsOutput" class="output-box" tabindex="0" role="button"
+                                aria-label="Underline alternating caps output, click to copy"></div>
+                            <div id="underlineAlternatingCapsCopyNote" class="copy-note mt-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="output-card p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h4 class="mb-0">Underline Alternating Lowercase First</h4>
+                                <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
+                                    data-target="underlineAlternatingLowercaseFirstOutput">Copy</button>
+                            </div>
+                            <div id="underlineAlternatingLowercaseFirstOutput" class="output-box" tabindex="0" role="button"
+                                aria-label="Underline alternating lowercase first output, click to copy"></div>
+                            <div id="underlineAlternatingLowercaseFirstCopyNote" class="copy-note mt-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="output-card p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h4 class="mb-0">Strikethrough Alternating Caps</h4>
+                                <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
+                                    data-target="strikethroughAlternatingCapsOutput">Copy</button>
+                            </div>
+                            <div id="strikethroughAlternatingCapsOutput" class="output-box" tabindex="0" role="button"
+                                aria-label="Strikethrough alternating caps output, click to copy"></div>
+                            <div id="strikethroughAlternatingCapsCopyNote" class="copy-note mt-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="output-card p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h4 class="mb-0">Strikethrough Alternating Lowercase First</h4>
+                                <button type="button" class="btn btn-sm btn-outline-primary copy-btn"
+                                    data-target="strikethroughAlternatingLowercaseFirstOutput">Copy</button>
+                            </div>
+                            <div id="strikethroughAlternatingLowercaseFirstOutput" class="output-box" tabindex="0" role="button"
+                                aria-label="Strikethrough alternating lowercase first output, click to copy"></div>
+                            <div id="strikethroughAlternatingLowercaseFirstCopyNote" class="copy-note mt-2"></div>
+                        </div>
+                    </div>
+
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="output-card p-4">
+                            <h5 class="mb-3">Example output</h5>
+                            <p class="mb-2">If someone types:</p>
+                            <p class="mb-3">Underline this text</p>
+                            <p class="mb-2">They will get things like:</p>
+                            <p class="mb-2">Underline: U̲n̲d̲e̲r̲l̲i̲n̲e̲ t̲h̲i̲s̲ t̲e̲x̲t̲</p>
+                            <p class="mb-2">Double underline: U̳n̳d̳e̳r̳l̳i̳n̳e̳ t̳h̳i̳s̳ t̳e̳x̳t̳</p>
+                            <p class="mb-2">Strikethrough: U̶n̶d̶e̶r̶l̶i̶n̶e̶ t̶h̶i̶s̶ t̶e̶x̶t̶</p>
+                            <p class="mb-0">Slash through: U̷n̷d̷e̷r̷l̷i̷n̷e̷ t̷h̷i̷s̷ t̷e̷x̷t̷</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <button onclick="scrollToTop()" id="scrollToTopButton" class="scroll-button"><span class="material-symbols-outlined">
+            arrow_upward
+        </span></button>
+
+    <div id="footer-container"></div>
+
+    <!-- JS to be wired in next -->
+    <!-- <script src="../scripts/font_pages/line_text.js"></script> -->
+    <script src="../scripts/font_pages/unicode_normalise.js"></script>
+    <script src="../scripts/font_pages/line_text.js"></script>
+</body>
+</html>
