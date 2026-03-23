@@ -1,0 +1,105 @@
+.roman-page {
+    max-width: 1180px;
+}
+
+.roman-hero {
+    padding: 1rem 0 0.5rem;
+}
+
+.roman-page-title {
+    margin: 0;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.roman-page-subtitle {
+    margin: 0.75rem auto 0;
+    max-width: 760px;
+    font-size: 1.08rem;
+    color: #4b5563;
+}
+
+.roman-panel,
+.roman-info-panel {
+    width: 100%;
+    height: 100%;
+    margin-top: 0;
+}
+
+.roman-panel-title,
+.roman-info-title {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #1f2937;
+}
+
+.roman-main-input,
+.roman-output-field {
+    min-height: 54px;
+}
+
+.roman-output-roman {
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.roman-status {
+    min-height: 82px;
+    display: flex;
+    align-items: center;
+    line-height: 1.45;
+}
+
+.roman-button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.roman-button-row .btn {
+    flex: 1 1 180px;
+}
+
+.roman-copy-note {
+    min-height: 1.5rem;
+    margin-top: 0.85rem;
+    font-size: 0.9rem;
+    text-align: center;
+    color: #4b5563;
+}
+
+.roman-helper {
+    color: #4b5563;
+}
+
+.roman-info-panel p:last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 991px) {
+    .roman-page-title {
+        font-size: 2.4rem;
+    }
+
+    .roman-page-subtitle {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 575px) {
+    .roman-button-row {
+        flex-direction: column;
+    }
+
+    .roman-button-row .btn {
+        width: 100%;
+    }
+
+    .roman-panel-title,
+    .roman-info-title {
+        text-align: left;
+    }
+}

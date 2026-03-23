@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Pangram World - Roman Numeral Generator" />
+    <meta property="og:description"
+        content="Convert standard Roman numerals and whole numbers instantly, with clear limits for what Roman numeral notation can handle." />
+    <meta property="og:image" content="https://www.pangram-world.com/static/images/pangram-world-title-trsp.png" />
+    <meta property="og:url" content="https://www.pangram-world.com/tools_pages/roman_num.html" />
+    <title>Pangram World - Roman Numeral Generator</title>
+
+    <link rel="stylesheet" href="../styles/bootstrap.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/calculators.css">
+    <link rel="stylesheet" href="../styles/tools_pages/roman_num.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="shortcut icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="shortcut icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="shortcut icon" type="image/png" sizes="192x192" href="../android-chrome-192x192.png">
+    <link rel="shortcut icon" type="image/png" sizes="512x512" href="../android-chrome-512x512.png">
+
+    <script src="../scripts/handlebars/dist/handlebars.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="../scripts/bootstrap.bundle.js"></script>
+    <script src="../scripts/main.js"></script>
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <main>
+        <div class="outer-container mx-auto my-5">
+            <div class="container my-4 roman-page">
+
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="roman-hero text-center">
+                            <h1 class="roman-page-title">Roman Numeral Generator</h1>
+                            <p class="roman-page-subtitle">
+                                Convert standard Roman numerals to numbers, or whole numbers to Roman numerals, from a
+                                single input box.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4 align-items-stretch">
+
+                    <div class="col-lg-6 d-flex">
+                        <section class="form-font-style roman-panel w-100">
+                            <h2 class="roman-panel-title">Enter a Roman numeral or number</h2>
+
+                            <div class="mb-3">
+                                <label for="universalRomanInput" class="form-label">Input</label>
+                                <input type="text" id="universalRomanInput" class="form-control roman-main-input"
+                                    placeholder="Examples: XIV, 42, MCMXCIX"
+                                    aria-label="Roman numeral or Arabic number input" autocomplete="off"
+                                    spellcheck="false">
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="helper-text roman-helper" id="romanInputNote">
+                                    Enter either a standard Roman numeral or a whole number from 1 to 3999.
+                                </div>
+                            </div>
+
+                            <div class="roman-button-row">
+                                <button type="button" class="btn copy-button" id="convertRomanButton">
+                                    Convert
+                                </button>
+                                <button type="button" class="btn copy-button" id="clearRomanButton">
+                                    Clear
+                                </button>
+                            </div>
+
+                            <small>Lowercase Roman numerals are fine. Output is normalised to uppercase.</small>
+                        </section>
+                    </div>
+
+                    <div class="col-lg-6 d-flex">
+                        <section class="form-font-style roman-panel w-100">
+                            <h2 class="roman-panel-title">Result</h2>
+
+                            <div class="mb-3">
+                                <label for="arabicOutput" class="form-label">Arabic number</label>
+                                <input type="text" id="arabicOutput" class="form-control roman-output-field"
+                                    placeholder="Converted number will appear here..." readonly
+                                    aria-label="Arabic number output">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="romanOutput" class="form-label">Roman numeral</label>
+                                <input type="text" id="romanOutput"
+                                    class="form-control roman-output-field roman-output-roman"
+                                    placeholder="Converted Roman numeral will appear here..." readonly
+                                    aria-label="Roman numeral output">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="romanStatus" class="form-label">Status</label>
+                                <div id="romanStatus" class="output-area roman-status" aria-live="polite">
+                                    Enter a Roman numeral or a whole number, then click "Convert".
+                                </div>
+                            </div>
+
+                            <div class="roman-button-row">
+                                <button type="button" class="btn copy-button" id="copyArabicButton">
+                                    Copy Number
+                                </button>
+                                <button type="button" class="btn copy-button" id="copyRomanButton">
+                                    Copy Numeral
+                                </button>
+                            </div>
+
+                            <div id="romanCopyNote" class="roman-copy-note" aria-live="polite"></div>
+                        </section>
+                    </div>
+
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <section class="form-font-style roman-info-panel">
+                            <h3 class="roman-info-title">What this tool does</h3>
+                            <p>
+                                This converter auto-detects whether your input is a standard Roman numeral or a whole
+                                number, then fills in both outputs.
+                            </p>
+                            <p>
+                                It supports whole numbers from 1 to 3999 only. It does not support zero, negative
+                                values, decimal points, fractions, or overline notation for values above 3999.
+                            </p>
+                            <p>
+                                Roman numeral input must be in standard form. So XIV, XCIX, and MCMXCIX will work, while
+                                IIII, VX, and IC will be rejected.
+                            </p>
+                            <p class="mb-0">
+                                The Romans built roads, aqueducts, and empires. Zero did not make the cut.
+                            </p>
+                        </section>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <button onclick="scrollToTop()" id="scrollToTopButton" class="scroll-button">
+        <span class="material-symbols-outlined">arrow_upward</span>
+    </button>
+
+    <div id="footer-container"></div>
+
+    <script src="../scripts/tools/roman_num.js"></script>
+</body>
+</html>
