@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderSizeSelect.addEventListener("change", () => {
     updatePreviewSize();
   });
-
+  
   latexInput.addEventListener("keydown", (event) => {
     if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
       event.preventDefault();
@@ -354,7 +354,11 @@ document.addEventListener("DOMContentLoaded", () => {
       latex: convertPlainTextToLatex(trimmed),
       converted: true,
     };
-  }
+    }
+    
+      function hasUnsupportedEnvironment(input) {
+        return /\\begin\{(align|align\*|document|tikzpicture)\}/.test(input);
+      }
 
   function renderEquation() {
     const rawInput = latexInput.value.trim();
@@ -378,7 +382,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const { latex, converted } = resolveToLatex(rawInput);
-
+        if (hasUnsupportedEnvironment(latex)) {
+          clearPreview();
+          resolvedLatexOutput.value = latex;
+          lastRenderedLatex = "";
+          setActionButtons(false);
+          setCopyNote("");
+          setStatus(
+            "That LaTeX environment is not supported here. Try equation snippets or use \\begin{aligned}...\\end{aligned} instead of \\begin{align}...\\end{align}.",
+            true,
+          );
+          return;
+      }
+      
     if (!latex) {
       clearPreview();
       resolvedLatexOutput.value = "";
