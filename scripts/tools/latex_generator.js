@@ -77,7 +77,17 @@ document.addEventListener("DOMContentLoaded", () => {
       exportFontSize: "4.2rem",
       exportPadding: "32px 40px",
     },
-  };
+    };
+    
+    const BACKGROUND_MAP = {
+      transparent: null,
+      white: "#ffffff",
+      "light-grey": "#f3f4f6",
+      "pale-yellow": "#fef9c3",
+      "pale-blue": "#dbeafe",
+      "pale-green": "#dcfce7",
+      black: "#000000",
+    };
 
   let lastRenderedLatex = "";
 
@@ -145,21 +155,46 @@ document.addEventListener("DOMContentLoaded", () => {
   function setActionButtons(enabled) {
     copyResolvedLatexButton.disabled = !enabled;
     downloadPngButton.disabled = !enabled;
-  }
-
-  function updatePreviewBackground() {
-    latexPreviewStage.dataset.background = backgroundSelect.value;
     }
     
-    function updatePreviewColour() {
-      latexRenderSurface.style.color = colourSelect.value;
-    }
+      function getSelectedBackgroundColour() {
+        return BACKGROUND_MAP[backgroundSelect.value] || null;
+      }
 
-  function updatePreviewSize() {
-    const sizeKey = renderSizeSelect.value;
-    const sizeConfig = SIZE_MAP[sizeKey] || SIZE_MAP.normal;
-    latexRenderSurface.style.fontSize = sizeConfig.previewFontSize;
-  }
+      function updatePreviewBackground() {
+        const selectedBackgroundColour = getSelectedBackgroundColour();
+
+        latexPreviewStage.dataset.background = backgroundSelect.value;
+
+        if (backgroundSelect.value === "transparent") {
+          latexPreviewStage.style.background = "";
+          latexPreviewStage.style.backgroundColor = "";
+          latexPreviewStage.style.backgroundImage = "";
+          latexPreviewStage.style.backgroundSize = "";
+          latexPreviewStage.style.backgroundPosition = "";
+          latexRenderSurface.style.background = "transparent";
+          latexRenderSurface.style.boxShadow = "none";
+          return;
+        }
+
+        latexPreviewStage.style.background = selectedBackgroundColour;
+        latexPreviewStage.style.backgroundColor = selectedBackgroundColour;
+        latexPreviewStage.style.backgroundImage = "none";
+        latexPreviewStage.style.backgroundSize = "";
+        latexPreviewStage.style.backgroundPosition = "";
+        latexRenderSurface.style.background = "transparent";
+        latexRenderSurface.style.boxShadow = "none";
+      }
+
+      function updatePreviewColour() {
+        latexRenderSurface.style.color = colourSelect.value;
+      }
+
+      function updatePreviewSize() {
+        const sizeKey = renderSizeSelect.value;
+        const sizeConfig = SIZE_MAP[sizeKey] || SIZE_MAP.normal;
+        latexRenderSurface.style.fontSize = sizeConfig.previewFontSize;
+      }
 
   function clearPreview() {
     latexRenderSurface.innerHTML = "";
@@ -172,35 +207,45 @@ document.addEventListener("DOMContentLoaded", () => {
     latexPreviewPlaceholder.style.display = "none";
     }
     
-      function maybeShowVisibilityNote() {
-        if (!lastRenderedLatex || !latexRenderSurface.innerHTML.trim()) {
-          return;
+        function maybeShowVisibilityNote() {
+          if (!lastRenderedLatex || !latexRenderSurface.innerHTML.trim()) {
+            return;
+          }
+
+          const selectedColour = colourSelect.value.toLowerCase();
+          const selectedBackgroundColour = getSelectedBackgroundColour();
+
+          if (!selectedBackgroundColour) {
+            if (selectedColour === "#ffffff") {
+              setCopyNote(
+                "White text on a transparent PNG may disappear on light backgrounds.",
+                true,
+              );
+              return;
+            }
+
+            if (selectedColour === "#1f1f1f" || selectedColour === "#000000") {
+              setCopyNote(
+                "Dark text on a transparent PNG may disappear on dark backgrounds.",
+                true,
+              );
+              return;
+            }
+
+            setCopyNote("");
+            return;
+          }
+
+          if (selectedColour === selectedBackgroundColour.toLowerCase()) {
+            setCopyNote(
+              "The selected text colour matches the background and may look invisible.",
+              true,
+            );
+            return;
+          }
+
+          setCopyNote("");
         }
-
-        const selectedColour = colourSelect.value.toLowerCase();
-        const selectedBackground = backgroundSelect.value;
-
-        if (selectedColour === "#ffffff" && selectedBackground === "white") {
-          setCopyNote(
-            "White text on a white background may look invisible in the preview and exported PNG.",
-            true,
-          );
-          return;
-        }
-
-        if (
-          selectedColour === "#ffffff" &&
-          selectedBackground === "transparent"
-        ) {
-          setCopyNote(
-            "White text on a transparent PNG may disappear on light backgrounds.",
-            true,
-          );
-          return;
-        }
-
-        setCopyNote("");
-      }
 
     function clearAll() {
       latexInput.value = "";
@@ -537,73 +582,72 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  async function copyPreviewPngToClipboard() {
-    if (!lastRenderedLatex || !latexRenderSurface.innerHTML.trim()) {
-      setCopyNote("Render an equation before copying the PNG.", true);
-      return;
-    }
-
-    if (typeof htmlToImage === "undefined") {
-      setCopyNote(
-        "The image export library is not loaded. Add html-to-image first.",
-        true,
-      );
-      return;
-    }
-
-    if (
-      !navigator.clipboard ||
-      !navigator.clipboard.write ||
-      typeof ClipboardItem === "undefined"
-    ) {
-      setCopyNote(
-        "PNG copy is not supported in this browser. Use Download PNG instead.",
-        true,
-      );
-      return;
-    }
-
-    try {
-      const pngBlob = await htmlToImage.toBlob(latexRenderSurface, {
-        cacheBust: true,
-        pixelRatio: 2,
-        backgroundColor:
-          backgroundSelect.value === "white" ? "#ffffff" : undefined,
-      });
-
-      if (!pngBlob) {
-        throw new Error("PNG blob could not be created.");
+    async function copyPreviewPngToClipboard() {
+      if (!lastRenderedLatex || !latexRenderSurface.innerHTML.trim()) {
+        setCopyNote("Render an equation before copying the PNG.", true);
+        return;
       }
 
-      await navigator.clipboard.write([
-        new ClipboardItem({
-          "image/png": pngBlob,
-        }),
-      ]);
-
-      if (backgroundSelect.value === "transparent") {
+      if (typeof htmlToImage === "undefined") {
         setCopyNote(
-          "Transparent PNG copied to clipboard. It may look blank on dark backgrounds.",
+          "The image export library is not loaded. Add html-to-image first.",
+          true,
         );
-      } else {
-        setCopyNote("PNG copied to clipboard.");
+        return;
       }
-    } catch (error) {
-      setCopyNote(`PNG copy failed: ${cleanErrorMessage(error)}`, true);
-    }
-  }
 
-    function getExportOptions() {
-      return {
-        cacheBust: true,
-        pixelRatio: 2,
-        backgroundColor:
-          backgroundSelect.value === "white" ? "#ffffff" : undefined,
-        style: {
-          color: colourSelect.value,
-        },
-      };
+      if (
+        !navigator.clipboard ||
+        !navigator.clipboard.write ||
+        typeof ClipboardItem === "undefined"
+      ) {
+        setCopyNote(
+          "PNG copy is not supported in this browser. Use Download PNG instead.",
+          true,
+        );
+        return;
+      }
+
+      try {
+        const pngBlob = await htmlToImage.toBlob(
+          latexRenderSurface,
+          getExportOptions(),
+        );
+
+        if (!pngBlob) {
+          throw new Error("PNG blob could not be created.");
+        }
+
+        await navigator.clipboard.write([
+          new ClipboardItem({
+            "image/png": pngBlob,
+          }),
+        ]);
+
+        if (backgroundSelect.value === "transparent") {
+          setCopyNote(
+            "Transparent PNG copied to clipboard. It may look blank on dark backgrounds.",
+          );
+        } else {
+          setCopyNote("PNG copied to clipboard.");
+        }
+      } catch (error) {
+        setCopyNote(`PNG copy failed: ${cleanErrorMessage(error)}`, true);
+      }
     }
+
+      function getExportOptions() {
+        const selectedBackgroundColour = getSelectedBackgroundColour();
+
+        return {
+          cacheBust: true,
+          pixelRatio: 2,
+          backgroundColor: selectedBackgroundColour || undefined,
+          style: {
+            color: colourSelect.value,
+          },
+        };
+      }
 
   function createSafeFileName() {
     const base = lastRenderedLatex
