@@ -89,3 +89,15 @@ This document outlines the various user stories for our physics calculator. The 
 - Ensure that the calculator logic covers all possible equations and combinations for the physics concepts involved.
 - Implement extensive unit testing to validate that all user stories are met.
 - The UI should be tested across different devices and browsers to ensure consistent behavior.
+
+# Known Issues: LaTeX Generator
+
+- Google Fonts and Google Material Symbols can trigger console errors during PNG export when used with `html-to-image`. This happens because the browser blocks access to remote stylesheet rules. The generator can still work correctly, but the warnings may still appear in DevTools.
+
+- Transparent PNG exports may appear blank in some apps or viewers that display transparent images against a dark background. The equation is usually still present, but black text on transparency can become hard to see. Using a white background avoids this.
+
+- Some LaTeX environments are not supported fully by KaTeX in this tool. For example, `align` may render incorrectly or produce malformed output. Use simpler equation snippets or `aligned` where appropriate.
+
+- This tool is designed for equation rendering only. It does not support full LaTeX documents, custom packages, or Overleaf-style workflows.
+
+- Plain-text equation input is limited. Simple expressions such as `v = d/t` may convert successfully, but more complex input may not be interpreted correctly.
