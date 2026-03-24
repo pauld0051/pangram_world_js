@@ -1,0 +1,209 @@
+.latex-page {
+    max-width: 1180px;
+}
+
+.latex-hero {
+    padding: 1rem 0 0.5rem;
+}
+
+.latex-page-title {
+    margin: 0;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.latex-page-subtitle {
+    margin: 0.75rem auto 0;
+    max-width: 760px;
+    font-size: 1.08rem;
+    color: #4b5563;
+}
+
+.latex-panel,
+.latex-info-panel {
+    width: 100%;
+    height: 100%;
+    margin-top: 0;
+}
+
+.latex-panel-title,
+.latex-info-title {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #1f2937;
+}
+
+.latex-main-input {
+    min-height: 180px;
+    resize: vertical;
+}
+
+.latex-output-field {
+    min-height: 96px;
+    resize: vertical;
+    font-family: "Courier New", Courier, monospace;
+}
+
+.latex-helper {
+    color: #4b5563;
+}
+
+.latex-example-row,
+.latex-button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.latex-example-row {
+    margin-top: 0.75rem;
+}
+
+.latex-example-row .btn,
+.latex-button-row .btn {
+    flex: 1 1 180px;
+}
+
+.latex-control-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.latex-control-group {
+    flex: 1 1 220px;
+}
+
+.latex-select {
+    min-height: 54px;
+}
+
+.latex-button-row {
+    margin-top: 1rem;
+}
+
+.latex-preview-stage {
+    position: relative;
+    min-height: 240px;
+    padding: 1.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+    background: #f8fafc;
+}
+
+.latex-preview-stage[data-background="transparent"] {
+    background-color: #f8fafc;
+    background-image:
+        linear-gradient(45deg, #eef2f7 25%, transparent 25%),
+        linear-gradient(-45deg, #eef2f7 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #eef2f7 75%),
+        linear-gradient(-45deg, transparent 75%, #eef2f7 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+}
+
+.latex-preview-stage[data-background="white"] {
+    background: #f8fafc;
+}
+
+.latex-preview-stage.has-preview .latex-preview-placeholder {
+    display: none;
+}
+
+.latex-preview-placeholder {
+    text-align: center;
+    color: #6b7280;
+    max-width: 28rem;
+    line-height: 1.5;
+}
+
+.latex-render-surface {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 72px;
+    min-height: 72px;
+    padding: 1rem 1.25rem;
+    border-radius: 14px;
+    max-width: 100%;
+}
+
+.latex-render-surface:empty {
+    display: none;
+}
+
+.latex-preview-stage[data-background="white"] .latex-render-surface {
+    background: #ffffff;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+}
+
+.latex-preview-stage[data-background="transparent"] .latex-render-surface {
+    background: transparent;
+}
+
+.latex-status {
+    min-height: 82px;
+    display: flex;
+    align-items: center;
+    line-height: 1.45;
+}
+
+.latex-copy-note {
+    min-height: 1.5rem;
+    margin-top: 0.85rem;
+    font-size: 0.9rem;
+    text-align: center;
+    color: #4b5563;
+}
+
+.latex-info-panel p:last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 991px) {
+    .latex-page-title {
+        font-size: 2.4rem;
+    }
+
+    .latex-page-subtitle {
+        font-size: 1rem;
+    }
+
+    .latex-preview-stage {
+        min-height: 220px;
+    }
+}
+
+@media (max-width: 575px) {
+
+    .latex-example-row,
+    .latex-button-row {
+        flex-direction: column;
+    }
+
+    .latex-example-row .btn,
+    .latex-button-row .btn {
+        width: 100%;
+    }
+
+    .latex-panel-title,
+    .latex-info-title {
+        text-align: left;
+    }
+
+    .latex-control-row {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .latex-control-group {
+        width: 100%;
+    }
+}

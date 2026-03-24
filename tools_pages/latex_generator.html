@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Pangram World - LaTeX Equation PNG Generator" />
+    <meta property="og:description"
+        content="Render clean equation images from LaTeX with transparent or white backgrounds and export them as PNG files." />
+    <meta property="og:image" content="https://www.pangram-world.com/static/images/pangram-world-title-trsp.png" />
+    <meta property="og:url" content="https://www.pangram-world.com/tools_pages/latex_generator.html" />
+    <title>Pangram World - LaTeX Equation PNG Generator</title>
+
+    <link rel="stylesheet" href="../styles/bootstrap.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/calculators.css">
+    <link rel="stylesheet" href="../styles/tools_pages/latex_generator.css">
+
+   
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="shortcut icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="shortcut icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="shortcut icon" type="image/png" sizes="192x192" href="../android-chrome-192x192.png">
+    <link rel="shortcut icon" type="image/png" sizes="512x512" href="../android-chrome-512x512.png">
+
+    <script src="../scripts/handlebars/dist/handlebars.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="../scripts/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="../node_modules/katex/dist/katex.min.css">
+    <script defer src="../node_modules/katex/dist/katex.min.js"></script>
+    <script src="../scripts/main.js"></script>
+
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <main>
+        <div class="outer-container mx-auto my-5">
+            <div class="container my-4 latex-page">
+
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="latex-hero text-center">
+                            <h1 class="latex-page-title">LaTeX Equation PNG Generator</h1>
+                            <p class="latex-page-subtitle">
+                                Render clean equation images from LaTeX, choose a transparent or white background,
+                                and export the result as a PNG.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4 align-items-stretch">
+
+                    <div class="col-lg-6 d-flex">
+                        <section class="form-font-style latex-panel w-100">
+                            <h2 class="latex-panel-title">Enter your equation</h2>
+
+                            <div class="mb-3">
+                                <label for="latexInput" class="form-label">LaTeX or a very simple plain-text
+                                    equation</label>
+                                <textarea id="latexInput" class="form-control latex-main-input" rows="7" placeholder="Examples:
+\frac{d}{t}
+v = \frac{d}{t}
+s = ut + \frac{1}{2}at^2
+v = d/t" aria-label="LaTeX equation input" spellcheck="false"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="helper-text latex-helper" id="latexInputNote">
+                                    For reliable results, enter proper LaTeX. Very simple plain-text input may be
+                                    supported later for straightforward cases only.
+                                </div>
+                            </div>
+
+                            <div class="latex-example-row" id="latexExampleRow">
+                                <button type="button" class="btn copy-button latex-example-button"
+                                    id="exampleFractionButton" data-example="\frac{d}{t}">
+                                    Example: d over t
+                                </button>
+                                <button type="button" class="btn copy-button latex-example-button"
+                                    id="exampleVelocityButton" data-example="v = \frac{d}{t}">
+                                    Example: v = d/t
+                                </button>
+                                <button type="button" class="btn copy-button latex-example-button"
+                                    id="exampleSuvatButton" data-example="s = ut + \frac{1}{2}at^2">
+                                    Example: suvat
+                                </button>
+                            </div>
+
+                            <div class="latex-control-row">
+                                <div class="latex-control-group">
+                                    <label for="backgroundSelect" class="form-label">Background</label>
+                                    <select id="backgroundSelect" class="form-select latex-select"
+                                        aria-label="PNG background">
+                                        <option value="transparent" selected>Transparent</option>
+                                        <option value="white">White</option>
+                                    </select>
+                                </div>
+
+                                <div class="latex-control-group">
+                                    <label for="renderSizeSelect" class="form-label">Size</label>
+                                    <select id="renderSizeSelect" class="form-select latex-select"
+                                        aria-label="Rendered image size">
+                                        <option value="small">Small</option>
+                                        <option value="normal" selected>Normal</option>
+                                        <option value="large">Large</option>
+                                        <option value="very-large">Very Large</option>
+                                        <option value="huge">Huge</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="latex-button-row">
+                                <button type="button" class="btn copy-button" id="renderLatexButton">
+                                    Render PNG
+                                </button>
+                                <button type="button" class="btn copy-button" id="clearLatexButton">
+                                    Clear
+                                </button>
+                            </div>
+
+                            <small>
+                                This is for relatively simple equation images, not full LaTeX documents. This is not an app pretending to be Overleaf.
+                            </small>
+                        </section>
+                    </div>
+
+                    <div class="col-lg-6 d-flex">
+                        <section class="form-font-style latex-panel w-100">
+                            <h2 class="latex-panel-title">Preview and output</h2>
+
+                            <div class="mb-3">
+                                <label for="latexPreviewStage" class="form-label">Rendered preview (click to copy PNG)</label>
+                                <div id="latexPreviewStage" class="latex-preview-stage" data-background="transparent"
+                                    aria-live="polite">
+                                    <div id="latexPreviewPlaceholder" class="latex-preview-placeholder">
+                                        Your rendered equation will appear here.
+                                    </div>
+                                    <div id="latexRenderSurface" class="latex-render-surface"></div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="resolvedLatexOutput" class="form-label">LaTeX used for rendering (click to copy)</label>
+                                <textarea id="resolvedLatexOutput" class="form-control latex-output-field" rows="4"
+                                    placeholder="The final LaTeX string used for rendering will appear here..."
+                                    aria-label="Resolved LaTeX output" readonly></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="latexStatus" class="form-label">Status</label>
+                                <div id="latexStatus" class="output-area latex-status" aria-live="polite">
+                                    Enter an equation, choose a background and size, then click "Render PNG".
+                                </div>
+                            </div>
+
+                            <div class="latex-button-row">
+                                <button type="button" class="btn copy-button" id="copyResolvedLatexButton" disabled>
+                                    Copy LaTeX
+                                </button>
+                                <button type="button" class="btn copy-button" id="downloadPngButton" disabled>
+                                    Download PNG
+                                </button>
+                            </div>
+
+                            <div id="latexCopyNote" class="latex-copy-note" aria-live="polite"></div>
+                        </section>
+                    </div>
+
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <section class="form-font-style latex-info-panel">
+                            <h3 class="latex-info-title">What this tool does</h3>
+                            <p>
+                                This page is designed for rendering equation snippets as PNG images. It is not a full
+                                LaTeX editor and it does not aim to replace Overleaf or a full document workflow.
+                            </p>
+                            <p>
+                                Proper LaTeX input will be the most reliable. Very simple plain-text equations may be
+                                converted in basic cases, but complex expressions, matrices, aligned lines, custom
+                                macros, or package-dependent syntax should be entered directly in LaTeX.
+                            </p>
+                            <p>
+                                KaTeX is fast and excellent for maths, though it does not support every LaTeX command
+                                under the sun. Like most things in life, it's nearly perfect.
+                            </p>
+                            <p class="mb-0">
+                                Background choices are transparent or white, and size controls how large the rendered
+                                equation will be before export.
+                            </p>
+                        </section>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <button onclick="scrollToTop()" id="scrollToTopButton" class="scroll-button">
+        <span class="material-symbols-outlined">arrow_upward</span>
+    </button>
+
+    <div id="footer-container"></div>
+
+    <script defer src="../node_modules/html-to-image/dist/html-to-image.js"></script>
+    <script src="../scripts/tools/latex_generator.js"></script>
+</body>
+</html>
