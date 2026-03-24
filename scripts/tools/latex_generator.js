@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const latexInput = document.getElementById("latexInput");
   const backgroundSelect = document.getElementById("backgroundSelect");
   const renderSizeSelect = document.getElementById("renderSizeSelect");
+  const colourSelect = document.getElementById("colourSelect");
   const renderLatexButton = document.getElementById("renderLatexButton");
   const clearLatexButton = document.getElementById("clearLatexButton");
   const latexPreviewStage = document.getElementById("latexPreviewStage");
@@ -21,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (
     !latexInput ||
     !backgroundSelect ||
+    !colourSelect ||
     !renderSizeSelect ||
     !renderLatexButton ||
     !clearLatexButton ||
@@ -65,6 +67,16 @@ document.addEventListener("DOMContentLoaded", () => {
       exportFontSize: "3.3rem",
       exportPadding: "28px 36px",
     },
+    tiny: {
+      previewFontSize: "0.9rem",
+      exportFontSize: "0.9rem",
+      exportPadding: "10px 14px",
+    },
+    massive: {
+      previewFontSize: "4.2rem",
+      exportFontSize: "4.2rem",
+      exportPadding: "32px 40px",
+    },
   };
 
   let lastRenderedLatex = "";
@@ -74,13 +86,14 @@ document.addEventListener("DOMContentLoaded", () => {
   latexPreviewStage.style.cursor = "pointer";
   resolvedLatexOutput.style.cursor = "pointer";
 
-  setStatus(
-    'Enter an equation, choose a background and size, then click "Render PNG".',
-  );
-  setCopyNote("");
-  updatePreviewBackground();
-  updatePreviewSize();
-  setActionButtons(false);
+    setStatus(
+      'Enter an equation, choose a background, colour, and size, then click "Render PNG".',
+    );
+    setCopyNote("");
+    updatePreviewBackground();
+    updatePreviewColour();
+    updatePreviewSize();
+    setActionButtons(false);
 
   renderLatexButton.addEventListener("click", renderEquation);
   clearLatexButton.addEventListener("click", clearAll);
@@ -90,13 +103,19 @@ document.addEventListener("DOMContentLoaded", () => {
   resolvedLatexOutput.addEventListener("click", copyResolvedLatex);
   latexPreviewStage.addEventListener("click", copyPreviewPngToClipboard);
 
-  backgroundSelect.addEventListener("change", () => {
-    updatePreviewBackground();
-  });
+    backgroundSelect.addEventListener("change", () => {
+      updatePreviewBackground();
+      maybeShowVisibilityNote();
+    });
 
-  renderSizeSelect.addEventListener("change", () => {
-    updatePreviewSize();
-  });
+    colourSelect.addEventListener("change", () => {
+      updatePreviewColour();
+      maybeShowVisibilityNote();
+    });
+
+    renderSizeSelect.addEventListener("change", () => {
+      updatePreviewSize();
+    });
   
   latexInput.addEventListener("keydown", (event) => {
     if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
@@ -130,7 +149,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function updatePreviewBackground() {
     latexPreviewStage.dataset.background = backgroundSelect.value;
-  }
+    }
+    
+    function updatePreviewColour() {
+      latexRenderSurface.style.color = colourSelect.value;
+    }
 
   function updatePreviewSize() {
     const sizeKey = renderSizeSelect.value;
@@ -147,19 +170,50 @@ document.addEventListener("DOMContentLoaded", () => {
   function showPreview() {
     latexPreviewStage.classList.add("has-preview");
     latexPreviewPlaceholder.style.display = "none";
-  }
+    }
+    
+      function maybeShowVisibilityNote() {
+        if (!lastRenderedLatex || !latexRenderSurface.innerHTML.trim()) {
+          return;
+        }
 
-  function clearAll() {
-    latexInput.value = "";
-    resolvedLatexOutput.value = "";
-    lastRenderedLatex = "";
-    clearPreview();
-    setStatus(
-      'Enter an equation, choose a background and size, then click "Render PNG".',
-    );
-    setCopyNote("");
-    setActionButtons(false);
-  }
+        const selectedColour = colourSelect.value.toLowerCase();
+        const selectedBackground = backgroundSelect.value;
+
+        if (selectedColour === "#ffffff" && selectedBackground === "white") {
+          setCopyNote(
+            "White text on a white background may look invisible in the preview and exported PNG.",
+            true,
+          );
+          return;
+        }
+
+        if (
+          selectedColour === "#ffffff" &&
+          selectedBackground === "transparent"
+        ) {
+          setCopyNote(
+            "White text on a transparent PNG may disappear on light backgrounds.",
+            true,
+          );
+          return;
+        }
+
+        setCopyNote("");
+      }
+
+    function clearAll() {
+      latexInput.value = "";
+      resolvedLatexOutput.value = "";
+      lastRenderedLatex = "";
+      clearPreview();
+      updatePreviewColour();
+      setStatus(
+        'Enter an equation, choose a background, colour, and size, then click "Render PNG".',
+      );
+      setCopyNote("");
+      setActionButtons(false);
+    }
 
   function looksLikeLatex(input) {
     return /\\[a-zA-Z]+|[{}`]/.test(input);
@@ -408,8 +462,9 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    updatePreviewBackground();
-    updatePreviewSize();
+      updatePreviewBackground();
+      updatePreviewColour();
+      updatePreviewSize();
 
     try {
       latexRenderSurface.innerHTML = "";
@@ -428,13 +483,15 @@ document.addEventListener("DOMContentLoaded", () => {
       setActionButtons(true);
       setCopyNote("");
 
-      if (converted && latex !== rawInput) {
-        setStatus(
-          "Rendered successfully. Plain-text input was converted into LaTeX first.",
-        );
-      } else {
-        setStatus("Rendered successfully.");
-      }
+        maybeShowVisibilityNote();
+
+        if (converted && latex !== rawInput) {
+            setStatus(
+            "Rendered successfully. Plain-text input was converted into LaTeX first.",
+            );
+        } else {
+            setStatus("Rendered successfully.");
+        }
     } catch (error) {
       clearPreview();
       resolvedLatexOutput.value = latex;
@@ -536,14 +593,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function getExportOptions() {
-    return {
-      cacheBust: true,
-      pixelRatio: 2,
-      backgroundColor:
-        backgroundSelect.value === "white" ? "#ffffff" : undefined,
-    };
-  }
+    function getExportOptions() {
+      return {
+        cacheBust: true,
+        pixelRatio: 2,
+        backgroundColor:
+          backgroundSelect.value === "white" ? "#ffffff" : undefined,
+        style: {
+          color: colourSelect.value,
+        },
+      };
+    }
 
   function createSafeFileName() {
     const base = lastRenderedLatex

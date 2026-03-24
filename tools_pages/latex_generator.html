@@ -96,22 +96,43 @@ v = d/t" aria-label="LaTeX equation input" spellcheck="false"></textarea>
                             <div class="latex-control-row">
                                 <div class="latex-control-group">
                                     <label for="backgroundSelect" class="form-label">Background</label>
-                                    <select id="backgroundSelect" class="form-select latex-select"
-                                        aria-label="PNG background">
+                                    <select id="backgroundSelect" class="form-select latex-select" aria-label="PNG background">
                                         <option value="transparent" selected>Transparent</option>
                                         <option value="white">White</option>
                                     </select>
                                 </div>
-
+                            
+                                <div class="latex-control-group">
+                                    <label for="colourSelect" class="form-label">Output colour</label>
+                                    <select id="colourSelect" class="form-select latex-select" aria-label="Equation colour">
+                                        <option value="#1f1f1f" selected>Black</option>
+                                        <option value="#ffffff">White</option>
+                                        <option value="#6b7280">Grey</option>
+                                        <option value="#dc2626">Red</option>
+                                        <option value="#be123c">Crimson</option>
+                                        <option value="#ea580c">Orange</option>
+                                        <option value="#ca8a04">Gold</option>
+                                        <option value="#16a34a">Green</option>
+                                        <option value="#0f766e">Teal</option>
+                                        <option value="#2563eb">Blue</option>
+                                        <option value="#1d4ed8">Royal Blue</option>
+                                        <option value="#1e3a8a">Navy</option>
+                                        <option value="#7c3aed">Purple</option>
+                                        <option value="#c026d3">Magenta</option>
+                                        <option value="#92400e">Brown</option>
+                                    </select>
+                                </div>
+                            
                                 <div class="latex-control-group">
                                     <label for="renderSizeSelect" class="form-label">Size</label>
-                                    <select id="renderSizeSelect" class="form-select latex-select"
-                                        aria-label="Rendered image size">
+                                    <select id="renderSizeSelect" class="form-select latex-select" aria-label="Rendered image size">
+                                        <option value="tiny">Tiny</option>
                                         <option value="small">Small</option>
                                         <option value="normal" selected>Normal</option>
                                         <option value="large">Large</option>
                                         <option value="very-large">Very Large</option>
                                         <option value="huge">Huge</option>
+                                        <option value="massive">Massive</option>
                                     </select>
                                 </div>
                             </div>
@@ -128,6 +149,7 @@ v = d/t" aria-label="LaTeX equation input" spellcheck="false"></textarea>
                             <small>
                                 This is for relatively simple equation images, not full LaTeX documents. This is not an app pretending to be Overleaf.
                             </small>
+                            <small>Note: If you choose white colour text on a white background, you've created invisible equations.</small>
                         </section>
                     </div>
 
