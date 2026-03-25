@@ -169,10 +169,29 @@
 #heterosexual,
 #male-restroom,
 #female-restroom,
-#unisex-restroom {
+#baby-changing {
     width: 200px;
     /* Adjust width as needed */
 }
 
 
 /* ---> FIX OVERSIZED KEYS *END* <--- */
+
+/* Special Cases */
+#restroom-symbols-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: 10px;
+}
+
+#restroom-symbols-container .alphabet-key {
+    margin: 0;
+    vertical-align: top;
+    width: 200px;
+}
+
+#baby-changing {
+    width: 200px;
+}
