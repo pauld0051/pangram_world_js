@@ -30,6 +30,19 @@ document.addEventListener("DOMContentLoaded", function () {
     { letter: "ي", unicode: "ي", name: "Ya", id: "ya" },
   ];
 
+  const arabicNumerals = [
+    { letter: "٠", unicode: "٠", name: "Zero", id: "digit-zero" },
+    { letter: "١", unicode: "١", name: "One", id: "digit-one" },
+    { letter: "٢", unicode: "٢", name: "Two", id: "digit-two" },
+    { letter: "٣", unicode: "٣", name: "Three", id: "digit-three" },
+    { letter: "٤", unicode: "٤", name: "Four", id: "digit-four" },
+    { letter: "٥", unicode: "٥", name: "Five", id: "digit-five" },
+    { letter: "٦", unicode: "٦", name: "Six", id: "digit-six" },
+    { letter: "٧", unicode: "٧", name: "Seven", id: "digit-seven" },
+    { letter: "٨", unicode: "٨", name: "Eight", id: "digit-eight" },
+    { letter: "٩", unicode: "٩", name: "Nine", id: "digit-nine" },
+  ];
+
   const arabicExtras = [
     { letter: "ء", unicode: "ء", name: "Hamza", id: "hamza" },
     {
@@ -53,6 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function createKeys(containerId, alphabet) {
     const container = document.getElementById(containerId);
+  
 
     alphabet.forEach((item) => {
       const key = document.createElement("div");
@@ -136,4 +150,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
   createKeys("arabic-letters-container", arabicLetters);
   createKeys("arabic-extras-container", arabicExtras);
+  createKeys("arabic-numerals-container", arabicNumerals);
 });
