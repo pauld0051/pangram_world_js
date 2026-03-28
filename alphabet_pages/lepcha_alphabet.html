@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Pangram World" />
+    <meta property="og:description"
+        content="For all your Physics needs with some extra social media helpers to really get your game on!" />
+    <meta property="og:image" content="https://www.pangram-world.com/static/images/pangram-world-title-trsp.png" />
+    <meta property="og:url" content="https://www.pangram-world.com" />
+    <title>Pangram World - Lepcha Alphabet</title>
+    <link rel="stylesheet" href="/styles/bootstrap.css">
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/alphabet_pages/alphabet.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Noto+Sans+Lepcha:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="shortcut icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="shortcut icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="shortcut icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <script src="/scripts/handlebars/dist/handlebars.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="/scripts/bootstrap.bundle.js"></script>
+    <script src="/scripts/main.js" defer></script>
+
+    <style>
+        .alphabet-key .letter {
+            font-family: "Noto Sans Lepcha", "Segoe UI Symbol", Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div id="header-container"></div>
+
+        <div class="outer-container mx-auto my-5">
+            <div class="container my-5">
+                <div class="row mb-5">
+                    <div class="col-md-12">
+                        <div class="main-heading text-center p-4">
+                            <h1 class="display-4 text-white">Lepcha Copy Tool ᰀ ᰣ ᱀</h1>
+                            <p class="lead text-light">Easily copy Lepcha letters, subjoined letters, vowel signs,
+                                consonant signs, punctuation, and digits.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-lg-8 mb-4 mb-lg-0">
+                        <div class="card alphabet-card h-100">
+                            <div class="card-header text-center">
+                                Core Letters
+                            </div>
+                            <div class="card-body text-center alphabet-grid" id="lepcha-letters-container">
+                                <!-- Keys will be injected here by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="card alphabet-card h-100">
+                            <div class="card-header text-center">
+                                Additional and Subjoined Letters
+                            </div>
+                            <div class="card-body text-center alphabet-grid" id="lepcha-extra-letters-container">
+                                <!-- Keys will be injected here by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-lg-6 mb-4 mb-lg-0">
+                        <div class="card alphabet-card h-100">
+                            <div class="card-header text-center">
+                                Vowel Signs
+                            </div>
+                            <div class="card-body text-center alphabet-grid" id="lepcha-vowels-container">
+                                <!-- Keys will be injected here by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card alphabet-card h-100">
+                            <div class="card-header text-center">
+                                Consonant Signs and Marks
+                            </div>
+                            <div class="card-body text-center alphabet-grid" id="lepcha-signs-container">
+                                <!-- Keys will be injected here by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-lg-6 mb-4 mb-lg-0">
+                        <div class="card alphabet-card h-100">
+                            <div class="card-header text-center">
+                                Punctuation
+                            </div>
+                            <div class="card-body text-center alphabet-grid" id="lepcha-punctuation-container">
+                                <!-- Keys will be injected here by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card alphabet-card h-100">
+                            <div class="card-header text-center">
+                                Lepcha Digits
+                            </div>
+                            <div class="card-body text-center alphabet-grid" id="lepcha-digits-container">
+                                <!-- Keys will be injected here by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card instruction-card text-center p-4">
+                            <div class="card-body">
+                                <h5 class="card-title">How to Use</h5>
+                                <p class="card-text">Click any character above to copy it to your clipboard. Combining
+                                    signs are shown with a dotted circle so you can see them clearly, but only the
+                                    actual Lepcha mark is copied. Delightfully twisty, suspiciously useful.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <button onclick="scrollToTop()" id="scrollToTopButton" class="scroll-button">
+        <span class="material-symbols-outlined">arrow_upward</span>
+    </button>
+
+    <div id="footer-container"></div>
+    <script src="../scripts/alphabet_pages/lepcha_alphabet.js" defer></script>
+</body>
+</html>
