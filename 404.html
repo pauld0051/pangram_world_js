@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | P.S. Davis Books</title>
+
+    <meta name="description" content="Page not found. Head back to P.S. Davis Books or explore the books.">
+    <meta property="og:title" content="404 | P.S. Davis Books">
+    <meta property="og:description"
+        content="Looks like this page wandered off. Return to the main page or explore the books.">
+    <meta property="og:url" content="https://www.psdavisbooks.com/404.html">
+
+    <link rel="stylesheet" href="styles/bootstrap.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/about.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="shortcut icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="shortcut icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="shortcut icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+    <link rel="shortcut icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <script src="scripts/handlebars/dist/handlebars.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="scripts/bootstrap.bundle.js"></script>
+    <script src="scripts/main.js"></script>
+
+    <style>
+        .error-code {
+            font-size: clamp(4rem, 11vw, 7rem);
+            line-height: 1;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.75rem;
+        }
+
+        .error-lead {
+            font-size: 1.1rem;
+            color: #495057;
+            line-height: 1.7;
+        }
+
+        .error-button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.85rem;
+            margin-top: 1.5rem;
+        }
+
+        .error-home-button,
+        .book-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            padding: 0.8rem 1.1rem;
+            border-radius: 0.6rem;
+            text-decoration: none;
+            font-weight: 700;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+        }
+
+        .error-home-button {
+            background: #ffdd57;
+            color: #333;
+            border: 1px solid #f3cf3c;
+        }
+
+        .error-home-button:hover {
+            background: #fcca46;
+            color: #222;
+            transform: translateY(-1px);
+            box-shadow: 0 0.35rem 1rem rgba(0, 0, 0, 0.08);
+        }
+
+        .book-grid-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .book-cover-404 {
+            width: 100%;
+            max-width: 170px;
+            height: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.18);
+            margin: 0 auto 1rem;
+            display: block;
+        }
+
+        .book-grid-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.65rem;
+        }
+
+        .book-grid-card p {
+            min-height: 3.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .book-button {
+            background: #1f2937;
+            color: #fff;
+            border: 1px solid #1f2937;
+        }
+
+        .book-button:hover {
+            background: #111827;
+            color: #fff;
+            transform: translateY(-1px);
+            box-shadow: 0 0.35rem 1rem rgba(0, 0, 0, 0.12);
+        }
+
+        .lost-note {
+            font-size: 0.98rem;
+            color: #5c6670;
+        }
+
+        @media (max-width: 768px) {
+            .book-grid-card p {
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <main>
+        <div class="outer-container mx-auto my-5">
+            <div class="container my-5">
+
+                <div class="row g-4 align-items-stretch">
+                    <div class="col-12">
+                        <section class="about-panel p-4 p-lg-5 text-center">
+                            <div class="about-kicker">404 | Page not found</div>
+                            <div class="error-code">404</div>
+                            <h1 class="mb-3">Well, this is awkward.</h1>
+                            <p class="error-lead mx-auto" style="max-width: 780px;">
+                                The page you were looking for has either moved, vanished, or taken a wrong turn into the
+                                fantasy wilderness.
+                                Rude, really.
+                            </p>
+                            <p class="lost-note mb-0">
+                                A sensible next move would be heading back to the main page. A more dangerous one would
+                                be clicking a book.
+                            </p>
+
+                            <div class="error-button-row justify-content-center">
+                                <a class="error-home-button" href="/">
+                                    <span class="material-symbols-outlined">home</span>
+                                    Return to the main page
+                                </a>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <div class="row g-4 mt-1">
+                    <div class="col-12">
+                        <section class="about-section-card p-4 p-lg-5">
+                            <h2 class="text-center mb-3">Lost already? Try one of these instead.</h2>
+                            <p class="text-center mb-4">
+                                If the page is gone, at least leave with a book.
+                            </p>
+
+                            <div class="row g-4">
+                                <div class="col-md-6 col-xl-4 d-flex">
+                                    <div class="feature-card book-grid-card w-100">
+                                        <img src="images/books/tsw.gif" alt="The Seeker's Wrath book cover"
+                                            class="book-cover-404">
+                                        <h3>The Seeker's Wrath</h3>
+                                        <p>A fantasy tale of power, loyalty, and blood in the world of Teloshka.</p>
+                                        <a class="book-button" href="https://books2read.com/theSeekersWrath"
+                                            target="_blank" rel="noopener noreferrer">
+                                            View book
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-xl-4 d-flex">
+                                    <div class="feature-card book-grid-card w-100">
+                                        <img src="images/books/aeg.gif" alt="An Envious God book cover"
+                                            class="book-cover-404">
+                                        <h3>An Envious God</h3>
+                                        <p>Epic fantasy with ambition, conflict, and enough trouble to keep everybody
+                                            busy.</p>
+                                        <a class="book-button" href="https://books2read.com/AnEnviousGod"
+                                            target="_blank" rel="noopener noreferrer">
+                                            View book
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-xl-4 d-flex mx-md-auto">
+                                    <div class="feature-card book-grid-card w-100">
+                                        <img src="images/books/wbot2.gif" alt="The White Beast of Trie book cover"
+                                            class="book-cover-404">
+                                        <h3>The White Beast of Trie</h3>
+                                        <p>A darker fantasy journey with danger, myth, and teeth where teeth are least
+                                            welcome.</p>
+                                        <a class="book-button" href="https://a.co/d/0hFH2Fsx"
+                                            target="_blank" rel="noopener noreferrer">
+                                            View book
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <button onclick="scrollToTop()" id="scrollToTopButton" class="scroll-button">
+        <span class="material-symbols-outlined">arrow_upward</span>
+    </button>
+
+    <div id="footer-container"></div>
+</body>
+</html>
