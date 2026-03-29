@@ -34,6 +34,11 @@ main {
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.navbar.header-color {
+    padding-top: 0.9rem;
+    padding-bottom: 0.9rem;
+}
+
 .header-color .nav-link,
 .header-color .navbar-brand,
 .header-color .navbar-toggler {
@@ -404,4 +409,112 @@ select[disabled] {
     flex-shrink: 0;
     border-radius: 3px;
     border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.header-inner {
+    max-width: 1720px;
+    margin: 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.header-utility-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.header-social-links {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-left: 1.1rem;
+}
+
+.header-social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.header-social-link:hover {
+    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.86);
+    box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.12);
+}
+
+.header-social-icon {
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
+    display: block;
+}
+
+.header-search-form {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+}
+
+.header-search-form .form-control {
+    width: 290px;
+    min-width: 290px;
+}
+
+@media (max-width: 1199.98px) {
+    .header-inner {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+
+    .header-search-form .form-control {
+        width: 250px;
+        min-width: 250px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .header-utility-group {
+        width: 100%;
+        margin-top: 0.85rem;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.85rem;
+    }
+
+    .header-social-links {
+        gap: 0.4rem;
+    }
+
+    .header-search-form {
+        width: 100%;
+    }
+
+    .header-search-form .form-control {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .header-social-link {
+        width: 32px;
+        height: 32px;
+    }
+
+    .header-social-icon {
+        width: 16px;
+        height: 16px;
+    }
 }
