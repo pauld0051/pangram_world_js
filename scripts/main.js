@@ -21,13 +21,13 @@ loadTemplate(
   function () {
     document.getElementById("current-year").textContent =
       new Date().getFullYear();
-  }
+  },
 );
 
 // Popovers Script - Every Page Requires.. //
 document.addEventListener("DOMContentLoaded", function () {
   var popoverTriggerList = [].slice.call(
-    document.querySelectorAll('[data-bs-toggle="popover"]')
+    document.querySelectorAll('[data-bs-toggle="popover"]'),
   );
   var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
     var popover = new bootstrap.Popover(popoverTriggerEl, {
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // Initialize Bootstrap tooltips //
 document.addEventListener("DOMContentLoaded", function () {
   var tooltipTriggerList = [].slice.call(
-    document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    document.querySelectorAll('[data-bs-toggle="tooltip"]'),
   );
   var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
     var tooltip = new bootstrap.Tooltip(tooltipTriggerEl);
