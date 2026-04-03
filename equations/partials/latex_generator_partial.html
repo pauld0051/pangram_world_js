@@ -1,0 +1,103 @@
+<section class="card shadow-sm border-0 latex-inline-card">
+    <div class="section-head p-4">
+        <h2 class="h4 mb-1">{{title}}</h2>
+        <p class="mb-0 editor-help">{{subtitle}}</p>
+    </div>
+
+    <div class="card-body p-4">
+        <div class="latex-inline-grid">
+            <div class="latex-inline-left">
+                <div class="mb-3">
+                    <label for="{{ns}}-latexInput" class="form-label">Raw LaTeX</label>
+                    <textarea id="{{ns}}-latexInput" class="form-control latex-inline-input" rows="4"
+                        placeholder="{{placeholder}}" spellcheck="false"></textarea>
+                </div>
+
+                <div class="latex-inline-controls mb-3">
+                    <div class="latex-inline-control-group">
+                        <label for="{{ns}}-backgroundSelect" class="form-label">Background</label>
+                        <select id="{{ns}}-backgroundSelect" class="form-select latex-inline-select">
+                            <option value="transparent" selected>Transparent</option>
+                            <option value="white">White</option>
+                            <option value="light-grey">Light Grey</option>
+                            <option value="pale-yellow">Pale Yellow</option>
+                            <option value="pale-blue">Pale Blue</option>
+                            <option value="pale-green">Pale Green</option>
+                            <option value="magenta">Magenta</option>
+                            <option value="black">Black</option>
+                        </select>
+                    </div>
+
+                    <div class="latex-inline-control-group">
+                        <label for="{{ns}}-colourSelect" class="form-label">Colour</label>
+                        <select id="{{ns}}-colourSelect" class="form-select latex-inline-select">
+                            <option value="#1f1f1f" selected>Black</option>
+                            <option value="#ffffff">White</option>
+                            <option value="#6b7280">Grey</option>
+                            <option value="#dc2626">Red</option>
+                            <option value="#be123c">Crimson</option>
+                            <option value="#ea580c">Orange</option>
+                            <option value="#ca8a04">Gold</option>
+                            <option value="#16a34a">Green</option>
+                            <option value="#0f766e">Teal</option>
+                            <option value="#2563eb">Blue</option>
+                            <option value="#1d4ed8">Royal Blue</option>
+                            <option value="#1e3a8a">Navy</option>
+                            <option value="#7c3aed">Purple</option>
+                            <option value="#c026d3">Magenta</option>
+                            <option value="#92400e">Brown</option>
+                        </select>
+                    </div>
+
+                    <div class="latex-inline-control-group">
+                        <label for="{{ns}}-renderSizeSelect" class="form-label">Size</label>
+                        <select id="{{ns}}-renderSizeSelect" class="form-select latex-inline-select">
+                            <option value="tiny">Tiny</option>
+                            <option value="small">Small</option>
+                            <option value="normal" selected>Normal</option>
+                            <option value="large">Large</option>
+                            <option value="very-large">Very Large</option>
+                            <option value="huge">Huge</option>
+                            <option value="massive">Massive</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="latex-inline-buttons">
+                    <button type="button" class="btn copy-button" id="{{ns}}-renderButton">Render</button>
+                    <button type="button" class="btn copy-button" id="{{ns}}-copyLatexButton" disabled>Copy
+                        LaTeX</button>
+                    <button type="button" class="btn copy-button" id="{{ns}}-copyPngButton" disabled>Copy PNG</button>
+                    <button type="button" class="btn copy-button" id="{{ns}}-downloadPngButton" disabled>Download
+                        PNG</button>
+                    <button type="button" class="btn copy-button" id="{{ns}}-clearButton">Clear</button>
+                </div>
+
+                <div id="{{ns}}-status" class="latex-inline-status" aria-live="polite">
+                    Enter LaTeX, then render.
+                </div>
+            </div>
+
+            <div class="latex-inline-right">
+                <div class="mb-3">
+                    <label for="{{ns}}-previewStage" class="form-label">Preview</label>
+                    <div id="{{ns}}-previewStage" class="latex-preview-stage latex-inline-preview"
+                        data-background="transparent" title="Click to copy PNG">
+                        <div id="{{ns}}-previewPlaceholder" class="latex-preview-placeholder">
+                            Your rendered equation will appear here.
+                        </div>
+                        <div id="{{ns}}-renderSurface" class="latex-render-surface"></div>
+                    </div>
+                </div>
+
+                <div class="mb-2">
+                    <label for="{{ns}}-resolvedLatexOutput" class="form-label">Resolved LaTeX</label>
+                    <textarea id="{{ns}}-resolvedLatexOutput" class="form-control latex-inline-output" rows="3" readonly
+                        placeholder="Rendered LaTeX will appear here."></textarea>
+                </div>
+
+                <div id="{{ns}}-copyNote" class="latex-inline-note" aria-live="polite"></div>
+            </div>
+        </div>
+    </div>
+</section>
