@@ -1,382 +1,239 @@
-/* Flexbox alignment for the row containing calculator and equations */
-.row.d-flex {
-    display: flex;
-    align-items: stretch;
-    /* Stretch the children to fill the height */
-    margin-left: -15px;
-    /* Adjust these values as per your layout */
-    margin-right: -15px;
-    /* Adjust these values as per your layout */
-}
-
-/* Color styling for labels */
-.input-group-text.label-col {
-    background-color: #f8d7da;
-    /* Soft pink, for example */
-    color: #721c24;
-    /* Dark red text color for contrast */
-    border-color: #f5c6cb;
-    /* Soft pink border */
-}
-
-.gen.label-col {
-    background-color: #555555;
-    /* Dark grey for contrast */
-    color: #ffffff;
-    /* White text for readability */
-    border-color: #f5c6cb;
-    /* Pink border */
-}
-
-/* Define CSS variables for easy adjustment of sizes */
+/* Calculator pages aligned to the current equation-page style */
 :root {
-    --input-label-width: 33%;
-    --input-field-width: 45%;
-    --select-width: 22%;
+    --calc-bg: rgba(231, 218, 218, 0.99);
+    --calc-border: rgba(200, 200, 200, 0.65);
+    --calc-card-bg: #ffffff;
+    --calc-line: #d7d7d7;
+    --calc-soft: #f7f8fc;
+    --calc-soft-2: #f2e5e6;
+    --calc-muted: #5f6368;
+    --calc-ink: #222222;
+    --calc-accent: #7b2d39;
+    --calc-accent-soft: #f8d7da;
+    --calc-button: #555555;
+    --calc-button-hover: #3d3d3d;
+    --calc-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.12);
+    --calc-input-label-width: 33%;
+    --calc-input-field-width: 41%;
+    --calc-select-width: 26%;
 }
 
-/* Ensuring consistent sizing for input groups with CSS variables */
-.input-group .input-group-text {
-    width: var(--input-label-width);
-    /* 33% width for label */
-    flex: none;
-    /* Do not grow or shrink */
+body {
+    font-family: "Roboto", sans-serif;
+    color: var(--calc-ink);
 }
 
-.input-group .form-control {
-    width: var(--input-field-width);
-    /* 45% width for input field */
-    flex: none;
-    /* Do not grow or shrink */
+.calculator-page-shell.outer-container {
+    background-color: var(--calc-bg);
+    border: 1px solid var(--calc-border);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+    max-width: 90%;
 }
 
-.input-group .form-select {
-    width: var(--select-width);
-    /* 22% width for select */
-    flex: none;
-    /* Do not grow or shrink */
-}
-
-.custom-generate-btn {
-    background-color: #FFAA33;
-    /* Adjust this color to match your theme */
-    color: #FFFFFF;
-    /* White text for better readability */
-    border: none;
-    padding: 0.5rem 1.5rem;
-    font-size: 1rem;
-    border-radius: 5px;
-    /* Slightly rounded corners */
-    transition: background-color 0.3s ease;
-}
-
-.custom-generate-btn:hover {
-    background-color: #FF8800;
-    /* Darken on hover */
-    cursor: pointer;
-}
-
-/* Responsive behavior */
-@media (max-width: 768px) {
-
-    /* On smaller screens, you may want to adjust the sizes or allow them to auto-adjust. 
-       For now, I'll leave them to take full width on smaller screens for better visibility. */
-    .input-group .input-group-text,
-    .input-group .input-group-text-gen,
-    .input-group .form-control,
-    .input-group .form-select {
-        width: 100%;
-        /* Each element takes full width of its container */
-    }
-}
-
-/* Remove the fixed height on select elements, it's not necessary */
-.input-group-sm .form-select {
-    height: auto;
-    line-height: inherit;
-}
-
-/* The .form-label class is not used with Bootstrap's input-group
-   but if you're using it elsewhere, keep it. Otherwise, it can be removed. */
-.form-label {
-    margin-bottom: 0.5rem;
-    /* Keep if used outside input-groups */
-}
-
-/* General styles for both containers */
-.bg-white.p-4.shadow-sm {
-    display: flex;
-    /* Enables flexbox layout */
-    flex-direction: column;
-    /* Stacks children vertically */
-    justify-content: flex-start;
-    /* Aligns children to the start of the main axis */
-    align-items: center;
-    /* Centers children along the cross axis */
-    padding: 1.5rem;
-    /* Consistent padding */
-    background-color: #fff;
-    /* White background */
-    border-radius: 0.5rem;
-    /* Rounded corners */
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    /* Subtle shadow */
-    margin-bottom: 2rem;
-    /* Space below the container */
-}
-
-/* Styles specific to the equations container */
-.equations-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    /* Align content to the top */
-    min-height: 100%;
-    /* Use min-height to allow container to grow */
-    padding-bottom: 1rem;
-    /* Adjust the padding to ensure the container can grow */
-}
-
-.equation {
-    margin-bottom: 1rem;
-    /* Space between each equation */
-    text-align: center;
-    /* Center-align the equations */
-}
-
-.form-font-style.flex-fill,
-.equations-container.flex-fill {
-    flex: 1;
-    /* Flex-grow to fill the space */
-}
-
-/* Styles for equation images to ensure they do not exceed their container's width */
-.equations-container img {
-    max-width: 100%;
-    /* Ensures images are responsive and do not overflow */
-    margin-bottom: 1rem;
-    /* Evenly spaces images vertically */
-}
-
-.row.d-flex.align-items-stretch {
+.calculator-layout {
     align-items: stretch;
-    /* This ensures that both children (calculator and equation columns) fill the parent height */
 }
 
-.bg-white.p-4.shadow-sm {
-    margin-bottom: 0;
-    /* Remove fixed margin to control the spacing between components */
-}
-
-/* Height adjustments to match both sides */
-.bg-white.p-4.shadow-sm.flex-fill {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    /* Distributes space between items */
+.calculator-layout > .card {
     height: 100%;
-    /* Takes full height of the parent */
 }
 
-/* Ensuring equations are spaced evenly and aligned */
-.equations-container.flex-fill {
+.calculator-help-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    border: 1px solid #d6c1c4;
+    background: #fff;
+    border-radius: 999px;
+    color: var(--calc-ink);
+    padding: 0.5rem 0.9rem;
+    font-weight: 500;
+    line-height: 1;
+}
+
+.calculator-help-btn:hover,
+.calculator-help-btn:focus-visible {
+    background: var(--calc-soft-2);
+    color: var(--calc-ink);
+    border-color: #cda7ad;
+}
+
+.calculator-help-btn .material-symbols-outlined {
+    font-size: 1.1rem;
+}
+
+.calculator-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.65rem 0.9rem;
+    border-radius: 999px;
+    background: var(--calc-soft);
+    border: 1px solid #e7e7ea;
+}
+
+.calculator-toggle .form-check-input {
+    margin-top: 0;
+    float: none;
+}
+
+.calculator-form {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    /* Evenly distributes space around items, can be 'space-between' if no space is wanted at the start/end */
+    gap: 0;
 }
 
-.clickable-input {
-    cursor: pointer;
-    color: #FFFFFF;
-    /* White text for readability */
-    background-color: #555555;
-    /* Dark grey for clickable input */
-    border: 2px solid #FF8800;
-    /* Orange border */
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+.calculator-inputs {
+    display: grid;
+    gap: 0.9rem;
 }
 
-.clickable-input:disabled {
-    background-color: #e9ecef;
-    /* Bootstrap default light grey */
-    color: #495057;
-    /* Dark grey text */
-    opacity: 1;
-    /* Ensure full opacity */
-}
-
-/* Reveal Button */
-.btn-reveal {
-    background-color: #007bff;
-    /* Bootstrap's primary blue */
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.btn-reveal:hover {
-    background-color: #0056b3;
-    /* Slightly darker shade of blue on hover */
-}
-
-.btn-reveal:focus {
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    /* Subtle blue shadow for focus */
-}
-
-@media (max-width: 991px) {
-    .row.d-flex {
-        flex-direction: column;
-        /* Stack children on smaller screens */
-    }
-
-    .equations-container.flex-fill {
-        min-height: 0;
-        /* Reset min-height for mobile to accommodate varying content heights */
-    }
-}
-
-/* Ensuring that the equations are not too close to the edges on smaller screens */
-@media (max-width: 575px) {
-    .equations-container .equation {
-        padding: 0 1rem;
-        /* Add padding on the sides */
-    }
-}
-
-/* Responsive adjustments for smaller screens */
-@media (max-width: 991px) {
-    .bg-white.p-4.shadow-sm {
-        margin-bottom: 1rem;
-        /* Reduces space below the container on smaller screens */
-    }
-}
-
-/* Additional responsive adjustments for very small screens */
-@media (max-width: 575px) {
-    .bg-white.p-4.shadow-sm {
-        padding: 1rem;
-        /* Reduces padding for more space */
-    }
-}
-
-/* Make sure the .row.flex-fill containers have the same height */
-.row.d-flex {
+.input-group-calculator {
     display: flex;
     flex-wrap: nowrap;
-    /* Prevent wrapping on larger screens */
+    align-items: stretch;
+    background: #fafafa;
+    border: 1px solid #e5e5e8;
+    border-radius: 14px;
+    padding: 0.45rem;
+    gap: 0.45rem;
 }
 
-/* Ensure both the calculator and the equations containers fill the height and are aligned */
-.col-lg-6.d-flex {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-font-style.flex-fill,
-.equations-container.flex-fill {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    /* Flex-grow to fill the space */
+.input-group-calculator .input-group-text.label-col {
+    width: var(--calc-input-label-width);
+    flex: 0 0 var(--calc-input-label-width);
+    display: inline-flex;
+    align-items: center;
     justify-content: flex-start;
-    /* Align content to the top */
+    background-color: var(--calc-accent-soft);
+    color: var(--calc-accent);
+    border: 1px solid #e9c4ca;
+    border-radius: 10px;
+    font-weight: 500;
+    line-height: 1.25;
+    min-height: 52px;
 }
 
-/* Remove the fixed margin-bottom from .bg-white.p-4.shadow-sm */
-.bg-white.p-4.shadow-sm {
-    margin-bottom: 0;
-    /* Or adjust as necessary to control the spacing between components */
+.input-group-calculator .form-control {
+    width: var(--calc-input-field-width);
+    flex: 0 0 var(--calc-input-field-width);
+    border-radius: 10px;
+    border: 1px solid #d6d6da;
+    min-height: 52px;
+    box-shadow: none;
 }
 
-.locked-input {
-    background-color: #e9acef;
-    border: 1px solid #ced4da;
+.input-group-calculator .form-select {
+    width: var(--calc-select-width);
+    flex: 0 0 var(--calc-select-width);
+    border-radius: 10px;
+    border: 1px solid #d6d6da;
+    min-height: 52px;
+    box-shadow: none;
+}
+
+.input-group-calculator .form-control:focus,
+.input-group-calculator .form-select:focus {
+    border-color: #b36b75;
+    box-shadow: 0 0 0 0.18rem rgba(123, 45, 57, 0.12);
+}
+
+input[readonly] {
+    background-color: #f2dede;
+    color: #555;
+    border-color: #e6bcbc;
     cursor: not-allowed;
-    /* Shows a 'not-allowed' cursor on hover */
 }
 
-/* Locked Input Message */
-.hidden {
-    display: none;
+.calculator-actions {
+    display: flex;
+    justify-content: flex-start;
 }
 
-.locked-message {
-    color: #dc3545;
-    /* Bootstrap's $danger color, for example */
-    background-color: #f8d7da;
-    /* Bootstrap's $danger-100 color */
-    border-color: #f5c6cb;
-    /* Bootstrap's $danger-300 color */
+.bulk-btn#clearButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: var(--calc-button);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 0.7rem 1.1rem;
+    font-weight: 500;
+}
+
+.bulk-btn#clearButton:hover,
+.bulk-btn#clearButton:focus-visible {
+    background: var(--calc-button-hover);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.bulk-btn#clearButton .material-symbols-outlined {
+    font-size: 1.05rem;
+}
+
+.equations-stage {
+    display: grid;
+    gap: 0.9rem;
+    align-content: start;
+}
+
+.calculator-equation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 82px;
+    padding: 0.9rem 1rem;
+    border-radius: 14px;
+    background: linear-gradient(180deg, #fafafa 0%, #f1f1f1 100%);
+    border: 1px solid #e0e0e0;
+    overflow-x: auto;
+}
+
+.calculator-equation .katex-display {
+    margin: 0;
+}
+
+.popover {
+    border-radius: 14px;
+    border: 1px solid #dfc7cb;
+    box-shadow: var(--calc-shadow);
+    max-width: 360px;
+}
+
+.popover-header {
+    background: var(--calc-soft-2);
+    color: var(--calc-ink);
+    border-bottom: 1px solid #ead7da;
+    font-weight: 700;
+}
+
+.popover-body {
+    color: var(--calc-ink);
+    line-height: 1.5;
+}
+
+.copy-tooltip {
     position: absolute;
-    z-index: 1;
-    padding: 0.5rem;
-    margin-top: 0.5rem;
-    border-radius: 0.25rem;
-    font-size: 0.875rem;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-/* Hide long names in select boxes */
-.sel:focus .l {
-    display: inline;
-    visibility: visible;
-}
-
-.sel:focus .s {
-    display: none;
-    visibility: hidden;
-}
-
-/* Speed of light tooltip */
-#velocityTooltip,
-#gravityTooltip,
-#massTooltip,
-#timeToolTip {
-    position: absolute;
-    background-color: #fff;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-    padding: 5px;
-    border-radius: 4px;
-    font-size: smaller;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-    /* Fluorescent green glow */
+    background-color: rgba(123, 45, 57, 0.96);
+    color: #fff;
+    padding: 0.45rem 0.7rem;
+    border-radius: 10px;
+    font-size: 0.88rem;
     z-index: 1000;
     pointer-events: none;
-    /* Prevents the tooltip from blocking clicks */
+    box-shadow: var(--calc-shadow);
 }
 
-/* Triangle pointer */
-#velocityTooltip::after,
-#gravityTooltip::after,
-#massTooltip::after,
-#timeTooltip::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    /* Position the pointer just below the tooltip */
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #f5c6cb transparent transparent transparent;
-}
-
-/* Make the modal small and centered like a tooltip */
 .modal-dialog.modal-sm {
     max-width: 300px;
 }
 
 .modal-content {
     background-color: #ffcccb;
-    /* Light red background to indicate an error */
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -388,29 +245,22 @@
 .modal-body p {
     font-size: 0.9rem;
     color: #333;
-    /* Dark text color */
 }
 
-/* Optional: Position the modal like a tooltip */
 .modal-dialog {
     margin: 0;
-    /* Remove default centering */
     transform: none;
-    /* Ensure it doesn't apply centering transform */
     max-width: none;
-    /* Allow it to grow to the full size if needed */
 }
 
 .speech-bubble {
     background-color: #ffc0cb;
-    /* Soft pink background */
     border-radius: 8px;
     border: none;
     padding: 10px;
     position: relative;
     display: inline-block;
     max-width: 300px;
-    /* Adjust as needed */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -418,64 +268,69 @@
     content: '';
     position: absolute;
     bottom: -10px;
-    /* Adjust according to position */
     left: 20px;
-    /* Adjust to align with the target element */
     width: 0;
     height: 0;
     border: 10px solid transparent;
     border-top-color: #ffc0cb;
-    /* Match background color */
 }
 
-/* END MODAL STUFF */
-
-.copy-tooltip {
-    position: absolute;
-    background-color: #333;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 14px;
-    opacity: 0.9;
-    z-index: 1000;
-    pointer-events: none;
+@media (max-width: 1199px) {
+    .calculator-page-shell.outer-container {
+        max-width: 96%;
+        padding: 14px;
+    }
 }
 
-/* Style for readonly inputs to look locked */
-input[readonly] {
-    background-color: #f2dede;
-    /* Light pinky-grey */
-    color: #555;
-    /* Text color to make it readable */
-    border-color: #e6bcbc;
-    /* Border color to match the background */
-    cursor: not-allowed;
-    /* Cursor indicates non-editable state */
+@media (max-width: 991px) {
+    :root {
+        --calc-input-label-width: 100%;
+        --calc-input-field-width: 100%;
+        --calc-select-width: 100%;
+    }
+
+    .calculator-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .input-group-calculator {
+        flex-wrap: wrap;
+    }
+
+    .input-group-calculator .input-group-text.label-col,
+    .input-group-calculator .form-control,
+    .input-group-calculator .form-select {
+        width: 100%;
+        flex: 0 0 100%;
+    }
+
+    .calculator-help-btn {
+        width: 100%;
+        justify-content: center;
+    }
 }
 
-/* Optional: Add some padding for a more polished look */
-input[readonly] {
-    padding: 8px;
-    border-radius: 4px;
-    /* Slightly rounded corners */
+@media (max-width: 767px) {
+    .calculator-page-shell.outer-container {
+        padding: 12px;
+    }
+
+    .calculator-help-btn,
+    .bulk-btn#clearButton {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .calculator-equation {
+        min-height: 74px;
+        padding: 0.8rem;
+    }
 }
 
-/* OUTER CONTAINER */
-/* Outer container styling */
-.outer-container {
-    background-color: rgba(231, 218, 218, 0.99);
-    /* Light newspaper-like color */
-    border: 1px solid rgba(200, 200, 200, 0.5);
-    /* Light gray border for definition */
-    border-radius: 8px;
-    /* Rounded corners for a soft look */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* Subtle shadow for depth */
-    padding: 20px;
-    /* Inner padding */
-    max-width: 80%;
-    /* Max width of 80% of the viewport */
-    margin: 0 auto;
-    /* Center the container horizontally */
+@media (prefers-reduced-motion: reduce) {
+    .calculator-help-btn,
+    .bulk-btn#clearButton,
+    .copy-tooltip {
+        transition: none;
+    }
 }
