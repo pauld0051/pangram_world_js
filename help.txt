@@ -49,3 +49,5 @@ Emoji Symbols:
 16. Symbol Combinations
 
     Often-used combinations like "tm" (™), "copy" (©), and "reg" (®).
+
+17. Making your Site-Map: node scripts/generate-sitemap.js
