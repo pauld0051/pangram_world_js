@@ -298,3 +298,59 @@ export function convertVelocity(value, fromUnit, toUnit) {
 
   return (value * fromRate) / toRate;
 }
+
+/* Energy Unit Conversion
+   Base unit: J
+*/
+const energyConversionRates = {
+  mJ: 0.001,
+  J: 1,
+  kJ: 1000,
+  MJ: 1000000,
+};
+
+export function getEnergyConversionRate(unit) {
+  return energyConversionRates[unit];
+}
+
+export function convertEnergy(value, fromUnit, toUnit) {
+  const fromRate = getEnergyConversionRate(fromUnit);
+  const toRate = getEnergyConversionRate(toUnit);
+
+  if (fromRate === undefined || toRate === undefined) {
+    console.error(
+      `Invalid energy unit provided: fromUnit=${fromUnit}, toUnit=${toUnit}`,
+    );
+    return NaN;
+  }
+
+  return (value * fromRate) / toRate;
+}
+
+/* Spring Constant Unit Conversion
+   Base unit: N/m
+*/
+const springConstantConversionRates = {
+  Nmm: 1000,
+  Ncm: 100,
+  Nm: 1,
+  kNm: 1000,
+};
+
+export function getSpringConstantConversionRate(unit) {
+  return springConstantConversionRates[unit];
+}
+
+export function convertSpringConstant(value, fromUnit, toUnit) {
+  const fromRate = getSpringConstantConversionRate(fromUnit);
+  const toRate = getSpringConstantConversionRate(toUnit);
+
+  if (fromRate === undefined || toRate === undefined) {
+    console.error(
+      `Invalid spring constant unit provided: fromUnit=${fromUnit}, toUnit=${toUnit}`,
+    );
+    return NaN;
+  }
+
+  return (value * fromRate) / toRate;
+}
