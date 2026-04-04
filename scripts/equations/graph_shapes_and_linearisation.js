@@ -1,4 +1,3 @@
-
 const cards = [
   {
     id: "linear",
@@ -146,15 +145,15 @@ const cards = [
     title: "General power law",
     relationship: "y ∝ xⁿ",
     equation: "y = Axⁿ",
-    shape: "Depends on n",
+    shape: "Depends on n. Negative n gives inverse-type curves.",
     linearise: "Plot ln y against ln x",
     straight_line: "ln y = ln A + n ln x",
     gradient: "gradient = n",
     intercept: "intercept = ln A",
-    examples: ["T ∝ l<sup>1/2</sup>", "I ∝ A²", "many scaling laws"],
+    examples: ["T ∝ l<sup>1/2</sup>", "I ∝ A²", "F ∝ r<sup>−2</sup>"],
     x_label: "ln x",
     y_label: "ln y",
-    orig_type: "power_generic",
+    orig_type: "power_family",
     lin_type: "line_intercept",
   },
 ];
@@ -170,47 +169,226 @@ const families = [
 
 let activeFamily = "all";
 
-function svgTemplate(pathD, xLabel, yLabel, extra = "") {
+const GRAPH = {
+  left: 42,
+  right: 188,
+  top: 24,
+  bottom: 136,
+  axis: "#5d6574",
+  curve: "#8b2f3d",
+};
+
+function svgTemplate(inner, xLabel, yLabel) {
   return `
     <svg class="graph-svg" viewBox="0 0 220 170" role="img" aria-label="Graph sketch">
       <rect x="0" y="0" width="220" height="170" fill="#fff"></rect>
-      <line x1="38" y1="140" x2="200" y2="140" stroke="#5d6574" stroke-width="2"/>
-      <line x1="38" y1="140" x2="38" y2="18" stroke="#5d6574" stroke-width="2"/>
-      <text x="195" y="157" font-size="12" fill="#5d6574" text-anchor="end">${xLabel}</text>
-      <text x="20" y="24" font-size="12" fill="#5d6574">${yLabel}</text>
-      <path d="${pathD}" fill="none" stroke="#7b2d39" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-      ${extra}
+      <line x1="38" y1="140" x2="200" y2="140" stroke="${GRAPH.axis}" stroke-width="2"/>
+      <line x1="38" y1="140" x2="38" y2="18" stroke="${GRAPH.axis}" stroke-width="2"/>
+      <text x="195" y="157" font-size="12" fill="${GRAPH.axis}" text-anchor="end">${xLabel}</text>
+      <text x="20" y="24" font-size="12" fill="${GRAPH.axis}">${yLabel}</text>
+      ${inner}
     </svg>
   `;
 }
 
-function graphPath(type) {
-  switch (type) {
-    case "line_origin": return "M 42 136 L 188 32";
-    case "line_intercept": return "M 42 112 L 188 40";
-    case "line_negative": return "M 42 40 L 188 128";
-    case "quadratic": return "M 44 136 C 72 134, 96 126, 120 108 C 146 88, 166 62, 188 28";
-    case "cubic": return "M 44 136 C 86 134, 110 122, 132 96 C 150 74, 166 48, 188 20";
-    case "sqrt": return "M 44 136 C 64 92, 96 62, 140 42 C 162 32, 176 28, 188 24";
-    case "inverse": return "M 48 30 C 72 54, 96 78, 118 96 C 144 116, 166 126, 188 132";
-    case "inverse_square": return "M 46 18 C 66 58, 92 92, 126 116 C 150 128, 170 134, 188 137";
-    case "exp_growth": return "M 44 132 C 90 132, 122 128, 144 114 C 164 100, 178 72, 188 22";
-    case "exp_decay": return "M 44 24 C 74 42, 102 68, 132 98 C 156 118, 172 128, 188 134";
-    case "power_generic": return "M 44 128 C 78 112, 108 90, 134 70 C 158 52, 174 40, 188 30";
-    default: return "M 42 136 L 188 32";
+function plotPath(pathD, options = {}) {
+  const {
+    stroke = GRAPH.curve,
+    width = 4,
+    opacity = 1,
+    dasharray = "",
+  } = options;
+
+  return `
+    <path
+      d="${pathD}"
+      fill="none"
+      stroke="${stroke}"
+      stroke-width="${width}"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      opacity="${opacity}"
+      ${dasharray ? `stroke-dasharray="${dasharray}"` : ""}
+    />
+  `;
+}
+
+function graphText(x, y, text, options = {}) {
+  const {
+    size = 9,
+    anchor = "end",
+    fill = "#7c8799",
+    weight = "400",
+  } = options;
+
+  return `
+    <text
+      x="${x}"
+      y="${y}"
+      font-size="${size}"
+      fill="${fill}"
+      font-weight="${weight}"
+      text-anchor="${anchor}"
+    >
+      ${text}
+    </text>
+  `;
+}
+
+function makeLinePath(x1, y1, x2, y2) {
+  return `M ${x1} ${y1} L ${x2} ${y2}`;
+}
+
+function makeFunctionPath(fn, options = {}) {
+  const {
+    xMin = 0,
+    xMax = 1,
+    samples = 120,
+    left = GRAPH.left,
+    right = GRAPH.right,
+    top = GRAPH.top,
+    bottom = GRAPH.bottom,
+    yMin = null,
+    yMax = null,
+  } = options;
+
+  const points = [];
+
+  for (let i = 0; i < samples; i += 1) {
+    const t = i / (samples - 1);
+    const x = xMin + (xMax - xMin) * t;
+    const y = fn(x);
+
+    if (Number.isFinite(y)) {
+      points.push({ x, y });
+    }
   }
+
+  if (!points.length) {
+    return makeLinePath(left, bottom, right, top);
+  }
+
+  const minY = yMin ?? Math.min(...points.map((p) => p.y));
+  const maxY = yMax ?? Math.max(...points.map((p) => p.y));
+  const yRange = Math.max(maxY - minY, 1e-9);
+  const xRange = Math.max(xMax - xMin, 1e-9);
+
+  return points
+    .map((p, index) => {
+      const sx = left + ((p.x - xMin) / xRange) * (right - left);
+      const sy = bottom - ((p.y - minY) / yRange) * (bottom - top);
+      return `${index === 0 ? "M" : "L"} ${sx.toFixed(2)} ${sy.toFixed(2)}`;
+    })
+    .join(" ");
+}
+
+function renderRepresentativePowerFamily() {
+  const sqrtPath = makeFunctionPath((x) => Math.sqrt(x), {
+    xMin: 0,
+    xMax: 1,
+    yMin: 0,
+    yMax: 1,
+  });
+
+  const linearPath = makeFunctionPath((x) => x, {
+    xMin: 0,
+    xMax: 1,
+    yMin: 0,
+    yMax: 1,
+  });
+
+  const quadraticPath = makeFunctionPath((x) => x * x, {
+    xMin: 0,
+    xMax: 1,
+    yMin: 0,
+    yMax: 1,
+  });
+
+  return `
+    ${plotPath(sqrtPath, { opacity: 0.45 })}
+    ${plotPath(linearPath, { opacity: 0.7 })}
+    ${plotPath(quadraticPath, { opacity: 1 })}
+    ${graphText(186, 32, "depends on n", { size: 8.5, fill: "#7c8799" })}
+  `;
 }
 
 function renderGraph(type, xLabel, yLabel) {
-  const extras = type === "line_intercept"
-    ? '<line x1="38" y1="112" x2="200" y2="112" stroke="#7b2d39" stroke-dasharray="4 4" opacity="0.25"/>'
-    : '';
-  return svgTemplate(graphPath(type), xLabel, yLabel, extras);
+  let inner = "";
+
+  switch (type) {
+    case "line_origin":
+      inner = plotPath(makeLinePath(42, 136, 188, 32));
+      break;
+
+    case "line_intercept":
+      inner =
+        plotPath(makeLinePath(42, 112, 188, 40)) +
+        plotPath(makeLinePath(38, 112, 200, 112), {
+          stroke: GRAPH.curve,
+          width: 1.4,
+          opacity: 0.25,
+          dasharray: "4 4",
+        });
+      break;
+
+    case "line_negative":
+      inner = plotPath(makeLinePath(42, 40, 188, 128));
+      break;
+
+    case "quadratic":
+      inner = plotPath(makeFunctionPath((x) => x * x));
+      break;
+
+    case "cubic":
+      inner = plotPath(makeFunctionPath((x) => x * x * x));
+      break;
+
+    case "sqrt":
+      inner = plotPath(makeFunctionPath((x) => Math.sqrt(x)));
+      break;
+
+    case "inverse":
+      inner = plotPath(
+        makeFunctionPath((x) => 1 / x, {
+          xMin: 0.18,
+          xMax: 1,
+        }),
+      );
+      break;
+
+    case "inverse_square":
+      inner = plotPath(
+        makeFunctionPath((x) => 1 / (x * x), {
+          xMin: 0.22,
+          xMax: 1,
+        }),
+      );
+      break;
+
+    case "exp_growth":
+      inner = plotPath(makeFunctionPath((x) => Math.exp(4 * x)));
+      break;
+
+    case "exp_decay":
+      inner = plotPath(makeFunctionPath((x) => Math.exp(-4 * x)));
+      break;
+
+    case "power_family":
+      inner = renderRepresentativePowerFamily();
+      break;
+
+    default:
+      inner = plotPath(makeLinePath(42, 136, 188, 32));
+      break;
+  }
+
+  return svgTemplate(inner, xLabel, yLabel);
 }
 
 function cardHtml(card) {
   const originalX = "x";
   const originalY = "y";
+
   return `
     <div class="col-12 col-md-6 col-xl-4">
       <article class="card graph-card shadow-sm h-100">
@@ -250,7 +428,7 @@ function cardHtml(card) {
             </div>
             <div class="graph-detail">
               <span class="label">Physics examples</span>
-              <ul class="example-list">${card.examples.map(ex => `<li>${ex}</li>`).join("")}</ul>
+              <ul class="example-list">${card.examples.map((ex) => `<li>${ex}</li>`).join("")}</ul>
             </div>
           </div>
         </div>
@@ -262,26 +440,38 @@ function cardHtml(card) {
 function renderFilters() {
   const bar = document.getElementById("filterBar");
   if (!bar) return;
-  bar.innerHTML = families.map(f => `
-    <button class="filter-chip ${f.id === activeFamily ? "active" : ""}" data-family="${f.id}">
-      ${f.label}
-    </button>
-  `).join("");
+
+  bar.innerHTML = families
+    .map(
+      (family) => `
+        <button class="filter-chip ${family.id === activeFamily ? "active" : ""}" data-family="${family.id}">
+          ${family.label}
+        </button>
+      `,
+    )
+    .join("");
 }
 
 function renderCards() {
   const grid = document.getElementById("cardsGrid");
   if (!grid) return;
-  const visible = activeFamily === "all" ? cards : cards.filter(card => card.family === activeFamily);
-  grid.innerHTML = visible.map(cardHtml).join("");
+
+  const visibleCards =
+    activeFamily === "all"
+      ? cards
+      : cards.filter((card) => card.family === activeFamily);
+
+  grid.innerHTML = visibleCards.map(cardHtml).join("");
 }
 
 function bindEvents() {
   const bar = document.getElementById("filterBar");
   if (!bar) return;
+
   bar.addEventListener("click", (event) => {
     const button = event.target.closest("[data-family]");
     if (!button) return;
+
     activeFamily = button.dataset.family;
     renderFilters();
     renderCards();
